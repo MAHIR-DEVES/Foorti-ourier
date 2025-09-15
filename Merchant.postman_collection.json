@@ -1,0 +1,1386 @@
+{
+	"info": {
+		"_postman_id": "b6bd050c-9e62-444a-92f9-b606c75609aa",
+		"name": "Merchant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31604812",
+		"_collection_link": "https://creative-software.postman.co/workspace/Packnexa~6b6a8ab2-1539-45c4-8d75-d2286f675e78/collection/31604812-b6bd050c-9e62-444a-92f9-b606c75609aa?action=share&source=collection_link&creator=31604812"
+	},
+	"item": [
+		{
+			"name": "CoverageArealist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://system.packnexa.com/api/distList",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"distList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Parcelion_login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjExMDQ5ZDBlOTdkNzhmMTYwOWUyODRlNDhmZjMxNTNmMzI3MzNmZmFlNmIwOGI5YzVhZjk5NDdkNGJmYjhhMjI2YjczNDQwMDc3MmY1ZGEyIn0.eyJhdWQiOiIyNCIsImp0aSI6IjExMDQ5ZDBlOTdkNzhmMTYwOWUyODRlNDhmZjMxNTNmMzI3MzNmZmFlNmIwOGI5YzVhZjk5NDdkNGJmYjhhMjI2YjczNDQwMDc3MmY1ZGEyIiwiaWF0IjoxNzA1MjAzNDg4LCJuYmYiOjE3MDUyMDM0ODgsImV4cCI6MTczNjgyNTg4OCwic3ViIjoiNzcxIiwic2NvcGVzIjpbXX0.nwNhtLbHpw1WfbVk9Eg6u6MOCyz_d1G_78nR15zIQuMqMAFMb6YnmB2ERuse72rqbr7ynFfhzT-Kn24UzNCEiHHtTffIeAPsb30RyjA7a97mCV4B1zb0CX3XR4R4aJlmg6MGtZilrGpadPnMXa_RmbWUpndKIpP3VpRQPL55fSH_I6fJyCGKX_NxA6mSD6UyqC_eShoSVibmqnPHG-7urZoRkDYbk-IwC3vnQY1i8v0xzdycUjL3XyAR191ljPqdVuKHvd-aTHr45eJUqWrFy466idPSqXZXEetKAXQlUGaJHZ7pas_FZvVa6tH7NLx-sVSEGf2ljUasy6jCq_VqXT2_Thg_tUHqLA7xb7tkqB_JNWPNLPhPmNjQCKQHsNERHXqJBTBnt92W15ssm3rIp9z4SPGoKq5UdgHEYHA9dfCr867YTUknIFQLb1XFvU0aLuB7enRgYMbjGTciXtujkqXSJfthnRqWb1yx5oQtYDX8Pb3QXm9vtjv8LZ1OPGPBJrHPtinZFoxVI3qT_thsp99sStqVdeScaBdM04nNTMkRgou9zSyGJv0ZFojsMhFyNSGiu9Vax3BHiYA_uwqzu0MwUxooY2q4n1hV2X95EmgszeZFWJE6PcbWRjZHxTRAwYsdjv7J4CdhKmfcTaQijlJA9qthjkZ9M-XH19qSiPo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "topspeed@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/api/login",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "dman_login Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjExMDQ5ZDBlOTdkNzhmMTYwOWUyODRlNDhmZjMxNTNmMzI3MzNmZmFlNmIwOGI5YzVhZjk5NDdkNGJmYjhhMjI2YjczNDQwMDc3MmY1ZGEyIn0.eyJhdWQiOiIyNCIsImp0aSI6IjExMDQ5ZDBlOTdkNzhmMTYwOWUyODRlNDhmZjMxNTNmMzI3MzNmZmFlNmIwOGI5YzVhZjk5NDdkNGJmYjhhMjI2YjczNDQwMDc3MmY1ZGEyIiwiaWF0IjoxNzA1MjAzNDg4LCJuYmYiOjE3MDUyMDM0ODgsImV4cCI6MTczNjgyNTg4OCwic3ViIjoiNzcxIiwic2NvcGVzIjpbXX0.nwNhtLbHpw1WfbVk9Eg6u6MOCyz_d1G_78nR15zIQuMqMAFMb6YnmB2ERuse72rqbr7ynFfhzT-Kn24UzNCEiHHtTffIeAPsb30RyjA7a97mCV4B1zb0CX3XR4R4aJlmg6MGtZilrGpadPnMXa_RmbWUpndKIpP3VpRQPL55fSH_I6fJyCGKX_NxA6mSD6UyqC_eShoSVibmqnPHG-7urZoRkDYbk-IwC3vnQY1i8v0xzdycUjL3XyAR191ljPqdVuKHvd-aTHr45eJUqWrFy466idPSqXZXEetKAXQlUGaJHZ7pas_FZvVa6tH7NLx-sVSEGf2ljUasy6jCq_VqXT2_Thg_tUHqLA7xb7tkqB_JNWPNLPhPmNjQCKQHsNERHXqJBTBnt92W15ssm3rIp9z4SPGoKq5UdgHEYHA9dfCr867YTUknIFQLb1XFvU0aLuB7enRgYMbjGTciXtujkqXSJfthnRqWb1yx5oQtYDX8Pb3QXm9vtjv8LZ1OPGPBJrHPtinZFoxVI3qT_thsp99sStqVdeScaBdM04nNTMkRgou9zSyGJv0ZFojsMhFyNSGiu9Vax3BHiYA_uwqzu0MwUxooY2q4n1hV2X95EmgszeZFWJE6PcbWRjZHxTRAwYsdjv7J4CdhKmfcTaQijlJA9qthjkZ9M-XH19qSiPo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "m@gmail.com",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "rakib@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/api/login",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order_tracking",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY4N2Q1M2YyMTM1MzJlMDNhYjJlYmVkNjMwYzQ3ZGNlNDFiZTY2MTE1YWViYmFjZmY1YzFkZjRiYjY3M2IzY2YzNGE5NDA1MTg1MDcyM2UxIn0.eyJhdWQiOiIxOCIsImp0aSI6IjY4N2Q1M2YyMTM1MzJlMDNhYjJlYmVkNjMwYzQ3ZGNlNDFiZTY2MTE1YWViYmFjZmY1YzFkZjRiYjY3M2IzY2YzNGE5NDA1MTg1MDcyM2UxIiwiaWF0IjoxNzM4MjE3NjMwLCJuYmYiOjE3MzgyMTc2MzAsImV4cCI6MTc2OTc1MzYzMCwic3ViIjoiMTI4NCIsInNjb3BlcyI6W119.ki6yM4IeyS8uHeAbCiL8jbTXpr_Eh73rpatvrjC1_drVh6A9wqiUoBnPhj4inZggmN1BpE_WH1D6BBLfEdZsqD6RRrAk5B5f06bW3K5mB664Y0ZgruDVb828J9xjrZey7w5QyN369wgabd-SmRDkDsWF3WIOq_x7MzW9jddp33zZvmwswmyRD_9j3RennyQE7HuxvDFZHcTw17Um4oFmY0Dr0XQ5j2kVucYzXWgZOuf46nSbJBMixU_AbtnTxU9J2QwKVRSXKiZR8eIZouTJ42m6RSerJSIeb9nIe4iFArYK-iWuHMk9AERo2PWH3dmTHgkb0ATND8APdfJfCE4Zy8loSHIfDOzz_u611gufZLb8M6Afa9z1FfgQv3sBSY8RcEc4Q5fzjdJigpA3Mn2dwwRGp1xPsays_Q2NJ0c5vbE8fUkH3QmR2TrqDDWmSCx3slGv12PwSiCQulI1qdFCHPhJwpGC9XMhdxaeeJPPvAzU609Yx2LGxXx41Qz2uFcZ8cYssk-cx8-w2dtRPq4kmrwLOwllveX6vU8ZuPZgraXodAYMjhSOcD7xis1C_7n2T4XprIwUE8Z4HI6qgaNVmlrGS9S_Ekty7QqM6MVCUaUcu5cR0awr_UfqG2nKS1Lo14jzYqEixwOZsySaveUqyfoHGPUTw--4D7Hc6XWsrkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://system.packnexa.com/api/order-view?tracking_id=PC12841805",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"order-view"
+					],
+					"query": [
+						{
+							"key": "tracking_id",
+							"value": "PC1284251511",
+							"disabled": true
+						},
+						{
+							"key": "tracking_id",
+							"value": "PC12841805"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "order_tracking Copy",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijk1Y2JmYzc5ZDRhN2VhNWYyYTA1ODVjMTVhMzY1MzdjOGI2NDk5MWFkOWM2MWJiY2RlOWFiOTRmNzRhNjdlNjIyNGRiNjZmNGRjNzA4MDM1In0.eyJhdWQiOiIyNCIsImp0aSI6Ijk1Y2JmYzc5ZDRhN2VhNWYyYTA1ODVjMTVhMzY1MzdjOGI2NDk5MWFkOWM2MWJiY2RlOWFiOTRmNzRhNjdlNjIyNGRiNjZmNGRjNzA4MDM1IiwiaWF0IjoxNzA1MjEwMDY2LCJuYmYiOjE3MDUyMTAwNjYsImV4cCI6MTczNjgzMjQ2Niwic3ViIjoiNzcxIiwic2NvcGVzIjpbXX0.OQvxrUsEA8gMoTtQpeOxHgMrRSdh5jWNHiTC_8Ui7pTRefUVGlFZcnc01AYUkF8jb8dXdal2RZDPgy73UWZp1Mcq-NkxBjsvcolW-TGFxH5tystIcARUpRmRarJnDRrzr_6wvWWiMvP5uFrsRPwTQF0RLHxrB-yl8CzGk8pfnOEtv2FPAXdFVaDA6J-D79RTZmNUkASDc4g_dxP2EqdKmM1aZpFFeFYseYHGyaLKP1xWExjDQGNlGPYZJ1I3Lc-G3b7veFZSe_KY1Ax5Ak5-lEaJCVejxuglKJ7bORn4FkeZwFFDIjdy1rOJOzliqiP07F6sxJEWeTQ5yAyceMVjl_srUcO5UwKo0ZqPoRoDPm_Ew54nuQe_niaXWigJHRLW5XdK4gUs8sJ6QKnV87W-45ccdlbhNwp7-or7EJu6EZFVJrdEYzRLaWnOg6aTqvUfDvMg2KgBD4h0hifQ0s26y3ubUGDa72gJyndIhYszfOb7fWnvmUgT8u951wMZlpj2869hloLFdUl01o830V83L5GWY_o0seuMDrARUHtba57Xr3AK97I1YwLpeOTfVPsBBEeSVIEAwnZpBLTeFabGRrbIul3yKfzaLc7T_pnG-5hccRiJM3UTa4xlWsQsiG7uWMhIPx3GxDK8EmbURjYl_IofnqOaUs-hefAFhu1Gno8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://system.packnexa.com/api/register-merchant?tracking_id=LBDL7702312044470",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"register-merchant"
+					],
+					"query": [
+						{
+							"key": "tracking_id",
+							"value": "LBDL7702312044470"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "confirm order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjY4N2Q1M2YyMTM1MzJlMDNhYjJlYmVkNjMwYzQ3ZGNlNDFiZTY2MTE1YWViYmFjZmY1YzFkZjRiYjY3M2IzY2YzNGE5NDA1MTg1MDcyM2UxIn0.eyJhdWQiOiIxOCIsImp0aSI6IjY4N2Q1M2YyMTM1MzJlMDNhYjJlYmVkNjMwYzQ3ZGNlNDFiZTY2MTE1YWViYmFjZmY1YzFkZjRiYjY3M2IzY2YzNGE5NDA1MTg1MDcyM2UxIiwiaWF0IjoxNzM4MjE3NjMwLCJuYmYiOjE3MzgyMTc2MzAsImV4cCI6MTc2OTc1MzYzMCwic3ViIjoiMTI4NCIsInNjb3BlcyI6W119.ki6yM4IeyS8uHeAbCiL8jbTXpr_Eh73rpatvrjC1_drVh6A9wqiUoBnPhj4inZggmN1BpE_WH1D6BBLfEdZsqD6RRrAk5B5f06bW3K5mB664Y0ZgruDVb828J9xjrZey7w5QyN369wgabd-SmRDkDsWF3WIOq_x7MzW9jddp33zZvmwswmyRD_9j3RennyQE7HuxvDFZHcTw17Um4oFmY0Dr0XQ5j2kVucYzXWgZOuf46nSbJBMixU_AbtnTxU9J2QwKVRSXKiZR8eIZouTJ42m6RSerJSIeb9nIe4iFArYK-iWuHMk9AERo2PWH3dmTHgkb0ATND8APdfJfCE4Zy8loSHIfDOzz_u611gufZLb8M6Afa9z1FfgQv3sBSY8RcEc4Q5fzjdJigpA3Mn2dwwRGp1xPsays_Q2NJ0c5vbE8fUkH3QmR2TrqDDWmSCx3slGv12PwSiCQulI1qdFCHPhJwpGC9XMhdxaeeJPPvAzU609Yx2LGxXx41Qz2uFcZ8cYssk-cx8-w2dtRPq4kmrwLOwllveX6vU8ZuPZgraXodAYMjhSOcD7xis1C_7n2T4XprIwUE8Z4HI6qgaNVmlrGS9S_Ekty7QqM6MVCUaUcu5cR0awr_UfqG2nKS1Lo14jzYqEixwOZsySaveUqyfoHGPUTw--4D7Hc6XWsrkA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Demo_merchants",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "merchant@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "01798757411",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "block",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "business_name",
+							"value": "ecomarce",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "area",
+							"value": "212",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "district",
+							"value": "47",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/api/confirm-orders-list",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"confirm-orders-list"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "demo",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "demo@gmail.com",
+							"disabled": true
+						},
+						{
+							"key": "mobile",
+							"value": "01798737518",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "block",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"disabled": true
+						},
+						{
+							"key": "area",
+							"value": "212",
+							"disabled": true
+						},
+						{
+							"key": "business_name",
+							"value": "Ecommerce",
+							"disabled": true
+						},
+						{
+							"key": "district",
+							"value": "47",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "weight list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjJkNmRkY2FhNmRkMWE5YmVlMTliOTkwNjRhYWJjZDM3MjZlZGE4NTBjMGM0Mzk4NGM5ZTUzZTc0MDEyOGU3YjAyNDc3OTljYTQ4YTJmOTZkIn0.eyJhdWQiOiIxOCIsImp0aSI6IjJkNmRkY2FhNmRkMWE5YmVlMTliOTkwNjRhYWJjZDM3MjZlZGE4NTBjMGM0Mzk4NGM5ZTUzZTc0MDEyOGU3YjAyNDc3OTljYTQ4YTJmOTZkIiwiaWF0IjoxNzIyNTk2MTQyLCJuYmYiOjE3MjI1OTYxNDIsImV4cCI6MTc1NDEzMjE0Miwic3ViIjoiMTE2OSIsInNjb3BlcyI6W119.JxgQNbxda_QbO2wmqWethCmL6nMx8MxHozFNjSXmHulWXzZITkRb_Arq6smOkmy6iry6f-CKtwpq01YGu9AyNF8nLo5A5J6jyhkiL8v2YWJYTn9Swa_jnBRWugWqRyo4XNzSSUCCCqcTkh9qaMEam6s-RNnXWE2P9ORkN5qsEFZv6QY9xk4QB_ZpPE79LJPpcijwdwbJsRF1UZ7AvWtDfO2kQfayMSD9wOIhLgn1UjqfEb5xi9xVG5TTmBzdO6LAh0pxoJDP-NecoXjxwjze9Tq2mkq6kR2vtgKiDMDtcaeffP9ZFSQh9uHSYf7cHOcClcQ4iaqOTmVsyynmWbcZffO9bEtmZEQYwkwm6AG1mfOdvcMaZ6moa9UeUB6B1MkCAL8KMviv-IxNHkpTAneX50C2jcx1QX2Qx6M-WD-HIUuiFRrQXhI09awiDZBklV5pHZtZYeWLHL3_KyPMu0v_d4VBHbchMob9sxSdCA3WlaP8kCoMVwYvreVAv5ppBSF-HSPaXMhzEzJBbTm4PaaY5GRMO2DYJivGTDdyvI5Fn0oMZDxhckCsTds0fkdonFdJ6MAy13tDMp6pVm3j7DWQYh033GRrXE4sJy6lLvWZOIMFt6zCJU-BUbSB12lEiV2-o-tk5n3EaBzC2rDUs0eq8VnsHAV3NNswNde-KOVBM2o",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Demo_merchants",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "merchant@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "01798757411",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "block",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "business_name",
+							"value": "ecomarce",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "area",
+							"value": "212",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "district",
+							"value": "47",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/api/confirm-orders-list",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"confirm-orders-list"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "demo",
+							"disabled": true
+						},
+						{
+							"key": "email",
+							"value": "demo@gmail.com",
+							"disabled": true
+						},
+						{
+							"key": "mobile",
+							"value": "01798737518",
+							"disabled": true
+						},
+						{
+							"key": "address",
+							"value": "block",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"disabled": true
+						},
+						{
+							"key": "area",
+							"value": "212",
+							"disabled": true
+						},
+						{
+							"key": "business_name",
+							"value": "Ecommerce",
+							"disabled": true
+						},
+						{
+							"key": "district",
+							"value": "47",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjE4M2IwMDVkYjJlMjg1NDZhZDM1ZGVhYWVjNWYyNjUzM2RjNzZjOTYyODQ1YzJiMjg2ZGFkMTdlOWUxNmVlMDkwYTA1NWQwOGUzNDkxNjQ4In0.eyJhdWQiOiIxNiIsImp0aSI6IjE4M2IwMDVkYjJlMjg1NDZhZDM1ZGVhYWVjNWYyNjUzM2RjNzZjOTYyODQ1YzJiMjg2ZGFkMTdlOWUxNmVlMDkwYTA1NWQwOGUzNDkxNjQ4IiwiaWF0IjoxNzE5NDg3NzAyLCJuYmYiOjE3MTk0ODc3MDIsImV4cCI6MTc1MTAyMzcwMiwic3ViIjoiMTA3NSIsInNjb3BlcyI6W119.OyKWv_AmuVHKawkpMdvJpYMdfiR8OGXQ8iTKgfFXmibQaB4EnB7jJ4a48VN1vWThDH8d4zrFgxR9cL4Mw2WpVD5UbF55oPxlanQc2QENfxqet0GTYVUe4J2_iS1AqkQuGkUpyaZxw80k7ylmyz2mU88SyqrHHQ-VNfL6xDlhqWWlythjWnIctzP9_hOvnD0x-tY9dqVYynUwTtO5bxsDoHkZf5wETZuZgLMRMcXPgUJIVa_j0LO5sUWdxGYjttnkBjfG5hIYDgvnZIOXQNTeR3iv9hY2wIsBeINzAwEQU42qQzb4QCjd4EEev7HC5ayHPUWXDvkBx6BNbd31Jw2Po_fsCOourcNM4y_NZemMPtZiHB-1x0htX1x7vUgVB9g65Ta4BgfJ5WK9JkUFHOsas09_GgnZ58qVxY1ON0qhGn6jUSm1PC1_ZN4-95bmOHmYe4_d8bIFgJDqdWXYyD8ZGkCCBQ-Pfps8tQx48Wh4iE2phQHr1PXEq8jql1S03eMMRgzIU4JJDydVM10OtvvyNyAypWet9ST8l0HTfd2azOcEVSMdmkmjPLouCn926zDM3BEodh9lfHpO7i-zhCGjj-BFXGZGycWUWYxSpVwxe5SuqJ_sKcJ692M6DP8-DCiyrIwahSvRk8QTeFcEKIQ9IFbALYIcjebLXSXXz7WHKMw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "customer_name",
+							"value": "Nickle",
+							"type": "text"
+						},
+						{
+							"key": "customer_email",
+							"value": "nickle@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "customer_address",
+							"value": "Dhaka",
+							"type": "text"
+						},
+						{
+							"key": "customer_phone",
+							"value": "01767656767",
+							"type": "text"
+						},
+						{
+							"key": "pickup_date",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "pckup_time",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "remarks",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "category",
+							"value": "Document",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "Upto 10 Kg",
+							"type": "text"
+						},
+						{
+							"key": "collection",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "district",
+							"value": "Dhaka",
+							"type": "text"
+						},
+						{
+							"key": "imp",
+							"value": "Regular",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/courier/api/orderstor",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"courier",
+						"api",
+						"orderstor"
+					],
+					"query": [
+						{
+							"key": "tracking_id",
+							"value": "LBDL7702312044470",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Arera",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjU1MzcwMDA0NmRlMWMzZGVhZjgwMWI1NThmZTAwOTg4YzBiODdmZmY4YWExYmQ0OGIxNTRmOGZmNWI5Mjc3Mjg4NjQ5NDNhMzk3MTYyZTYxIn0.eyJhdWQiOiIyNCIsImp0aSI6IjU1MzcwMDA0NmRlMWMzZGVhZjgwMWI1NThmZTAwOTg4YzBiODdmZmY4YWExYmQ0OGIxNTRmOGZmNWI5Mjc3Mjg4NjQ5NDNhMzk3MTYyZTYxIiwiaWF0IjoxNzA2NTg1OTIxLCJuYmYiOjE3MDY1ODU5MjEsImV4cCI6MTczODIwODMyMSwic3ViIjoiMTEwNSIsInNjb3BlcyI6W119.cXeAQtroZpxSD3B_OIpwF6gmKztJCOjXZ2CV2gFU5x2ir_uN4gK_ZYu4lWGgdYwYAZkARdrRCDyJCHisLRF3uTHLQBGK_LPqJort7FoomzNcGza9b4ECyrqKizrhAFnFHzTlJx7pchGvMZeyPXaP3eJcMHWy6Kkh9023c0QebmjBLAvrQecTamxmyGkN4z1nmLQsGliZlA9XBfp-LR0FbR71gsTiqUo6cxoviqJERRgtOKeMZWVhAlGKrQh7V4AD-zqE4MYwfgow22fCmRpz_-m_lcTBtO42JnkO9kzcI3HlMjPYE5sNxr57Zob0ULfWyNXFxPRJg4fAw2Q0NXDpCzN1SYFnXENSkAieLk_77g4NGqefJU7dKQliUgsQjjXlYagWDaHVExMPHG0fzQFB-3dLsSgCEgE-fTOdJbCrzDpg7gCY_Dz7WQ1aNARTdvDTS_OLorUt7IB9WtKqRvrPA4Dnst2VgLArKT9A_DOdKNk0Wk-wnksaU5mgoquS8Sg81DGlX9pJfA70sGXawZh9c5Gyk5UK_-Y-wzfKAYRM_vu6YFlJ0X7p_qwqw7XHCztogrhnIrUt7gduJpmIBkePdSvGEHV4SWuga-fw7Q9jSEY-uJ7ExkuNOmCzv-wbXJtU89E_rV-Wt2OSERowvXAJyNBY0RnS58ThbXmuKXQ11qE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/api/payment-history?fromdate=12.12.23&todate=1.2.24",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"payment-history"
+					],
+					"query": [
+						{
+							"key": "fromdate",
+							"value": "12.12.23"
+						},
+						{
+							"key": "todate",
+							"value": "1.2.24"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Merchent_register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "testowner",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "testowner100@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "01798757600",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "block",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "dmanbd",
+							"type": "text"
+						},
+						{
+							"key": "business_name",
+							"value": "demo_buisness",
+							"type": "text"
+						},
+						{
+							"key": "area",
+							"value": "212",
+							"type": "text"
+						},
+						{
+							"key": "district",
+							"value": "47",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/api/register-merchant",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"register-merchant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pick_request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI4ZmRlMjIwZjE1ZDdjNWVhZDIwNmU4ZTNiMmU3ODc4NGJkMjhlYTE1ZWUwYWU1ZTNmMmQyMzJlZDRiNTAyNTQxZTgxMDcyMWQ4OTI3N2U5In0.eyJhdWQiOiIxMiIsImp0aSI6IjI4ZmRlMjIwZjE1ZDdjNWVhZDIwNmU4ZTNiMmU3ODc4NGJkMjhlYTE1ZWUwYWU1ZTNmMmQyMzJlZDRiNTAyNTQxZTgxMDcyMWQ4OTI3N2U5IiwiaWF0IjoxNzA4NTkwMjk3LCJuYmYiOjE3MDg1OTAyOTcsImV4cCI6MTc0MDIxMjY5Nywic3ViIjoiNzcwIiwic2NvcGVzIjpbXX0.MdcUmAru5ndW7vG_GvCS31ftSysprr6Mk_FUOYbHGLHxydMieSYIOwFNDj5xQI7NKSBbqSzaL1JNRgg7HMDOgtRxuNfItqEgkKrZcTvdGePQvSyE1IoOrvNdnk6SMa1AvCfP3KeXCRA6x4Ob0rkSb4jV0H_k8_36WWc4axLgD_9nQgdGSW-tkdbbYC5KVafrqTjrvIH8YoAMaXzIyNO7-YE0SKgU76s2k0XL_cJPWtHwouieecNcCO9TSgJuKk0pBSuInNdO5c1tO1-8Q7mNqeBauX49qV4b5dl2qjdKIVk-GlLk2uQfuhs8xD1pjhmFop2KKyFxlgyCeA7DiZZtOA_SuTNMWQrF47oHGeFBQHGUzAcGFt0bLkdnyEO8GA0y2bKNYz9YJIgxzoGRDiIMKBRtUiXi0cuj3tduLw7bfQfqTzgcgXT_rmkeXOAEY8Moci_48wIppeuAzL3I7_sJLVLnv74zHEm-f1Rv-7Yr6PZVaZM-JZACLflk04hl52XN-sojHOlK9FxFbjgBl8JbW2MNXBozd2YEJr-1sKqVGNCB6DJAKosWLFSYjuktK01CymZP6tZDBe6_6ufJeMwTgelEVGFdiOr2tdn7dd-BqKCH4xXLdMzjbZjzDn_SG-b3Ddjrkx0RlMUhVIH6pQcPrxg8tG_LxTPnxh8fjiISpbc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "pick_up_address",
+							"value": "uttra,dhaka",
+							"type": "text"
+						},
+						{
+							"key": "Note",
+							"value": "demo",
+							"type": "text"
+						},
+						{
+							"key": "estimated_parcel",
+							"value": "123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://system.packnexa.com/api/pick-up-request",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"pick-up-request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "merchant_info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI0NGEzNTlmZWFkZTRkYTVlN2E5ZDQ1OThlYmQ3NTQ4NDg1NTZlOTRkYTJlZmVhNDMyZmUzNzgwNjdlYWVlZTYwZTU1ZDdkMWQ4NGEzMGRhIn0.eyJhdWQiOiIxNCIsImp0aSI6IjI0NGEzNTlmZWFkZTRkYTVlN2E5ZDQ1OThlYmQ3NTQ4NDg1NTZlOTRkYTJlZmVhNDMyZmUzNzgwNjdlYWVlZTYwZTU1ZDdkMWQ4NGEzMGRhIiwiaWF0IjoxNzEwMjIxMDcwLCJuYmYiOjE3MTAyMjEwNzAsImV4cCI6MTc0MTc1NzA3MCwic3ViIjoiMTEwNyIsInNjb3BlcyI6W119.N29BhBBTRMRBnRx6PtnEbqyC9Jg3dZUxk2ML1MhJRYScPl0kALp1mDykzxIurFD3d3tSZke4KKKwqEzdyy9kVFmtazde0r1O8P6QZc8EM41RdhtmGlcajLQbYWfEvCMUrvHhl_fsMvvSD9um_B6h0pes7h399ocoywzPwhS6SfKvKpjkaFkKJmIL1JvF637rFA9kAgKN-9NDL5olAF_fOcdl4QoA18bIGwXt5trM6NzlxTna_oJA1MqYLoeAfC-GzKCRyp96x0ohtQ1ilVPaGz9AEbv6DyM4Cq8T_rrT7O2kgcb5YT19Fq8WLo0CI2XBui8IWbqHksvZEb2xrVBGoZeyRrXKkIFlPs4LJ8Wu6AP_w2W3nE6KRKS7kt43htPuqK6CeQRKnYikcwxCOUCx2vgWcvgBBkR4b9MfUbZenCNjZF5nkGOiwkTBcNtaQ9KEB40yR912wuEu5-3lGc4lG-BUd0nMn7G412WzRBzmMA596CFX84vzsl97EZubOhz3AAycmbSCVSorVpokK_OWL-Nq4MtyvXy5Hl5SXz5LJzAWfpUFvlTKCbn1LWUJdHPhoNWXfahRbNfwysGnQGqzRGqWJk8VN-lG0FZ9IIWPHI5P8qmM1Y-FQFqIe-y6d3scSOjaSFQBRVFZhbMqMc7JQEmSxo3p8j1XrK08S1gkIKY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://system.parcelpointltd.com/api/get-merchant-info",
+					"protocol": "https",
+					"host": [
+						"system",
+						"parcelpointltd",
+						"com"
+					],
+					"path": [
+						"api",
+						"get-merchant-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Summary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI0NGEzNTlmZWFkZTRkYTVlN2E5ZDQ1OThlYmQ3NTQ4NDg1NTZlOTRkYTJlZmVhNDMyZmUzNzgwNjdlYWVlZTYwZTU1ZDdkMWQ4NGEzMGRhIn0.eyJhdWQiOiIxNCIsImp0aSI6IjI0NGEzNTlmZWFkZTRkYTVlN2E5ZDQ1OThlYmQ3NTQ4NDg1NTZlOTRkYTJlZmVhNDMyZmUzNzgwNjdlYWVlZTYwZTU1ZDdkMWQ4NGEzMGRhIiwiaWF0IjoxNzEwMjIxMDcwLCJuYmYiOjE3MTAyMjEwNzAsImV4cCI6MTc0MTc1NzA3MCwic3ViIjoiMTEwNyIsInNjb3BlcyI6W119.N29BhBBTRMRBnRx6PtnEbqyC9Jg3dZUxk2ML1MhJRYScPl0kALp1mDykzxIurFD3d3tSZke4KKKwqEzdyy9kVFmtazde0r1O8P6QZc8EM41RdhtmGlcajLQbYWfEvCMUrvHhl_fsMvvSD9um_B6h0pes7h399ocoywzPwhS6SfKvKpjkaFkKJmIL1JvF637rFA9kAgKN-9NDL5olAF_fOcdl4QoA18bIGwXt5trM6NzlxTna_oJA1MqYLoeAfC-GzKCRyp96x0ohtQ1ilVPaGz9AEbv6DyM4Cq8T_rrT7O2kgcb5YT19Fq8WLo0CI2XBui8IWbqHksvZEb2xrVBGoZeyRrXKkIFlPs4LJ8Wu6AP_w2W3nE6KRKS7kt43htPuqK6CeQRKnYikcwxCOUCx2vgWcvgBBkR4b9MfUbZenCNjZF5nkGOiwkTBcNtaQ9KEB40yR912wuEu5-3lGc4lG-BUd0nMn7G412WzRBzmMA596CFX84vzsl97EZubOhz3AAycmbSCVSorVpokK_OWL-Nq4MtyvXy5Hl5SXz5LJzAWfpUFvlTKCbn1LWUJdHPhoNWXfahRbNfwysGnQGqzRGqWJk8VN-lG0FZ9IIWPHI5P8qmM1Y-FQFqIe-y6d3scSOjaSFQBRVFZhbMqMc7JQEmSxo3p8j1XrK08S1gkIKY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://system.parcelpointltd.com/api/get-merchant-info",
+					"protocol": "https",
+					"host": [
+						"system",
+						"parcelpointltd",
+						"com"
+					],
+					"path": [
+						"api",
+						"get-merchant-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "merchant_dashboard",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjYwYTNlYTQwNDNlOWQwNWFiODQ4OGE4YzE0ZTJkMzc3MjY0MDUyMDA0MTRlODhhNDE1OTY3MmQxYWJjZDM2MDk2NDU0N2ZiOTA1NDdjODczIn0.eyJhdWQiOiIxOCIsImp0aSI6IjYwYTNlYTQwNDNlOWQwNWFiODQ4OGE4YzE0ZTJkMzc3MjY0MDUyMDA0MTRlODhhNDE1OTY3MmQxYWJjZDM2MDk2NDU0N2ZiOTA1NDdjODczIiwiaWF0IjoxNzIzMDA5NTE0LCJuYmYiOjE3MjMwMDk1MTQsImV4cCI6MTc1NDU0NTUxNCwic3ViIjoiMTIzMyIsInNjb3BlcyI6W119.dporuBJU3a6zHrIdIIMphOnvPecpYKdW-mO8_D5Ajov3laTtAmRGoqH7vFz2jKgxG9MefcrN1ADoNkxrEonk1lD7argi8QoNABIyM_l2t8MreKjrFpFtJM3gEEAgQzxg63HeGygATqrG4xlLPbeB4npJEnflY2M6x-LB7VfMQDPMy-GsVoGNBtVCt7QAOP1NxR-Ufh8FCw8izgDO_x1KN9lef7Wxmm5Ea04cwlN1Usc2s2FqG3I5LLBYDjA8Ef0dEu0Qaztaep6ObekxXu_myzo_qhgF-BUqQvByCQyhM3_pMArMcBTkVZdonMhRyzWsa2oNblviQSkTqrz13GRYOekiUc5nk2WHGV885fWT2ahsdQ6k4F1mBZ7DsazGAyjmm6gL4-7ZZcxTNQYbAbtce_hiNm_2EqalCk34G5cBUl2FuMOFR0BOnYyxeuN3HYkozjUvy7cESaRK_hCmvplhA40ThvZUJsR64ukJZBRnRobpjAjdht9kmXQGVMtHxCD-xgaaspgd_7X-nTv6xk5vAN0npBlkgAOSyllG5nIibBCLHXJ7OmbH4V7iWfvEdJScYFKXaMXwo2ROv_d1TLKeeNTtd2FScLUCVhliue5dnDCM0XIq7hbpugmP8Vrq1i9KmN57Zu_otMd0bSVDpm2UpXAUOgRIBFUbWrcSwrM-d-0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://dmanbd.com/system/api/merchantdashboard",
+					"protocol": "https",
+					"host": [
+						"dmanbd",
+						"com"
+					],
+					"path": [
+						"system",
+						"api",
+						"merchantdashboard"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "merchant_dashboard_details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjA1NjFiN2NlN2FjZDU2NTQ0NjI4YWZmOTM4Y2M0MzdjOTBlY2FlY2M5NzFlYjRhYzgxNGM4NDU1YWYwMTY2YTcwOTlkMWVhNzU5N2Y0ZjMzIn0.eyJhdWQiOiIxNCIsImp0aSI6IjA1NjFiN2NlN2FjZDU2NTQ0NjI4YWZmOTM4Y2M0MzdjOTBlY2FlY2M5NzFlYjRhYzgxNGM4NDU1YWYwMTY2YTcwOTlkMWVhNzU5N2Y0ZjMzIiwiaWF0IjoxNzA5MzU1MzAwLCJuYmYiOjE3MDkzNTUzMDAsImV4cCI6MTc0MDg5MTMwMCwic3ViIjoiNzcwIiwic2NvcGVzIjpbXX0.RJ9rKB_xB6w9ZKcJCQa38We-oXDj3VNxF2eYtTTD4mwjrYj9I6ygzT_O3rg5Oq6mmbC-bJ3LpZEwvLP-TfF_mFPxek63iGO4gy_UCyoe1ux6IlIqe8YZaHU5wKi-J6XXqGPXD1_P9nP0pzK-zHcStg2NCv4EhZY3HEzmX2qVOOVJ4X7FvdKKFbQScG2D9ej5txkLC7Eyg7b88SFfC_17EwCXn7kuHypIxJs3_QjWD57Y1pkdlmLk2VA5d_rEvFCKrUs32bE61_GoGmDDkUh7lAU-SKWhPDeveuOpOjs3y5lGu4iYMd3abJ3nceNAxpJTgJxZRIuFwcNYO6ZsSzy2fjkmZp7lxKC5VJZoSU2ComDQhU8pTfi0FgCW4W08TkL2QHT71HVAXrqOe_j0PX1qaN2N0qmZF5Z3NOL1aloYA62fzKsLQOv7GdZlk2Ty9qaDoWcaUKUSN-n3BdUI8TuPo1DTpNOx9hLHcA3sPuvHcrjcYP8Eip0r1EhKVllVqhpHBnmPuCsjvvkdqRcjpKJTUsRTbzBXMv9mJgv8_OOAw5dgV9Vy_OKYeHltB-fTpRNes0KT9LTS2dokFvocMgmIBgQ0D3E3ZHeqE1khBFpXn_PDkIHPjjz_AHByDpvyX7iLlQa3pW_W3dhZACgufOg-Y0BFuoVmdo2imF2YfIWlf50",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://system.parcelpointltd.com/api/merchantdashboard-list",
+					"protocol": "https",
+					"host": [
+						"system",
+						"parcelpointltd",
+						"com"
+					],
+					"path": [
+						"api",
+						"merchantdashboard-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user Profile info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjliMzM2MjJhNDE4MTU5NzMwYmMzYTBlMzJmOTVkNGVjMGQ2Y2I4NGMxNmUwZDk2MDk5NDhiOTJkZTJhZWUyMzAzZTQzNjdiMzdhYzZhNTE0In0.eyJhdWQiOiIxNCIsImp0aSI6IjliMzM2MjJhNDE4MTU5NzMwYmMzYTBlMzJmOTVkNGVjMGQ2Y2I4NGMxNmUwZDk2MDk5NDhiOTJkZTJhZWUyMzAzZTQzNjdiMzdhYzZhNTE0IiwiaWF0IjoxNzExODc3MTE4LCJuYmYiOjE3MTE4NzcxMTgsImV4cCI6MTc0MzQxMzExOCwic3ViIjoiNzcwIiwic2NvcGVzIjpbXX0.JDc8j5aCiyVhiG_RMQo57KJEnhhJRbRZP9Uk85WI2OhtXaDEhsLWh3QQWfQK_XZ85-axNZZZPvfp5kqnZTtRE5D4xZ_zllIkURbMIr4fuDqYq8M3lmlk5AZL2Pg3durqn6I2fEypDsjXfEUQ62UtjaKq63CICLSBSREF-d9c-A84Drn9eCVzb6GErw0OKaaKaHtqDE01C7LC9XhylccuuUEV01BQuH6HEmrFqOKWVwb-TehmsoWz2mHqwg7Tmqs0r9z7ngrYa43xl5CqcOsNLOHhhijmJmkY_pVuLV_tkGq75DIm9JIz0aF2-Bn3NLSHZVDtCCte0iOprVYX3Dpeh1g6whTAPbYZhHuWaDUum_ErOARS_vB68NkW-NzizbGW_oVZTOMae2VEviByDv22F6IapX0HtEb_wHcCWOZIfNL4HGFoga9c3EarF9NFfnl4KiOcH6rucljgvTRpT9_CBcOLlMYgVs5RKpJDd3GAdjufByyNrmgGBXxlTpDqmCs1Xkce33TVYNI9ErJydHpi0Ex2aiolMiqezPT0L-2q5go_P4hHYR0aOKIV3PTajJ5vCd5XFpwa3XS2ETGKZKabV38Y3DztPZbRW9MtzWcNLJewtuXbXCZeaP50Kao4UmeKMH0XypZN2Cs8k2jbteL94TQySNnRSLGQVHcrBzviSbQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://system.parcelpointltd.com/api/user-info",
+					"protocol": "https",
+					"host": [
+						"system",
+						"parcelpointltd",
+						"com"
+					],
+					"path": [
+						"api",
+						"user-info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invoice_wise_payment_details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjA1NjFiN2NlN2FjZDU2NTQ0NjI4YWZmOTM4Y2M0MzdjOTBlY2FlY2M5NzFlYjRhYzgxNGM4NDU1YWYwMTY2YTcwOTlkMWVhNzU5N2Y0ZjMzIn0.eyJhdWQiOiIxNCIsImp0aSI6IjA1NjFiN2NlN2FjZDU2NTQ0NjI4YWZmOTM4Y2M0MzdjOTBlY2FlY2M5NzFlYjRhYzgxNGM4NDU1YWYwMTY2YTcwOTlkMWVhNzU5N2Y0ZjMzIiwiaWF0IjoxNzA5MzU1MzAwLCJuYmYiOjE3MDkzNTUzMDAsImV4cCI6MTc0MDg5MTMwMCwic3ViIjoiNzcwIiwic2NvcGVzIjpbXX0.RJ9rKB_xB6w9ZKcJCQa38We-oXDj3VNxF2eYtTTD4mwjrYj9I6ygzT_O3rg5Oq6mmbC-bJ3LpZEwvLP-TfF_mFPxek63iGO4gy_UCyoe1ux6IlIqe8YZaHU5wKi-J6XXqGPXD1_P9nP0pzK-zHcStg2NCv4EhZY3HEzmX2qVOOVJ4X7FvdKKFbQScG2D9ej5txkLC7Eyg7b88SFfC_17EwCXn7kuHypIxJs3_QjWD57Y1pkdlmLk2VA5d_rEvFCKrUs32bE61_GoGmDDkUh7lAU-SKWhPDeveuOpOjs3y5lGu4iYMd3abJ3nceNAxpJTgJxZRIuFwcNYO6ZsSzy2fjkmZp7lxKC5VJZoSU2ComDQhU8pTfi0FgCW4W08TkL2QHT71HVAXrqOe_j0PX1qaN2N0qmZF5Z3NOL1aloYA62fzKsLQOv7GdZlk2Ty9qaDoWcaUKUSN-n3BdUI8TuPo1DTpNOx9hLHcA3sPuvHcrjcYP8Eip0r1EhKVllVqhpHBnmPuCsjvvkdqRcjpKJTUsRTbzBXMv9mJgv8_OOAw5dgV9Vy_OKYeHltB-fTpRNes0KT9LTS2dokFvocMgmIBgQ0D3E3ZHeqE1khBFpXn_PDkIHPjjz_AHByDpvyX7iLlQa3pW_W3dhZACgufOg-Y0BFuoVmdo2imF2YfIWlf50",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "https://system.parcelpointltd.com/api/invoice-wise-payment-detail?invoice_id=\tMPMT141595",
+					"protocol": "https",
+					"host": [
+						"system",
+						"parcelpointltd",
+						"com"
+					],
+					"path": [
+						"api",
+						"invoice-wise-payment-detail"
+					],
+					"query": [
+						{
+							"key": "invoice_id",
+							"value": "\tMPMT141595"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payment_request",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjI4ZmRlMjIwZjE1ZDdjNWVhZDIwNmU4ZTNiMmU3ODc4NGJkMjhlYTE1ZWUwYWU1ZTNmMmQyMzJlZDRiNTAyNTQxZTgxMDcyMWQ4OTI3N2U5In0.eyJhdWQiOiIxMiIsImp0aSI6IjI4ZmRlMjIwZjE1ZDdjNWVhZDIwNmU4ZTNiMmU3ODc4NGJkMjhlYTE1ZWUwYWU1ZTNmMmQyMzJlZDRiNTAyNTQxZTgxMDcyMWQ4OTI3N2U5IiwiaWF0IjoxNzA4NTkwMjk3LCJuYmYiOjE3MDg1OTAyOTcsImV4cCI6MTc0MDIxMjY5Nywic3ViIjoiNzcwIiwic2NvcGVzIjpbXX0.MdcUmAru5ndW7vG_GvCS31ftSysprr6Mk_FUOYbHGLHxydMieSYIOwFNDj5xQI7NKSBbqSzaL1JNRgg7HMDOgtRxuNfItqEgkKrZcTvdGePQvSyE1IoOrvNdnk6SMa1AvCfP3KeXCRA6x4Ob0rkSb4jV0H_k8_36WWc4axLgD_9nQgdGSW-tkdbbYC5KVafrqTjrvIH8YoAMaXzIyNO7-YE0SKgU76s2k0XL_cJPWtHwouieecNcCO9TSgJuKk0pBSuInNdO5c1tO1-8Q7mNqeBauX49qV4b5dl2qjdKIVk-GlLk2uQfuhs8xD1pjhmFop2KKyFxlgyCeA7DiZZtOA_SuTNMWQrF47oHGeFBQHGUzAcGFt0bLkdnyEO8GA0y2bKNYz9YJIgxzoGRDiIMKBRtUiXi0cuj3tduLw7bfQfqTzgcgXT_rmkeXOAEY8Moci_48wIppeuAzL3I7_sJLVLnv74zHEm-f1Rv-7Yr6PZVaZM-JZACLflk04hl52XN-sojHOlK9FxFbjgBl8JbW2MNXBozd2YEJr-1sKqVGNCB6DJAKosWLFSYjuktK01CymZP6tZDBe6_6ufJeMwTgelEVGFdiOr2tdn7dd-BqKCH4xXLdMzjbZjzDn_SG-b3Ddjrkx0RlMUhVIH6pQcPrxg8tG_LxTPnxh8fjiISpbc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "payment_method",
+							"value": "bkash",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost/Courierlab_V7.30.6/api/payment-request",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"Courierlab_V7.30.6",
+						"api",
+						"payment-request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "District",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQzZDVjMzdiZDI4NDYyYjg2ZmI4NDI3YjU3YjFlNGE0ZTZlYmEyYWU1ZTYxNGY2YWRiNzE5MmQwZDk5ZGYxYzY1NGZiN2I3MjMzMWJhMmZmIn0.eyJhdWQiOiIyMiIsImp0aSI6IjQzZDVjMzdiZDI4NDYyYjg2ZmI4NDI3YjU3YjFlNGE0ZTZlYmEyYWU1ZTYxNGY2YWRiNzE5MmQwZDk5ZGYxYzY1NGZiN2I3MjMzMWJhMmZmIiwiaWF0IjoxNzA0NTMwMzkyLCJuYmYiOjE3MDQ1MzAzOTIsImV4cCI6MTczNjE1Mjc5Miwic3ViIjoiNzcwIiwic2NvcGVzIjpbXX0.VWhoPg-cb-Y1NKbb4EWcEOnnEUhwUuF2BbeqW5S3Zx-RAAQUuD7zyPARWrohQeF5m-TbuD6WSF3yMadJqxzYSXbP5kq6cQ_Oa7pskuSexHeHC4D3sX7pn77MdYaxNE9G9cmf2NXDUaMio0xM7hOquOW7H3Pj7xSpKUOer_K_BM5a0841hbHJo8d-J6kpADEduTCO0Am0UEtJ6W0hBRp5cprZT_X12N8pkGVvyxXMLme6K0q06IJ29oI5HH6ZMN4m3xWr2jPJNq2hX6awIaIu5OEt179dT964lLp_soj47SagUMMDETixw0AeuzlXt27QQfOLGkkCnhPzE2jWDol7mFb_LZqjq44q-ZCy6EHI8SbkxUVa8GkaviSBaSKm6StczlTcOsxFG15UYGv6_w_iBRSBWbDb0iGkZ861ZpWQ9pi68BrMI7pp1-Qtun7yu9KkRNUOtBW8zd-M4fOZ8jXDNfuyJ66wV0f-dmTScBSzXXEngYU3Pf8rK3IGwGv8KDL5276JfVQSUKhIpAle0cwn75J4jsEja-4uLKvlt4GioSboLYY25X4fY-P27utTgk-laypRbkFjjp8-5-OXmfJ0xR3LoJOzAJvqqF56Y-1oxdrpF20BEljaoHXEKrHeqewN2S3j7qaLxJZ6MIAebQrIiPNbqTLuqF1lUaWAXC1SzVg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://system.packnexa.com/api/distList",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"distList"
+					],
+					"query": [
+						{
+							"key": "tracking_id",
+							"value": "LBDL7702312044470",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Distwise-area",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjQzZDVjMzdiZDI4NDYyYjg2ZmI4NDI3YjU3YjFlNGE0ZTZlYmEyYWU1ZTYxNGY2YWRiNzE5MmQwZDk5ZGYxYzY1NGZiN2I3MjMzMWJhMmZmIn0.eyJhdWQiOiIyMiIsImp0aSI6IjQzZDVjMzdiZDI4NDYyYjg2ZmI4NDI3YjU3YjFlNGE0ZTZlYmEyYWU1ZTYxNGY2YWRiNzE5MmQwZDk5ZGYxYzY1NGZiN2I3MjMzMWJhMmZmIiwiaWF0IjoxNzA0NTMwMzkyLCJuYmYiOjE3MDQ1MzAzOTIsImV4cCI6MTczNjE1Mjc5Miwic3ViIjoiNzcwIiwic2NvcGVzIjpbXX0.VWhoPg-cb-Y1NKbb4EWcEOnnEUhwUuF2BbeqW5S3Zx-RAAQUuD7zyPARWrohQeF5m-TbuD6WSF3yMadJqxzYSXbP5kq6cQ_Oa7pskuSexHeHC4D3sX7pn77MdYaxNE9G9cmf2NXDUaMio0xM7hOquOW7H3Pj7xSpKUOer_K_BM5a0841hbHJo8d-J6kpADEduTCO0Am0UEtJ6W0hBRp5cprZT_X12N8pkGVvyxXMLme6K0q06IJ29oI5HH6ZMN4m3xWr2jPJNq2hX6awIaIu5OEt179dT964lLp_soj47SagUMMDETixw0AeuzlXt27QQfOLGkkCnhPzE2jWDol7mFb_LZqjq44q-ZCy6EHI8SbkxUVa8GkaviSBaSKm6StczlTcOsxFG15UYGv6_w_iBRSBWbDb0iGkZ861ZpWQ9pi68BrMI7pp1-Qtun7yu9KkRNUOtBW8zd-M4fOZ8jXDNfuyJ66wV0f-dmTScBSzXXEngYU3Pf8rK3IGwGv8KDL5276JfVQSUKhIpAle0cwn75J4jsEja-4uLKvlt4GioSboLYY25X4fY-P27utTgk-laypRbkFjjp8-5-OXmfJ0xR3LoJOzAJvqqF56Y-1oxdrpF20BEljaoHXEKrHeqewN2S3j7qaLxJZ6MIAebQrIiPNbqTLuqF1lUaWAXC1SzVg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://system.packnexa.com/api/dist-area?id=36",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"dist-area"
+					],
+					"query": [
+						{
+							"key": "tracking_id",
+							"value": "LBDL7702312044470",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "36"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report-order_history",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjgyMWEzYTE4Y2FiODJjODY2MGY2Zjg2OGE3ZTIxZTc3NGM1NmJjYmY5MGZkNjJjZDlmNTM0Y2Q4MDVmOTZmMzk4NTM3ZWE2MTk4N2Q5ZDc2In0.eyJhdWQiOiIxOCIsImp0aSI6IjgyMWEzYTE4Y2FiODJjODY2MGY2Zjg2OGE3ZTIxZTc3NGM1NmJjYmY5MGZkNjJjZDlmNTM0Y2Q4MDVmOTZmMzk4NTM3ZWE2MTk4N2Q5ZDc2IiwiaWF0IjoxNzIyOTI2NjE0LCJuYmYiOjE3MjI5MjY2MTQsImV4cCI6MTc1NDQ2MjYxNCwic3ViIjoiMTIzMyIsInNjb3BlcyI6W119.IrLrkWZBy2FhzmjE8MFAd_7BvOXvUtJ6rvY0Jby1zSF8pcZcuPamYh7wurb_uYmeZeGnv7bRaEi42OMZt0kBtTqJ95Q4jFTW8bKyVFtsxS_3zwCw2kGsvoNAwpIgOnEY6Ch5dIsRmVtH_DcRRAxqX5PoM0vReC-oPSapJCJMg1vLpjsjLmMQlPnOwmMFGzdULu3t_sIDzoY5OXiC9NvfG5OuKlr2DjxywAYmLfJ2ACah327GRA5o8nXgItTSSEveMJNHDI0TPNfJJAkP1tom0UYUfn3o35J8dZ-edmBq97jqdM9i7uC63kIGTzliNMRLoaqGT2TqkcYnJtcJn2y5pbMOGToOiZkcAT6R-vJ9-MFr2sXmHFGn_V8eIsPYnI4lbLsnFiLbX4DXy8c-OlMo2NqL_OQrABZKaIXZHdFbO3kHz7apHSrlryP6D2GJ3P8EpYZD-5-dJn2Dm5yS7l9qXf6CF6tcytNj6DyHR5BItxz_uA-44N_MC_OS2gf7wcEVpAshAtpD2gee6DM5b6b5Op3g1eH_Fi_zL-jrWMuNbiWE43uyup2VVT3OrXHLj4qzsbvNaUoxEXuKoUTSYBH2790UWJXX_a_8q9vFz3_9wvhjO9e9fYx2_9sFnr8XXKOUuBQ4vpFILsgCgQpIP9Sz-9UPLVWvgHQ8GVMNvPCqrNA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://dmanbd.com/system/api/confirm_orders?fromdate=2024-01-06&todate=2024-08-06",
+					"protocol": "https",
+					"host": [
+						"dmanbd",
+						"com"
+					],
+					"path": [
+						"system",
+						"api",
+						"confirm_orders"
+					],
+					"query": [
+						{
+							"key": "tracking_id",
+							"value": "LBDL7702312044470",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fromdate",
+							"value": "2024-01-06"
+						},
+						{
+							"key": "todate",
+							"value": "2024-08-06"
+						},
+						{
+							"key": "status",
+							"value": "$status",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report-payment_history",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjUyMmRlM2VlZTBmNGVhNjJlYzdiMTBiMzc3ODRkZDUwM2ZlNDc5YWQwMTY1Yjg3MjJmYzFiZDRjNDYxNjNhY2Q1MWEyZmM0Y2Y3ZTM5NzRhIn0.eyJhdWQiOiIxOCIsImp0aSI6IjUyMmRlM2VlZTBmNGVhNjJlYzdiMTBiMzc3ODRkZDUwM2ZlNDc5YWQwMTY1Yjg3MjJmYzFiZDRjNDYxNjNhY2Q1MWEyZmM0Y2Y3ZTM5NzRhIiwiaWF0IjoxNzIyOTE1MjM2LCJuYmYiOjE3MjI5MTUyMzYsImV4cCI6MTc1NDQ1MTIzNiwic3ViIjoiMTIzMyIsInNjb3BlcyI6W119.TtGhki8wZsNelcIerFa_ATBeWJFTQEqVWr4zWhmBxM9CuCYF9nG8HBADmCHQsDMsoG6OZQ-iFXBnVHTcl9M41296UfK2MVCL7YWfRKWH6aFvSmmfsnZfmkZ1JPnbkXxg4G-Yz1hPCaWy9ior5GizdNKogBVmpPb_vULOEuCNws7pK86tLmAAdQEebzprzGXu9u5SD455XjT8ZgFPF3KzKDY10e1VcvTmx3afnBiJpEyEicbLoJmgS5UCzyWq2S-Bt53DZdQoKjEJn48tIK7E7oqBaSa0PL9_wYX1e5AFUYIQyEoM2dE-TiTyeeU8TJcYjuhs9kVKRsuKRAhlcuuox4j2gSLqFJXOsZ23DVfuACRpbULE-ra2ZQ0IAz33ag6uE6rMTuIxT002dnaBNolOJLIxOItlR1SfOuVYsnCBSsSqVp58Q4K0btzhL7PvF2tYaPJQug1oOG6PTRWUkk3wMGDxPhqv160KxBjswqnoo1_ES6WHnqXZiIZcabH4t0QBUJt9qyRznup0B4X95iJHUiOs7Ms9dfYfoCnRMNCgm7WkBL56BJsTV0AlDCe0_Dbse644LeQKzGi5wEbf8Z8Gm399PyHBsfCLU0RAlFkdZoGaUfzNlFYzFkHMWA-jRBWMXumWYRqSTHjbyiZlYXqor_X5N_ayHYLxSuga5YdzfJU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://system.packnexa.com/api/confirm_orders?fromdate=$fDate&todate=$tDate&status=$status",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"confirm_orders"
+					],
+					"query": [
+						{
+							"key": "tracking_id",
+							"value": "LBDL7702312044470",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "fromdate",
+							"value": "$fDate"
+						},
+						{
+							"key": "todate",
+							"value": "$tDate"
+						},
+						{
+							"key": "status",
+							"value": "$status"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report-return history",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjBmMzExYjM2MTFkYzVmMDczOTMyZmIzZjMwZDhmOWM3ZWM5ZDMzM2UzYjJkNDcxNDk3ZWZlNzY1NzZjMzdiYWRlOGVkMGMwOGIzOGM0NjI5In0.eyJhdWQiOiIxOCIsImp0aSI6IjBmMzExYjM2MTFkYzVmMDczOTMyZmIzZjMwZDhmOWM3ZWM5ZDMzM2UzYjJkNDcxNDk3ZWZlNzY1NzZjMzdiYWRlOGVkMGMwOGIzOGM0NjI5IiwiaWF0IjoxNzMyNjI1NDc5LCJuYmYiOjE3MzI2MjU0NzksImV4cCI6MTc2NDE2MTQ3OSwic3ViIjoiMTQxOCIsInNjb3BlcyI6W119.HACSguLSpU7d472oC3Un5DZNAUKizzGImWEHdSrlNIzFauDsDj03XQyus-GhF-6SZ1JhhpFIc1AYJZPEEOiBlUsrmyEgo-uWiCgNzz99R4iaWqOGL3TCEr3wLMchCri2C0Lf2piT3qiQUiau_gtfr1uS2BpyJIaRtYwSnHO28_FIpd9X60RpOUnqdTkn0cfNfrZLz73UxwIiP5UKc7w7uNayaSR-sQ2wlb8i7Y9Jcz3dXpCKRyNDRfUXMBlNUdELjAXLKTN2bIlB88FRFO8bLBq03UOdLAG1Tdr0aIt34qrRV8bX_Wd1VOydGRskB16PBcCUTyj8tfUNPgDummpWFmJ8dJ_QrEU1-57yjG3KhLMKYbDVdhsrmj7dTDglDw07RiZzse0EqI6-sOtShzldB_qxy1_BJAKH4qr5K8aN_uqIvICvAZ9ltvsVM9UGrWMe40hH1NmgmjzBYGSWAnGzJE2y_cYPIB5L0yJXqQfilwNoR4zcnKQV9YR0YtEOMtgGDVlT8ocg-d3ZIycVwaYl-eS-FIadCSqN4mRoQ9u54Du_i5WHdYreqq5_GP1DueNxtpI4P3nXpU5kbcjNGtXqA1paZi5YriPWIppKNxYo3Z-GwS85zzy2vudbMubIZ4BX84aZg8vvMSPmgYo5lCDh6RT6sVSSvRJJonY44ZVp5RA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://system.packnexa.com/api/return-history?fromdate=1.1.2024&todate=26.11.2024",
+					"protocol": "https",
+					"host": [
+						"system",
+						"packnexa",
+						"com"
+					],
+					"path": [
+						"api",
+						"return-history"
+					],
+					"query": [
+						{
+							"key": "fromdate",
+							"value": "1.1.2024"
+						},
+						{
+							"key": "todate",
+							"value": "26.11.2024"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

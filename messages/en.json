@@ -1,0 +1,306 @@
+{
+    "common": {
+      "menu": {
+        "home": "Home",
+        "about": "About",
+        "services": "Services",
+        "coverage-area": "Coverage Area",
+        "contact": "Contact",
+        "trackParcel": "Track Parcel",
+        "login": "Login",
+        "signup": "Sign Up"
+      }
+    },
+    "homePage": {
+      "heroSection": {
+        "title": "We Deliver",
+        "subtitle": "Parcel on Time with no Hassle",
+        "description": "Easy Tracking, fast Payment, and safe Delivery across country.",
+        "button": "Become a Merchant"
+      },
+      "statsSection": {
+        
+        "numbersOne": "300K + ",
+        "numbersTwo": "12K +",
+        "numbersThree": " 600 +"
+      },
+      "trackParcelSection": {
+        "title": "Track your parcel to get detailed update",
+        "inputLabel": "Enter Tracking ID ",
+        "button": "Track Parcel"
+      },
+      "featuresSection": {
+        "title": "Choose ABC as your logistics partner",
+        "features": [
+          {
+            "title": "Industry-leading tech",
+            "description": "Professional building solutions for your business and development services."
+          },
+          {
+            "title": "Next day payment",
+            "description": "Strategic controls to grow your solutions with development services."
+          },
+          {
+            "title": "Best COD rate",
+            "description": "Modern data development services with development services."
+          },
+          {
+            "title": "Secure handling",
+            "description": "Modern data development services with development services."
+          },
+          {
+            "title": "Fastest solutions",
+            "description": "Modern data development services with development services."
+          },
+          {
+            "title": "Multimedia coverage",
+            "description": "Modern data development services with development services."
+          }
+        ]
+      },
+      "calculatorSection": {
+        "title": "Delivery calculator",
+        "description": "Plan your alignment with view at your external delivery costs telefoneed.",
+        "table": {
+          "inputLabelOne": "Weight (steps: 10g)",
+          "inputLabelTwo": "Selling price of the product",
+          "inputLabelThree": "Pickup Area",
+          "inputLabelFour": "Delivery Area"
+         
+        },
+        "button":" Calculate price",
+        "clickHearOne":"Check our ",
+        "clickHearTwo":"detailed list",
+        "note": "Play your alignment with view at your external delivery costs telefoneed. Once new details fall."
+      },
+      "reviewsSection": {
+    "title": "Client Reviews",
+    "reviews": [
+      {
+        "text": "Top notch quality and very responsive team. Helped us every step of the way.",
+        "author": "Olivia Johnson",
+        "position": "Director at Visionary Co."
+      },
+      {
+        "text": "Top notch quality and very responsive team. Helped us every step of the way.",
+        "author": "Robert Brown",
+        "position": "CTO of Cloudify"
+      },
+      {
+        "text": "Top notch quality and very responsive team. Helped us every step of the way.",
+        "author": "Robert Brown",
+        "position": "CTO of Cloudify"
+      },
+      {
+        "text": "Top notch quality and very responsive team. Helped us every step of the way.",
+        "author": "Robert Brown",
+        "position": "CTO of Cloudify"
+      },
+      {
+        "text": "Top notch quality and very responsive team. Helped us every step of the way.",
+        "author": "Robert Brown",
+        "position": "CTO of Cloudify"
+      }
+    ]
+   
+  },
+      "faqSection": {
+        "title": "Still have questions? We have answers!",
+        "description": "Plan your alignment with view at your external delivery costs telefoneed.",
+        "button": "See all our FAQs ",
+        "questions": [
+          {
+            "question": "What is the purpose of whichmoving is design?",
+            "answer": "We thinking a solution to basic structure and layout of a display, starting as a virtual guide before detailed development."
+          },
+          {
+            "question": "Why is user-centered design important?",
+             "answer": "We thinking "
+          },
+          {
+            "question": "What role does constant play in graphic design?",
+            "answer": "We thinking and layout of a display, "
+          },
+          {
+            "question": "Define the term 'repeatable design' in web development.",
+            "answer": "structure and layout of a display, starting"
+          },
+          {
+            "question": "What is the significance of color theory in design?",
+            "answer": "We thinking the significance"
+          }
+          
+        ],
+        "cta": "See all our tools"
+      },
+      "footer": {
+        "titleOne":"Company",
+         "titleTwo":"Concern",
+        "brand": "@PACKHEXA",
+        "description": "Passed to ensure these COD constraints & a reduction assessment will apply every million customers. Have any option?",
+        "links": ["Pagedone", "Power", "Abuse", "Pricing", "Contact", "Payment To System", "Name/Assess", "Responsive Needs"],
+        "social": "Follow Us",
+         "copyRight": "© abc 2024, All rights reserved."
+      }
+    },
+    "loginPage": {
+      "title": "Login to your account",
+      "emailLabel": "Email Address",
+      "passwordLabel": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "loginButton": "Login",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up here"
+    },
+    "signupPage": {
+      "title": "Create new account",
+      "nameLabelOne": "Your Business Name",
+      "nameLabelTwo": "Full Name",
+      "locationLabel": "Address of our location",
+      "emailLabel": "Email Address",
+      "phoneLabel": "Phone Number",
+      "passwordLabel": "Password",
+      "confirmPasswordLabel": "Confirm Password",
+      "signupButton": "Sign Up",
+      "accountLabelOne": "By clicking Sign Up you are agreeing with our",
+      "accountLabelTwo": "Terms & Conditions",
+      "existingAccount": "Already have an account?",
+      "loginLink": "Login here",
+      "area_label_one": "Area",
+      "area_label_two": "Area_district"
+    },
+    "dashboard": {
+      "sidebar": {
+        "dashboard": "Dashboard",
+        "parcels": {
+          "main": "Parcels",
+          "addParcel": "Add Parcel",
+          "allParcels": "All Parcels",
+          "pending": "Pending",
+          "inTransit": "In Transit",
+          "delivered": "Delivered"
+        },
+        "finance": {
+          "main": "Finance",
+          "addFund": "Add Fund",
+          "transactions": "Transactions",
+          "withdraw": "Withdraw"
+        },
+        "reports": "Reports",
+        "settings": "Settings",
+        "help": "Help"
+      },
+      "topbar": {
+        "notifications": "Notifications",
+        "messages": "Messages",
+        "profile": "Profile",
+        "logout": "Logout"
+      },
+      "mainContent": {
+        "welcome": "Welcome back,",
+        "stats": {
+          "totalParcels": "Total Parcels",
+          "delivered": "Delivered",
+          "inTransit": "In Transit",
+          "pending": "Pending"
+        },
+        "recentActivities": "Recent Activities",
+        "quickActions": {
+          "title": "Quick Actions",
+          "newParcel": "New Parcel",
+          "trackParcel": "Track Parcel",
+          "generateReport": "Generate Report",
+          "settings": "Settings"
+        }
+      }
+    },
+    "addParcelPage": {
+      "title": "Add New Parcel",
+      "form": {
+        "senderInfo": "Sender Information",
+        "receiverInfo": "Receiver Information",
+        "parcelInfo": "Parcel Information",
+        "senderName": "Sender Name",
+        "senderPhone": "Sender Phone",
+        "senderAddress": "Sender Address",
+        "receiverName": "Receiver Name",
+        "receiverPhone": "Receiver Phone",
+        "receiverAddress": "Receiver Address",
+        "parcelType": "Parcel Type",
+        "parcelWeight": "Weight (kg)",
+        "deliveryType": "Delivery Type",
+        "deliveryCharge": "Delivery Charge",
+        "paymentMethod": "Payment Method",
+        "notes": "Notes",
+        "submitBtn": "Submit Parcel"
+      },
+      "validation": {
+        "required": "This field is required",
+        "invalidPhone": "Invalid phone number"
+      }
+    },
+    "addFundPage": {
+      "title": "Add Fund to Wallet",
+      "currentBalance": "Current Balance",
+      "amount": "Amount to Add",
+      "paymentMethods": "Payment Methods",
+      "bkash": "bKash",
+      "nagad": "Nagad",
+      "rocket": "Rocket",
+      "bank": "Bank Transfer",
+      "card": "Credit/Debit Card",
+      "transactionId": "Transaction ID",
+      "submitBtn": "Add Fund",
+      "minAmount": "Minimum amount is 100",
+      "success": "Fund added successfully"
+    },
+    "trackParcelPage": {
+      "title": "Track Your Parcel",
+      "inputLabel": "Enter Tracking Number",
+      "searchBtn": "Track",
+      "results": {
+        "status": "Status",
+        "date": "Date",
+        "location": "Location",
+        "remarks": "Remarks"
+      },
+      "notFound": "No parcel found with this tracking number"
+    },
+    "allParcelsPage": {
+      "title": "All Parcels",
+      "filters": {
+        "all": "All",
+        "today": "Today",
+        "week": "This Week",
+        "month": "This Month"
+      },
+      "tableHeaders": [
+        "Tracking No",
+        "Sender",
+        "Receiver",
+        "Status",
+        "Date",
+        "Actions"
+      ],
+      "actions": {
+        "view": "View",
+        "edit": "Edit",
+        "print": "Print"
+      }
+    },
+    "profilePage": {
+      "title": "My Profile",
+      "personalInfo": "Personal Information",
+      "changePassword": "Change Password",
+      "name": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm Password",
+      "updateBtn": "Update Profile",
+      "changePassBtn": "Change Password"
+    }
+  }

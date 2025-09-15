@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --primary-color: #fff;
+  --secondary-color: #737373;
+  --dark-color: #171717;
+  --border-color: #d1d5db;
+  --active-color: #2a64f6;
+}
+
+.text-primary {
+  color: var(--dark-color);
+}
+
+.text-primary-hover:hover {
+  color: #2a64f6;
+}
+.text-primary-active {
+  color: var(--active-color);
+}
+
+.text-secondary {
+  color: var(--secondary-color);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.border-gray {
+  border-color: var(--border-color);
+}
+
+.button-primary {
+  background-color: #2a64f6;
+  color: white;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.4s ease-out;
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
