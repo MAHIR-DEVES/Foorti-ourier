@@ -122,7 +122,7 @@ const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
       {balanceClicked ? (
         <div className="flex justify-between items-center gap-16 md:gap-20 py-0.5">
           <span className="font-semibold text-primary-active">
-            {data?.data?.paymentComplete} Tk
+            {data?.data?.paymentProcessing} Tk
           </span>
           <span className="text-[15px] bg-[#1976d2] text-white rounded-full px-2.5 py-0.5">
             Details

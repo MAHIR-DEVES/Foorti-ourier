@@ -1,20 +1,24 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
-const ParcelTable = () => {
-  const tabs = [
-    'All',
-    'Rescheduled',
-    'Return Reach To Merchant',
-    'Payment Completed',
-    'List by Date',
-    'Order Placed',
-    'Transit',
-    'Successfully Delivery',
-  ];
+const tabs = [
+  'All',
+  'Rescheduled',
+  'Return Reach To Merchant',
+  'Payment Completed',
+  'List by Date',
+  'Order Placed',
+  'Transit',
+  'Successfully Delivery',
+];
 
-  const [activeTab, setActiveTab] = useState('All'); // default 'All'
+const ParcelTable = () => {
+  const searchParams = useSearchParams();
+  const queryStatus = searchParams.get('status') || 'All';
+
+  const [activeTab, setActiveTab] = useState(queryStatus);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,40 +30,26 @@ const ParcelTable = () => {
     const fetchOrders = async () => {
       try {
         const stored = localStorage.getItem('token');
-
-        if (!stored) {
-          console.error('No token found in localStorage');
-          return;
-        }
+        if (!stored) return;
 
         const parsed = JSON.parse(stored);
         const token = parsed?.token;
-
-        if (!token) {
-          console.error('No token value inside localStorage');
-          return;
-        }
+        if (!token) return;
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_MERCHANT_API_KEY}/confirm-orders-list`,
           {
             method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            headers: { Authorization: `Bearer ${token}` },
           }
         );
 
-        if (!response.ok) {
-          throw new Error('Confirm orders fetch failed');
-        }
+        if (!response.ok) throw new Error('Failed to fetch orders');
 
         const data = await response.json();
-        console.log('Orders:', data);
-
         setOrders(data.confirmed_order_list || []);
-      } catch (error) {
-        console.error('API Error:', error.message);
+      } catch (err) {
+        console.error('API Error:', err.message);
       } finally {
         setLoading(false);
       }
@@ -68,13 +58,18 @@ const ParcelTable = () => {
     fetchOrders();
   }, []);
 
-  // ✅ Filtering orders by active tab
+  // Update tab if queryStatus changes (when TextCard is clicked)
+  useEffect(() => {
+    setActiveTab(queryStatus);
+  }, [queryStatus]);
+
+  // Filter orders
   const filteredOrders = orders.filter(order => {
     if (activeTab === 'All') return true;
     return order.status === activeTab;
   });
 
-  // ✅ Pagination calculations with filtered orders
+  // Pagination calculations
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedOrders = filteredOrders.slice(
@@ -97,9 +92,7 @@ const ParcelTable = () => {
     }
   };
 
-  const handlePageClick = page => {
-    setCurrentPage(page);
-  };
+  const handlePageClick = page => setCurrentPage(page);
 
   const renderPageNumbers = () => {
     const pages = [];
@@ -159,7 +152,7 @@ const ParcelTable = () => {
             <thead className="border-b border-gray">
               <tr className="text-primary">
                 <th className="px-4 py-3">SL#</th>
-                <th className="px-4 py-3">Crete Date</th>
+                <th className="px-4 py-3">Create Date</th>
                 <th className="px-4 py-3">Tracking ID</th>
                 <th className="px-4 py-3">Customer Name</th>
                 <th className="px-4 py-3">Customer Phone</th>
@@ -181,7 +174,9 @@ const ParcelTable = () => {
                 paginatedOrders.map((order, idx) => (
                   <tr key={`${order.id}-${idx}`}>
                     <td className="px-4 py-3">{startIndex + idx + 1}</td>
-                    <td className="px-4 py-3">11/22/33</td>
+                    <td className="px-4 py-3">
+                      {order.create_date || '11/22/33'}
+                    </td>
                     <td className="px-4 py-3">{order.tracking_id}</td>
                     <td className="px-4 py-3">{order.customer_name}</td>
                     <td className="px-4 py-3">{order.customer_phone}</td>

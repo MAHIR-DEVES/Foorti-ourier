@@ -2,12 +2,24 @@
 import Link from 'next/link';
 
 const textCardData = [
-  { label: 'Consignments', href: '/dashboard/consignments' },
-  { label: 'Delivered', href: '/dashboard/consignments' },
-  { label: 'Pending', href: '/dashboard/consignments' },
-  { label: 'Returned', href: '/dashboard/consignments' },
-  { label: 'Cancelled', href: '/dashboard/consignments' },
-  { label: 'In Transit', href: '/dashboard/consignments' },
+  { label: 'Consignments', href: '/dashboard/consignments?status=All' },
+  { label: 'Rescheduled', href: '/dashboard/consignments?status=Rescheduled' },
+  {
+    label: 'Return Reach To Merchant',
+    href: '/dashboard/consignments?status=Return Reach To Merchant',
+  },
+  {
+    label: 'Payment Completed',
+    href: '/dashboard/consignments?status=Payment Completed',
+  },
+  {
+    label: 'List by Date',
+    href: '/dashboard/consignments?status=List by Date',
+  },
+  {
+    label: 'Order Placed',
+    href: '/dashboard/consignments?status=Order Placed',
+  },
 ];
 
 const TextCard = () => {
@@ -17,7 +29,7 @@ const TextCard = () => {
         <Link
           key={index}
           href={item.href}
-          className="bg-[#bbdefb] py-6 rounded-lg  transition"
+          className="bg-[#bbdefb] py-6 rounded-lg transition"
         >
           <p className="text-center text-primary font-medium text-[14px]">
             {item.label}
