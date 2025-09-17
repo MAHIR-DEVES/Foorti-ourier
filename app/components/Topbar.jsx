@@ -148,13 +148,11 @@ const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
         />
 
         <div className="flex-1 flex items-center justify-center md:justify-between relative">
-          <Link href="/">
-            <img
-              src="/img/logo.png"
-              alt="logo"
-              className="h-20 mx-auto md:mx-0 md:ml-4 transition-opacity duration-200"
-            />
-          </Link>
+          <img
+            src="/img/logo.png"
+            alt="logo"
+            className="h-20 mx-auto md:mx-0 md:ml-4 transition-opacity duration-200"
+          />
 
           {/* Desktop Search */}
           <div className="hidden md:flex items-center justify-center gap-4 absolute left-1/2 transform -translate-x-1/2">
