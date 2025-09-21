@@ -13,8 +13,8 @@ const textCardData = [
     href: '/dashboard/consignments?status=Payment Completed',
   },
   {
-    label: 'List by Date',
-    href: '/dashboard/consignments?status=List by Date',
+    label: 'Assigned Pickup Rider',
+    href: '/dashboard/consignments?status=Assigned Pickup Rider',
   },
   {
     label: 'Order Placed',

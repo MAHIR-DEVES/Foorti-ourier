@@ -4,14 +4,12 @@ import { useSearchParams } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const tabs = [
-  'All',
-  'Rescheduled',
-  'Return Reach To Merchant',
-  'Payment Completed',
-  'List by Date',
-  'Order Placed',
-  'Transit',
-  'Successfully Delivery',
+  { label: 'All', value: 'All' },
+  { label: 'Order Placed', value: 'Order Placed' },
+  { label: 'Payment Completed', value: 'Payment Completed' },
+  { label: ' Pickup Rider', value: 'Assigned Pickup Rider' },
+  { label: 'Return', value: 'Return Reach To Merchant' },
+  { label: 'Rescheduled', value: 'Rescheduled' },
 ];
 
 const ParcelTable = () => {
@@ -63,7 +61,6 @@ const ParcelTable = () => {
     setActiveTab(queryStatus);
   }, [queryStatus]);
 
-  // Filter orders
   const filteredOrders = orders.filter(order => {
     if (activeTab === 'All') return true;
     return order.status === activeTab;
@@ -128,17 +125,17 @@ const ParcelTable = () => {
           <button
             key={idx}
             onClick={() => {
-              setActiveTab(tab);
+              setActiveTab(tab.value);
               setCurrentPage(1);
               setPaginationGroup(1);
             }}
             className={`px-4 py-2 rounded border text-sm font-medium transition-colors ${
-              activeTab === tab
+              activeTab === tab.value
                 ? 'bg-blue-100 button-primary cursor-pointer'
                 : 'bg-white text-gray-700 cursor-pointer border-gray'
             }`}
           >
-            {tab}
+            {tab.label} {/* এখানে UI তে শুধু label দেখাবে */}
           </button>
         ))}
       </div>
