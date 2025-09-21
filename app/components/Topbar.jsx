@@ -125,7 +125,7 @@ const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
             {data?.data?.paymentProcessing} Tk
           </span>
           <span className="text-[15px] bg-[#1976d2] text-white rounded-full px-2.5 py-0.5">
-            Details
+            Balance
           </span>
         </div>
       ) : (
