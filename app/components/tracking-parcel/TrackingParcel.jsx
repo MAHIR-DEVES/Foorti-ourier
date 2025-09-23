@@ -112,7 +112,7 @@ const TrackingParcel = () => {
       {parcel && (
         <div className="space-y-6">
           {/* Company Information */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          {/* <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div
               style={{ backgroundColor: 'var(--active-color)' }}
               className="p-4 text-white"
@@ -157,7 +157,7 @@ const TrackingParcel = () => {
                 </span>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Parcel Information */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -165,10 +165,21 @@ const TrackingParcel = () => {
               style={{ backgroundColor: 'var(--active-color)' }}
               className=" p-4 text-white"
             >
-              <h3 className="text-xl font-semibold">Parcel Information</h3>
-              <p className="text-blue-100">
-                Tracking ID: {parcel.data?.tracking_id || 'N/A'}
-              </p>
+              <div className="flex justify-between  items-center">
+                <div className="">
+                  <h3 className="text-xl font-semibold">Parcel Information</h3>
+                  <p className="text-blue-100">
+                    Tracking ID: {parcel.data?.tracking_id || 'N/A'}
+                  </p>
+                </div>
+                <div className="">
+                  {' '}
+                  <h1>Merchant Name</h1>
+                  <span className="font-medium">
+                    {parcel.data?.customer_name || 'N/A'}
+                  </span>
+                </div>
+              </div>
             </div>
             <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
@@ -242,12 +253,6 @@ const TrackingParcel = () => {
                       {parcel.data?.type || 'N/A'}
                     </span>
                   </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Merchant:</span>
-                    <span className="font-medium">
-                      {parcel.data?.merchant || 'N/A'}
-                    </span>
-                  </div>
                 </div>
               </div>
 
@@ -286,64 +291,6 @@ const TrackingParcel = () => {
             </div>
           </div>
 
-          {/* Order History */}
-          {parcel.order_history && parcel.order_history.length > 0 && (
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div
-                style={{ backgroundColor: 'var(--active-color)' }}
-                className=" p-4 text-white"
-              >
-                <h3 className="text-xl font-semibold">Order History</h3>
-              </div>
-              <div className="p-6">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Name
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Mobile
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Status
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {parcel.order_history.map((history, index) => (
-                        <tr key={index}>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {formatDate(history.date)}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {history.name}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {history.mobile}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                                history.status
-                              )}`}
-                            >
-                              {history.status}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* Order Status */}
           {parcel.order_status && parcel.order_status.length > 0 && (
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
@@ -361,9 +308,7 @@ const TrackingParcel = () => {
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Date
                         </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Name
-                        </th>
+
                         <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                           Status
                         </th>
@@ -378,17 +323,16 @@ const TrackingParcel = () => {
                           <td className="px-6 py-4 whitespace-nowrap">
                             {formatDate(status.date)}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {status.name}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+
+                          <td className="px-6 py-4 whitespace-nowrap flex gap-2">
                             <span
                               className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
                                 status.status
-                              )}`}
+                              )} `}
                             >
                               {status.status}
                             </span>
+                            <p>({status.name})</p>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap">
                             {status.delivery_note || 'N/A'}
