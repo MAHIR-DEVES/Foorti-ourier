@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 const tabs = [
   { label: 'All', value: 'All' },
+  { label: 'List by Date', value: 'List by Date' },
   { label: 'Pending', value: 'Pending' },
   { label: 'Approval Pending', value: 'Approval Pending' },
   { label: 'Delivered', value: 'Delivered' },
@@ -198,7 +199,10 @@ const ParcelTable = () => {
                 </tr>
               ) : (
                 paginatedOrders.map((order, idx) => (
-                  <tr key={`${order.id}-${idx}`}>
+                  <tr
+                    className=" border-b-2 border-gray-200"
+                    key={`${order.id}-${idx}`}
+                  >
                     <td className="px-4 py-3">{startIndex + idx + 1}</td>
                     <td className="px-4 py-3">
                       {order?.order_create_date
