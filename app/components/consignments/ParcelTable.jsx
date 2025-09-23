@@ -10,6 +10,12 @@ const tabs = [
   { label: ' Pickup Rider', value: 'Assigned Pickup Rider' },
   { label: 'Return', value: 'Return Reach To Merchant' },
   { label: 'Rescheduled', value: 'Rescheduled' },
+  //
+  { label: 'Pending', value: 'Pending' },
+  { label: 'Approval Pending', value: 'Approval Pending' },
+  { label: 'Delivered', value: 'Delivered' },
+  { label: 'Partly Delivered', value: 'Partly Delivered' },
+  { label: 'Cancelled', value: 'Cancelled' },
 ];
 
 const ParcelTable = () => {
@@ -145,19 +151,19 @@ const ParcelTable = () => {
         {loading ? (
           <p className="p-4">Loading...</p>
         ) : (
-          <table className="w-full table-auto text-sm text-left text-gray-500">
+          <table className="w-full table-auto text-xl text-left text-gray-500">
             <thead className="border-b border-gray">
               <tr className="text-primary">
                 <th className="px-4 py-3">SL#</th>
                 <th className="px-4 py-3">Create Date</th>
-                <th className="px-4 py-3">Tracking ID</th>
+                <th className="px-4 py-3"> ID</th>
                 <th className="px-4 py-3">Customer Name</th>
-                <th className="px-4 py-3">Customer Phone</th>
-                <th className="px-4 py-3">Customer Address</th>
-                <th className="px-4 py-3">Delivery Charge</th>
+                {/* <th className="px-4 py-3">Customer Phone</th>
+                <th className="px-4 py-3">Customer Address</th> */}
+                <th className="px-4 py-3"> Charge</th>
                 <th className="px-4 py-3">Collection</th>
                 <th className="px-4 py-3">Remarks</th>
-                <th className="px-4 py-3">Order Status</th>
+                <th className="px-4 py-3"> Status</th>
               </tr>
             </thead>
             <tbody>
@@ -169,15 +175,15 @@ const ParcelTable = () => {
                 </tr>
               ) : (
                 paginatedOrders.map((order, idx) => (
-                  <tr key={`${order.id}-${idx}`}>
+                  <tr className="text-2xl" key={`${order.id}-${idx}`}>
                     <td className="px-4 py-3">{startIndex + idx + 1}</td>
                     <td className="px-4 py-3">
                       {order.create_date || '11/22/33'}
                     </td>
                     <td className="px-4 py-3">{order.tracking_id}</td>
                     <td className="px-4 py-3">{order.customer_name}</td>
-                    <td className="px-4 py-3">{order.customer_phone}</td>
-                    <td className="px-4 py-3">{order.customer_address}</td>
+                    {/* <td className="px-4 py-3">{order.customer_phone}</td>
+                    <td className="px-4 py-3">{order.customer_address}</td> */}
                     <td className="px-4 py-3">{order.delivery}</td>
                     <td className="px-4 py-3">{order.collection}</td>
                     <td className="px-4 py-3">{order.remarks || ''}</td>
