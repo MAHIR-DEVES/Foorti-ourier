@@ -2,22 +2,42 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import Link from 'next/link';
 
 const tabs = [
   { label: 'All', value: 'All' },
-  // { label: 'Order Placed', value: 'Order Placed' },
-  // { label: 'Payment Completed', value: 'Payment Completed' },
-  // { label: ' Pickup Rider', value: 'Assigned Pickup Rider' },
-  // { label: 'Return', value: 'Return Reach To Merchant' },
-  //
-  { label: 'List by Date', value: 'List by Date' },
   { label: 'Pending', value: 'Pending' },
   { label: 'Approval Pending', value: 'Approval Pending' },
   { label: 'Delivered', value: 'Delivered' },
   { label: 'Partly Delivered', value: 'Partly Delivered' },
   { label: 'Cancelled', value: 'Cancelled' },
-  // { label: 'Rescheduled', value: 'Rescheduled' },
 ];
+
+const statusMapping = {
+  Pending: [
+    'Pending',
+    'Reschedule Order',
+    'Rescheduled',
+    'Assigned To Delivery Rider',
+  ],
+  'Approval Pending': [
+    'Delivered Amount Collected from Branch',
+    'Delivered Amount Send to Fulfillment',
+  ],
+  Delivered: ['Successfully Delivered'],
+  'Partly Delivered': ['Partly Delivered'],
+  Cancelled: [
+    'Return Confirm',
+    'Cancel Order',
+    'Payment Processing',
+    'Payment Processing Complete',
+    'Return Reach To Merchant',
+    'Assigned Rider For Return',
+    'Return Received By Destination Hub',
+    'Return To Merchant',
+  ],
+  All: [],
+};
 
 const ParcelTable = () => {
   const searchParams = useSearchParams();
@@ -26,8 +46,6 @@ const ParcelTable = () => {
   const [activeTab, setActiveTab] = useState(queryStatus);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  console.log(orders);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
@@ -65,17 +83,21 @@ const ParcelTable = () => {
     fetchOrders();
   }, []);
 
-  // Update tab if queryStatus changes (when TextCard is clicked)
+  // Update active tab if queryStatus changes
   useEffect(() => {
     setActiveTab(queryStatus);
+    setCurrentPage(1);
+    setPaginationGroup(1);
   }, [queryStatus]);
 
+  // Filtered Orders based on status mapping
   const filteredOrders = orders.filter(order => {
     if (activeTab === 'All') return true;
-    return order.status === activeTab;
+    const allowedStatuses = statusMapping[activeTab] || [];
+    return allowedStatuses.includes(order.status);
   });
 
-  // Pagination calculations
+  // Pagination
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedOrders = filteredOrders.slice(
@@ -144,7 +166,7 @@ const ParcelTable = () => {
                 : 'bg-white text-gray-700 cursor-pointer border-gray'
             }`}
           >
-            {tab.label} {/* এখানে UI তে শুধু label দেখাবে */}
+            {tab.label}
           </button>
         ))}
       </div>
@@ -159,14 +181,12 @@ const ParcelTable = () => {
               <tr className="text-primary">
                 <th className="px-4 py-3">SL#</th>
                 <th className="px-4 py-3">Create Date</th>
-                <th className="px-4 py-3"> ID</th>
+                <th className="px-4 py-3">ID</th>
                 <th className="px-4 py-3">Customer Name</th>
-                {/* <th className="px-4 py-3">Customer Phone</th>
-                <th className="px-4 py-3">Customer Address</th> */}
-                <th className="px-4 py-3"> Charge</th>
+                <th className="px-4 py-3">Customer Phone</th>
+                <th className="px-4 py-3">Charge</th>
                 <th className="px-4 py-3">Collection</th>
                 <th className="px-4 py-3">Remarks</th>
-                {/* <th className="px-4 py-3"> Status</th> */}
               </tr>
             </thead>
             <tbody>
@@ -184,26 +204,30 @@ const ParcelTable = () => {
                       {order?.order_create_date
                         ? new Date(
                             order.order_create_date.replace(' ', 'T')
-                          ).toLocaleString([], {
+                          ).toLocaleString('en-GB', {
                             year: 'numeric',
                             month: '2-digit',
                             day: '2-digit',
                             hour: '2-digit',
                             minute: '2-digit',
                             second: '2-digit',
-                            hour12: true, // AM/PM format
+                            hour12: true,
                           })
-                        : '11/22/33'}
+                        : '-'}
                     </td>
 
-                    <td className="px-4 py-3">{order.tracking_id}</td>
+                    <td className="px-4 py-3 hover:text-blue-500">
+                      <Link
+                        href={`/dashboard/consignments/${order.tracking_id}`}
+                      >
+                        {order.tracking_id}
+                      </Link>
+                    </td>
                     <td className="px-4 py-3">{order.customer_name}</td>
-                    {/* <td className="px-4 py-3">{order.customer_phone}</td>
-                    <td className="px-4 py-3">{order.customer_address}</td> */}
+                    <td className="px-4 py-3">{order.customer_phone}</td>
                     <td className="px-4 py-3">{order.delivery}</td>
                     <td className="px-4 py-3">{order.collection}</td>
                     <td className="px-4 py-3">{order.remarks || ''}</td>
-                    {/* <td className="px-4 py-3">{order.status}</td> */}
                   </tr>
                 ))
               )}

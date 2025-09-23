@@ -215,16 +215,36 @@ const ParcelModal = ({ isOpen, onClose, parcel }) => {
                 <span className="text-gray-600">Created:</span>
                 <span className="font-medium text-gray-800 text-sm">
                   {parcel?.data?.created_at
-                    ? new Date(parcel.data.created_at).toLocaleString()
-                    : 'N/A'}
+                    ? new Date(
+                        parcel?.data?.created_at.replace(' ', 'T')
+                      ).toLocaleString('en-GB', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true,
+                      })
+                    : '-'}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Last Updated:</span>
                 <span className="font-medium text-gray-800 text-sm">
                   {parcel?.data?.updated_at
-                    ? new Date(parcel.data.updated_at).toLocaleString()
-                    : 'N/A'}
+                    ? new Date(
+                        parcel?.data?.updated_at.replace(' ', 'T')
+                      ).toLocaleString('en-GB', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true,
+                      })
+                    : '-'}
                 </span>
               </div>
             </div>
@@ -301,7 +321,13 @@ const ParcelModal = ({ isOpen, onClose, parcel }) => {
                         className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
                       >
                         <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-700">
-                          {h.date ? new Date(h.date).toLocaleString() : 'N/A'}
+                          {h.date
+                            ? new Date(h.date).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                              })
+                            : 'N/A'}
                         </td>
                         <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
                           {h.name || 'N/A'}
@@ -371,7 +397,13 @@ const ParcelModal = ({ isOpen, onClose, parcel }) => {
                         className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}
                       >
                         <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-700">
-                          {s.date ? new Date(s.date).toLocaleString() : 'N/A'}
+                          {s.date
+                            ? new Date(s.date).toLocaleDateString('en-GB', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                              })
+                            : 'N/A'}
                         </td>
                         <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-gray-900">
                           {s.name || 'N/A'}

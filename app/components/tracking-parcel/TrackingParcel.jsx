@@ -220,16 +220,6 @@ const TrackingParcel = () => {
                 </h4>
                 <div className="space-y-2">
                   <div className="flex">
-                    <span className="text-gray-600 w-32">Status:</span>
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                        parcel.data?.status
-                      )}`}
-                    >
-                      {parcel.data?.status || 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex">
                     <span className="text-gray-600 w-32">COD Amount:</span>
                     <span className="font-medium">
                       {parcel.data?.collection || 'N/A'} ৳
