@@ -27,6 +27,8 @@ const ParcelTable = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  console.log(orders);
+
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const [paginationGroup, setPaginationGroup] = useState(1);
@@ -179,8 +181,21 @@ const ParcelTable = () => {
                   <tr key={`${order.id}-${idx}`}>
                     <td className="px-4 py-3">{startIndex + idx + 1}</td>
                     <td className="px-4 py-3">
-                      {order.create_date || '11/22/33'}
+                      {order?.order_create_date
+                        ? new Date(
+                            order.order_create_date.replace(' ', 'T')
+                          ).toLocaleString([], {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit',
+                            hour12: true, // AM/PM format
+                          })
+                        : '11/22/33'}
                     </td>
+
                     <td className="px-4 py-3">{order.tracking_id}</td>
                     <td className="px-4 py-3">{order.customer_name}</td>
                     {/* <td className="px-4 py-3">{order.customer_phone}</td>
