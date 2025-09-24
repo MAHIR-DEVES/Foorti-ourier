@@ -106,7 +106,7 @@ const DetailsPage = () => {
               Tracking ID: {consignment?.data?.tracking_id}
             </p>{' '}
             {/* Customer Info */}
-            <div className="space-y-2 text-sm">
+            <div className="space-y-2 text-xl">
               <p className="font-bold">
                 <strong>Name: {consignment?.data?.customer_name}</strong>
               </p>
@@ -130,7 +130,7 @@ const DetailsPage = () => {
             </div>
           </div>
 
-          <div className="text-right">
+          <div className="text-right text-xl">
             <p>
               <strong>Created at:</strong>
               {consignment?.data?.user?.created_at
@@ -160,7 +160,7 @@ const DetailsPage = () => {
         {/* Item Description Table */}
         <div className="mt-6 border border-gray-300 rounded">
           <div className="text-center">
-            <div className="bg-gray-100 text-sm font-semibold p-2">Note</div>
+            <div className="bg-gray-100 text-xl font-semibold p-2">Note</div>
           </div>
 
           {/* Tracking Updates */}
