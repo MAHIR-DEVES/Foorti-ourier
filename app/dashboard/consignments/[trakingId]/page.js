@@ -161,28 +161,60 @@ const DetailsPage = () => {
         <div className="mt-6 border border-gray-300 rounded">
           <div className="text-center">
             <div className="bg-gray-100 text-sm font-semibold p-2">Note</div>
-            <div className="bg-gray-100 text-sm font-semibold p-2 mt-3"></div>
           </div>
 
           {/* Tracking Updates */}
           <div className="mt-8">
-            <div className="max-w-2xl mx-auto">
-              <h3 className="text-lg font-semibold mb-4 px-4 text-center">
+            <div className="max-w-4xl mx-auto">
+              <h3 className="text-lg font-semibold mb-6 px-4 text-center">
                 Tracking Updates
               </h3>
-              <div className="space-y-4 pb-8">
-                {trackingUpdates.map((update, index) => (
-                  <div key={index} className="flex items-start gap-4 text-sm">
-                    <div className="text-primary-active text-right min-w-[110px]">
-                      <p></p>
-                      <p className="text-xs">{update.time}</p>
+
+              <div className="relative">
+                {/* Vertical Timeline Line */}
+                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-1/2"></div>
+
+                <div className="space-y-6 pb-8">
+                  {consignment?.order_history.map((update, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between relative"
+                    >
+                      {/* Date - Left Side */}
+                      <div className="text-right w-2/5 pr-6">
+                        <p className="text-sm font-medium text-gray-700">
+                          {update.time}
+                        </p>
+                        <p className="text-xs text-gray-500">{update.date}</p>
+                      </div>
+
+                      {/* Icon - Middle */}
+                      <div className="relative  flex-shrink-0">
+                        <div
+                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                            index === 0
+                              ? 'bg-green-500 ring-4 ring-green-100'
+                              : 'bg-green-400'
+                          }`}
+                        >
+                          <FaCheckCircle className="text-white text-sm" />
+                        </div>
+                      </div>
+
+                      {/* Status - Right Side */}
+                      <div className="text-left w-2/5 pl-6">
+                        <p className="text-sm font-medium text-gray-800">
+                          {update.status}
+                        </p>
+                        {update.location && (
+                          <p className="text-xs text-gray-600 mt-1">
+                            {update.location}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <div className="pt-1">
-                      <FaCheckCircle className="text-blue-500 mt-0.5" />
-                    </div>
-                    <div className="text-gray-700"></div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
