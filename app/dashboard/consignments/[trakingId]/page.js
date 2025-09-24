@@ -102,12 +102,12 @@ const DetailsPage = () => {
         {/* Info Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
-            <p className="font-bold">
+            <p className="font-bold text-xl">
               Tracking ID: {consignment?.data?.tracking_id}
             </p>{' '}
             {/* Customer Info */}
             <div className="space-y-2 text-xl">
-              <p className="font-bold">
+              <p className="">
                 <strong>Name: {consignment?.data?.customer_name}</strong>
               </p>
               <p>
@@ -123,7 +123,7 @@ const DetailsPage = () => {
                 <strong>
                   Phone Number: {consignment?.data?.customer_phone}
                 </strong>
-                <button className="button-primary cursor-pointer text-white px-2 py-1 rounded flex items-center text-xs">
+                <button className="button-primary cursor-pointer text-white px-2 py-1 rounded flex items-center ">
                   <FaPhoneAlt className="mr-1" /> Call
                 </button>
               </p>
@@ -174,7 +174,7 @@ const DetailsPage = () => {
                 {/* Vertical Timeline Line */}
                 <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-1/2"></div>
 
-                <div className="space-y-6 pb-8">
+                <div className="space-y-16 pb-8">
                   {consignment?.order_history.map((update, index) => (
                     <div
                       key={index}
