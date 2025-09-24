@@ -1,11 +1,11 @@
-"use client";
-import { FaPhoneAlt, FaCheckCircle } from "react-icons/fa";
-import { useEffect, useState } from "react";
+'use client';
+import { FaPhoneAlt, FaCheckCircle } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
 export default function ParcelDetails({ tracking_id }) {
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -19,8 +19,8 @@ export default function ParcelDetails({ tracking_id }) {
           setDetails(result);
         }
       } catch (err) {
-        console.error("Fetch failed:", err);
-        setError("Something went wrong while fetching data.");
+        console.error('Fetch failed:', err);
+        setError('Something went wrong while fetching data.');
       } finally {
         setLoading(false);
       }
@@ -36,29 +36,29 @@ export default function ParcelDetails({ tracking_id }) {
 
   const trackingUpdates = [
     {
-      date: "Apr 24, 2025",
-      time: "11:45 am",
-      message: "Consignment has been listed for reversed back.",
+      date: 'Apr 24, 2025',
+      time: '11:45 am',
+      message: 'Consignment has been listed for reversed back.',
     },
     {
-      date: "Apr 21, 2025",
-      time: "3:41 pm",
-      message: "Consignment has been received at BURICHANG (CUMILLA).",
+      date: 'Apr 21, 2025',
+      time: '3:41 pm',
+      message: 'Consignment has been received at BURICHANG (CUMILLA).',
     },
     {
-      date: "Apr 20, 2025",
-      time: "01:27 am",
-      message: "Consignment sent to BURICHANG (CUMILLA). Dispatch ID: 523488",
+      date: 'Apr 20, 2025',
+      time: '01:27 am',
+      message: 'Consignment sent to BURICHANG (CUMILLA). Dispatch ID: 523488',
     },
     {
-      date: "Apr 17, 2025",
-      time: "10:12 am",
-      message: "Consignment has been received at CUMILLA WAREHOUSE.",
+      date: 'Apr 17, 2025',
+      time: '10:12 am',
+      message: 'Consignment has been received at CUMILLA WAREHOUSE.',
     },
     {
-      date: "Apr 16, 2025",
-      time: "11:45 pm",
-      message: "Consignment sent to CUMILLA WAREHOUSE. Dispatch ID: 5228488",
+      date: 'Apr 16, 2025',
+      time: '11:45 pm',
+      message: 'Consignment sent to CUMILLA WAREHOUSE. Dispatch ID: 5228488',
     },
   ];
 
@@ -93,7 +93,7 @@ export default function ParcelDetails({ tracking_id }) {
             <p>Invoice: N/A</p>
             <p>ID: 31816966</p>
             <p>
-              Tracking Code:{" "}
+              Tracking Code:{' '}
               <span className="text-gray-800 font-mono">
                 DUR3NSVAYTJ3T6YWTK5XGR4AH
               </span>

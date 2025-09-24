@@ -177,7 +177,7 @@ const ParcelTable = () => {
         {loading ? (
           <p className="p-4">Loading...</p>
         ) : (
-          <table className="w-full table-auto text-[14px] text-left text-gray-500">
+          <table className="w-full table-auto text-[20px] text-left text-gray-700">
             <thead className="border-b border-gray">
               <tr className="text-primary">
                 <th className="px-4 py-3">SL#</th>
@@ -188,6 +188,7 @@ const ParcelTable = () => {
                 <th className="px-4 py-3">Charge</th>
                 <th className="px-4 py-3">Collection</th>
                 <th className="px-4 py-3">Remarks</th>
+                <th className="px-4 py-3">Details</th>
               </tr>
             </thead>
             <tbody>
@@ -220,7 +221,7 @@ const ParcelTable = () => {
                         : '-'}
                     </td>
 
-                    <td className="px-4 py-3 hover:text-blue-500">
+                    <td className="px-4 py-3 text-[#FB654d]">
                       <Link
                         href={`/dashboard/consignments/${order.tracking_id}`}
                       >
@@ -232,6 +233,13 @@ const ParcelTable = () => {
                     <td className="px-4 py-3">{order.delivery}</td>
                     <td className="px-4 py-3">{order.collection}</td>
                     <td className="px-4 py-3">{order.remarks || ''}</td>
+                    <td className="px-4 py-3 text-blue-600">
+                      <Link
+                        href={`/dashboard/consignments/${order.tracking_id}`}
+                      >
+                        View
+                      </Link>
+                    </td>
                   </tr>
                 ))
               )}
