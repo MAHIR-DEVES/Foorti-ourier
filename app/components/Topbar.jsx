@@ -2,24 +2,20 @@
 import { FaBars, FaSearch, FaTimes, FaHandPointer } from 'react-icons/fa';
 import { GoNote } from 'react-icons/go';
 import { useState, useRef, useEffect } from 'react';
-import Link from 'next/link';
 import NotificationBell from './topbar/NotificationBell';
 import ProfileMenu from './topbar/Profile';
 import LanguageToggle from './topbar/LanguageToggle';
-import ParcelModal from './Modal/ParcelModal';
+import { useRouter } from 'next/navigation';
 
 const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
   const [query, setQuery] = useState('');
   const [parcel, setParcel] = useState(null);
   const [balanceClicked, setBalanceClicked] = useState(false);
   const [error, setError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [data, setData] = useState(null);
   const dropdownRef = useRef(null);
-
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchDashboard = async () => {
@@ -114,6 +110,12 @@ const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  // handel navigation to details page
+
+  const navigateToDetails = () => {
+    router.push(`/dashboard/consignments/${parcel?.data?.tracking_id}`);
+  };
+
   const CheckBalanceButton = () => (
     <button
       className="flex items-center gap-3 px-4 py-1.5 rounded-full border border-[#1976d2] text-primary-active shadow-sm hover:shadow-md transition-all duration-300 bg-[#FAFAFA]"
@@ -175,7 +177,7 @@ const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
                   {error ? (
                     <p className="text-red-500 text-sm">{error}</p>
                   ) : (
-                    <div onClick={handleResultClick} className="flex gap-2">
+                    <div onClick={navigateToDetails} className="flex gap-2">
                       <p className="text-sm text-gray-700">
                         <span className="font-semibold">T</span>{' '}
                         {parcel?.data?.tracking_id}
@@ -187,12 +189,6 @@ const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
                   )}
                 </div>
               )}
-
-              <ParcelModal
-                isOpen={isModalOpen}
-                onClose={handleCloseModal}
-                parcel={parcel}
-              />
             </div>
 
             <CheckBalanceButton />
@@ -251,12 +247,6 @@ const Topbar = ({ toggleSidebar, toggleMobileSearch, showMobileSearch }) => {
               )}
             </div>
           )}
-
-          <ParcelModal
-            isOpen={isModalOpen}
-            onClose={handleCloseModal}
-            parcel={parcel}
-          />
         </div>
       )}
 
