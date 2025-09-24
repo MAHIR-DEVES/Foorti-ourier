@@ -82,7 +82,7 @@ const DetailsPage = () => {
   return (
     <div className="max-w-6xl mx-auto md:p-6">
       <div className=" md:flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold"></h2>
+        <h2 className="text-lg "></h2>
         <div className="flex flex-wrap justify-end gap-2 pt-1.5 md:pt-0">
           <button className="button-primary cursor-pointer text-white px-3 py-1 rounded">
             Open Support Ticket
@@ -102,7 +102,7 @@ const DetailsPage = () => {
         {/* Info Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
-            <p className="font-bold text-xl">
+            <p className=" text-xl">
               Tracking ID: {consignment?.data?.tracking_id}
             </p>{' '}
             {/* Customer Info */}
@@ -160,7 +160,7 @@ const DetailsPage = () => {
         {/* Item Description Table */}
         <div className="mt-6 border border-gray-300 rounded">
           <div className="text-center">
-            <div className="bg-gray-100 text-xl font-semibold p-2">
+            <div className="bg-gray-100 text-xl p-2">
               Note: {consignment?.data?.remarks}{' '}
             </div>
           </div>
@@ -168,7 +168,7 @@ const DetailsPage = () => {
           {/* Tracking Updates */}
           <div className="mt-8">
             <div className="max-w-4xl mx-auto">
-              <h3 className="text-lg font-semibold mb-6 px-4 text-center">
+              <h3 className="text-lg mb-6 px-4 text-center">
                 Tracking Updates
               </h3>
 
@@ -183,10 +183,8 @@ const DetailsPage = () => {
                       className="flex items-center justify-between relative"
                     >
                       {/* Date - Left Side */}
-                      <div className="text-right w-2/5 pr-6">
-                        <p className="text-sm font-medium text-gray-700">
-                          {update.time}
-                        </p>
+                      <div className="text-right w-2/5 ">
+                        <p className="text-sm  text-gray-700">{update.time}</p>
                         <p className="text-xs text-gray-500">{update.date}</p>
                       </div>
 
@@ -205,8 +203,12 @@ const DetailsPage = () => {
 
                       {/* Status - Right Side */}
                       <div className="text-left w-2/5 pl-6">
-                        <p className="text-sm font-medium text-gray-800">
+                        <p className="text-sm  text-gray-800">
                           {update.status}
+                        </p>
+                        <p className="text-sm  text-gray-800">{update.name}</p>
+                        <p className="text-sm  text-gray-800">
+                          {update.mobile}
                         </p>
                         {update.location && (
                           <p className="text-xs text-gray-600 mt-1">
