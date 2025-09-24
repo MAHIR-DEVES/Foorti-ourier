@@ -1,7 +1,54 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { FaCheckCircle, FaPhoneAlt } from 'react-icons/fa';
 
-const page = () => {
+const DetailsPage = () => {
+  const params = useParams();
+  const trackingId = params.trakingId;
+
+  const [consignment, setConsignment] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  console.log(consignment);
+
+  useEffect(() => {
+    if (!trackingId) return;
+
+    const fetchConsignment = async () => {
+      try {
+        const stored = localStorage.getItem('token');
+        const token = stored ? JSON.parse(stored).token : null;
+        const res = await fetch(
+          `https://admin.merchantfcservice.com/api/order-view?tracking_id=${trackingId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch consignment');
+        }
+
+        const data = await res.json();
+        setConsignment(data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchConsignment();
+  }, [trackingId]);
+
+  if (loading) return <p className="p-4">Loading...</p>;
+  if (error) return <p className="p-4 text-red-500">{error}</p>;
+
   const trackingUpdates = [
     {
       date: 'Apr 24, 2025',
@@ -29,6 +76,9 @@ const page = () => {
       message: 'Consignment sent to CUMILLA WAREHOUSE. Dispatch ID: 5228488',
     },
   ];
+
+  console.log(consignment.data.tracking_id);
+
   return (
     <div className="max-w-6xl mx-auto md:p-6">
       <div className=" md:flex justify-between items-center mb-4">
@@ -52,24 +102,26 @@ const page = () => {
         {/* Info Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
-            <p className="font-bold">Tracking ID: 31816966</p>{' '}
+            <p className="font-bold">
+              Tracking ID: {consignment?.data?.tracking_id}
+            </p>{' '}
             {/* Customer Info */}
-            <p>Invoice: N/A</p>
+            <p className="font-bold">Invoice: {consignment?.data?.cod} </p>
             <div className="space-y-2 text-sm">
-              <p>
-                <strong>Name:</strong>
+              <p className="font-bold">
+                <strong>Name: {consignment?.data?.user?.name}</strong>
               </p>
               <p>
-                <strong>Address:</strong>
+                <strong>Address: {consignment?.data?.user?.address}</strong>
               </p>
               <p>
-                <strong>Area:</strong>
+                <strong>Area: {consignment?.data?.area}</strong>
               </p>
               <p>
-                <strong>District:</strong>
+                <strong>District: {consignment?.data?.district}</strong>
               </p>
               <p className="flex items-center gap-2">
-                <strong>Phone Number:</strong>
+                <strong>Phone Number: {consignment?.data?.user?.mobile}</strong>
                 <button className="button-primary cursor-pointer text-white px-2 py-1 rounded flex items-center text-xs">
                   <FaPhoneAlt className="mr-1" /> Call
                 </button>
@@ -79,14 +131,29 @@ const page = () => {
 
           <div className="text-right">
             <p>
-              <strong>Created at:</strong> April 13, 2025 03:59 PM
+              <strong>Created at:</strong>
+              {consignment?.data?.user?.created_at
+                ? new Date(
+                    consignment?.data?.user?.created_at.replace(' ', 'T')
+                  ).toLocaleString('en-GB', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true,
+                  })
+                : '-'}
             </p>
 
             <p>
-              <strong>Weight:</strong>
+              <strong>Weight: {consignment?.data?.weight}</strong>
             </p>
 
-            <p className="text-red-600 text-lg font-bold">COD: ৳1150</p>
+            <p className="text-red-600 text-lg font-bold">
+              COD: {consignment?.data?.cod}
+            </p>
             {/* <div className="mt-2 flex flex-wrap justify-end gap-2">
               <span className="bg-red-600 cursor-pointer text-white text-xs px-2 py-1 rounded">
                 Cancelled
@@ -139,4 +206,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default DetailsPage;

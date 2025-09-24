@@ -111,54 +111,6 @@ const TrackingParcel = () => {
 
       {parcel && (
         <div className="space-y-6">
-          {/* Company Information */}
-          {/* <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div
-              style={{ backgroundColor: 'var(--active-color)' }}
-              className="p-4 text-white"
-            >
-              <h3 className="text-xl font-semibold">Company Information</h3>
-            </div>
-            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex">
-                <span className="text-gray-600 w-40 font-medium">
-                  Company Name:
-                </span>
-                <span>{parcel.company?.name || 'N/A'}</span>
-              </div>
-              <div className="flex">
-                <span className="text-gray-600 w-40 font-medium">
-                  Company Initial:
-                </span>
-                <span>{parcel.company?.company_initial || 'N/A'}</span>
-              </div>
-              <div className="flex">
-                <span className="text-gray-600 w-40 font-medium">Email:</span>
-                <span>{parcel.company?.email || 'N/A'}</span>
-              </div>
-              <div className="flex">
-                <span className="text-gray-600 w-40 font-medium">Mobile:</span>
-                <span>{parcel.company?.mobile || 'N/A'}</span>
-              </div>
-              <div className="flex md:col-span-2">
-                <span className="text-gray-600 w-40 font-medium">Address:</span>
-                <span>{parcel.company?.address || 'N/A'}</span>
-              </div>
-              <div className="flex md:col-span-2">
-                <span className="text-gray-600 w-40 font-medium">Website:</span>
-                <span className="text-blue-600 hover:underline">
-                  <a
-                    href={parcel.company?.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {parcel.company?.website || 'N/A'}
-                  </a>
-                </span>
-              </div>
-            </div>
-          </div> */}
-
           {/* Parcel Information */}
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
             <div
