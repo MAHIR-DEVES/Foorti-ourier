@@ -160,7 +160,9 @@ const DetailsPage = () => {
         {/* Item Description Table */}
         <div className="mt-6 border border-gray-300 rounded">
           <div className="text-center">
-            <div className="bg-gray-100 text-xl font-semibold p-2">Note</div>
+            <div className="bg-gray-100 text-xl font-semibold p-2">
+              Note: {consignment?.data?.remarks}{' '}
+            </div>
           </div>
 
           {/* Tracking Updates */}
