@@ -106,13 +106,12 @@ const DetailsPage = () => {
               Tracking ID: {consignment?.data?.tracking_id}
             </p>{' '}
             {/* Customer Info */}
-            <p className="font-bold">Invoice: {consignment?.data?.cod} </p>
             <div className="space-y-2 text-sm">
               <p className="font-bold">
-                <strong>Name: {consignment?.data?.user?.name}</strong>
+                <strong>Name: {consignment?.data?.customer_name}</strong>
               </p>
               <p>
-                <strong>Address: {consignment?.data?.user?.address}</strong>
+                <strong>Address: {consignment?.data?.customer_address}</strong>
               </p>
               <p>
                 <strong>Area: {consignment?.data?.area}</strong>
@@ -121,7 +120,9 @@ const DetailsPage = () => {
                 <strong>District: {consignment?.data?.district}</strong>
               </p>
               <p className="flex items-center gap-2">
-                <strong>Phone Number: {consignment?.data?.user?.mobile}</strong>
+                <strong>
+                  Phone Number: {consignment?.data?.customer_phone}
+                </strong>
                 <button className="button-primary cursor-pointer text-white px-2 py-1 rounded flex items-center text-xs">
                   <FaPhoneAlt className="mr-1" /> Call
                 </button>
@@ -150,21 +151,6 @@ const DetailsPage = () => {
             <p>
               <strong>Weight: {consignment?.data?.weight}</strong>
             </p>
-
-            <p className="text-red-600 text-lg font-bold">
-              COD: {consignment?.data?.cod}
-            </p>
-            {/* <div className="mt-2 flex flex-wrap justify-end gap-2">
-              <span className="bg-red-600 cursor-pointer text-white text-xs px-2 py-1 rounded">
-                Cancelled
-              </span>
-              <span className="bg-yellow-500 cursor-pointer text-white text-xs px-2 py-1 rounded">
-                Cancel Request
-              </span>
-              <span className="bg-blue-600 cursor-pointer text-white text-xs px-2 py-1 rounded">
-                Acknowledged
-              </span>
-            </div> */}
           </div>
         </div>
 
