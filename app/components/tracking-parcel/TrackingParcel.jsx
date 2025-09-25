@@ -1,11 +1,14 @@
 'use client';
 import { useState } from 'react';
+import { FaCheckCircle, FaPhoneAlt } from 'react-icons/fa';
 
 const TrackingParcel = () => {
   const [query, setQuery] = useState('');
   const [parcel, setParcel] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  console.log(parcel);
 
   const handleSearch = async () => {
     if (!query.trim()) return;
@@ -110,183 +113,161 @@ const TrackingParcel = () => {
       )}
 
       {parcel && (
-        <div className="space-y-6">
-          {/* Parcel Information */}
-          <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <div
-              style={{ backgroundColor: 'var(--active-color)' }}
-              className=" p-4 text-white"
-            >
-              <div className="flex justify-between  items-center">
-                <div className="">
-                  <h3 className="text-xl font-semibold">Parcel Information</h3>
-                  <p className="text-blue-100">
-                    Tracking ID: {parcel.data?.tracking_id || 'N/A'}
+        <div className="max-w-6xl mx-auto md:p-6">
+          <div className=" md:flex justify-between items-center mb-4">
+            <h2 className="text-lg "></h2>
+            <div className="flex flex-wrap justify-end gap-2 pt-1.5 md:pt-0">
+              <button className="button-primary cursor-pointer text-white px-3 py-1 rounded">
+                Open Support Ticket
+              </button>
+              <button className="bg-blue-500 cursor-pointer text-white px-3 py-1 rounded">
+                Invoice
+              </button>
+              <button className="bg-indigo-500 cursor-pointer text-white px-3 py-1 rounded">
+                Label
+              </button>
+              {/* <button className="bg-gray-700 cursor-pointer text-white px-3 py-1 rounded">
+            Edit
+          </button> */}
+            </div>
+          </div>
+          <div className=" bg-white p-6 rounded-md">
+            {/* Info Section */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+              <div>
+                <p className="text-xl">
+                  Tracking ID: {parcel?.data?.tracking_id}
+                </p>
+
+                {/* Customer Info */}
+                <div className="space-y-2 text-xl">
+                  <p>
+                    Name: <span>{parcel?.data?.customer_name}</span>
+                  </p>
+                  <p>
+                    Address: <span>{parcel?.data?.customer_address}</span>
+                  </p>
+                  <p>
+                    Area: <span>{parcel?.data?.area}</span>
+                  </p>
+                  <p>
+                    District: <span>{parcel?.data?.district}</span>
+                  </p>
+
+                  <p className="flex items-center gap-2">
+                    Phone Number: <span>{parcel?.data?.customer_phone}</span>
+                    <button className="button-primary cursor-pointer text-white px-2 py-1 rounded flex items-center">
+                      <FaPhoneAlt className="mr-1" /> Call
+                    </button>
                   </p>
                 </div>
-                <div className="">
-                  {' '}
-                  <h1>Merchant Name</h1>
-                  <span className="font-medium">
-                    {parcel.data?.customer_name || 'N/A'}
-                  </span>
-                </div>
+              </div>
+
+              <div className="text-right text-xl">
+                <p>
+                  Created at:{' '}
+                  {parcel?.data?.user?.created_at
+                    ? new Date(
+                        parcel?.data?.user?.created_at.replace(' ', 'T')
+                      ).toLocaleString('en-GB', {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                        hour12: true,
+                      })
+                    : '-'}
+                </p>
+
+                <p>
+                  Weight: <span>{parcel?.data?.weight}</span>
+                </p>
+                <p>
+                  Cod: <span>{parcel?.data?.cod}</span>
+                </p>
               </div>
             </div>
-            <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <h4 className="font-medium text-gray-700 mb-3 border-b pb-2">
-                  Customer Information
-                </h4>
-                <div className="space-y-2">
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Name:</span>
-                    <span className="font-medium">
-                      {parcel.data?.customer_name || 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Phone:</span>
-                    <span className="font-medium">
-                      {parcel.data?.customer_phone || 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Email:</span>
-                    <span className="font-medium">
-                      {parcel.data?.customer_email || 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Address:</span>
-                    <span className="font-medium">
-                      {parcel.data?.customer_address || 'N/A'}
-                    </span>
-                  </div>
-                </div>
+
+            {/* Divider */}
+            <hr className="my-4" />
+
+            {/* Item Description Table */}
+            <div className="mt-6 border border-gray-300 rounded">
+              <div className="bg-gray-100 text-xl p-2">
+                Note: <br /> {parcel?.data?.remarks}{' '}
               </div>
 
-              <div>
-                <h4 className="font-medium text-gray-700 mb-3 border-b pb-2">
-                  Shipment Details
-                </h4>
-                <div className="space-y-2">
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">COD Amount:</span>
-                    <span className="font-medium">
-                      {parcel.data?.collection || 'N/A'} ৳
-                    </span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Weight:</span>
-                    <span className="font-medium">
-                      {parcel.data?.weight || 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Category:</span>
-                    <span className="font-medium">
-                      {parcel.data?.category || 'N/A'}
-                    </span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-32">Type:</span>
-                    <span className="font-medium">
-                      {parcel.data?.type || 'N/A'}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              {/* Tracking Updates */}
+              <div className="mt-8">
+                <div className="max-w-4xl mx-auto">
+                  <h3 className="text-lg mb-6 px-4 text-center">
+                    Tracking Updates
+                  </h3>
 
-              <div className="md:col-span-2">
-                <h4 className="font-medium text-gray-700 mb-3 border-b pb-2">
-                  Additional Information
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex">
-                    <span className="text-gray-600 w-40">Area:</span>
-                    <span>{parcel.data?.area || 'N/A'}</span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-40">District:</span>
-                    <span>{parcel.data?.district || 'N/A'}</span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-40">Created At:</span>
-                    <span>{formatDate(parcel.data?.created_at)}</span>
-                  </div>
-                  <div className="flex">
-                    <span className="text-gray-600 w-40">Updated At:</span>
-                    <span>{formatDate(parcel.data?.updated_at)}</span>
-                  </div>
-                </div>
-              </div>
+                  <div className="relative">
+                    {/* Vertical Timeline Line */}
+                    <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-1/2"></div>
 
-              <div className="md:col-span-2">
-                <h4 className="font-medium text-gray-700 mb-2">Remarks</h4>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="text-gray-800">
-                    {parcel.data?.remarks || 'No remarks available'}
-                  </p>
+                    <div className="space-y-16 pb-8">
+                      {[...parcel?.order_status]
+                        .sort((a, b) => new Date(b.date) - new Date(a.date)) // DESC (latest first)
+                        .map((update, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between relative"
+                          >
+                            {/* Date - Left Side */}
+                            <div className="text-right w-2/5 ">
+                              <p className="text-sm text-gray-700">
+                                {new Date(update.date).toLocaleTimeString(
+                                  'en-GB'
+                                )}
+                                <span className="mr-3"></span>
+
+                                {new Date(update.date).toLocaleDateString(
+                                  'en-GB'
+                                )}
+                              </p>
+                            </div>
+
+                            {/* Icon - Middle */}
+                            <div className="relative flex-shrink-0">
+                              <div
+                                className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                                  index === 0
+                                    ? 'bg-green-500 ring-4 ring-green-100'
+                                    : 'bg-green-400'
+                                }`}
+                              >
+                                <FaCheckCircle className="text-white text-sm" />
+                              </div>
+                            </div>
+
+                            {/* Status - Right Side */}
+                            <div className="text-left w-2/5 pl-6">
+                              <p className="text-sm text-gray-800">
+                                {update.status}
+                              </p>
+                              <p className="text-sm text-gray-800">
+                                {update.name}
+                              </p>
+                              <p className="text-sm text-gray-800">
+                                {update.mobile}
+                              </p>
+                              <p className="text-sm text-gray-800">
+                                {update.delivery_note}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Order Status */}
-          {parcel.order_status && parcel.order_status.length > 0 && (
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div
-                style={{ backgroundColor: 'var(--active-color)' }}
-                className="p-4 text-white"
-              >
-                <h3 className="text-xl font-semibold">Current Status</h3>
-              </div>
-              <div className="p-6">
-                <div className="overflow-x-auto">
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Date
-                        </th>
-
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Status
-                        </th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Delivery Note
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {parcel.order_status.map((status, index) => (
-                        <tr key={index}>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {formatDate(status.date)}
-                          </td>
-
-                          <td className="px-6 py-4 whitespace-nowrap flex gap-2">
-                            <span
-                              className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(
-                                status.status
-                              )} `}
-                            >
-                              {status.status}
-                            </span>
-                            <p>({status.name})</p>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {status.delivery_note || 'N/A'}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       )}
     </div>

@@ -123,6 +123,9 @@ const DetailsPage = () => {
             <p>
               Weight: <span>{consignment?.data?.weight}</span>
             </p>
+            <p>
+              Cod: <span>{consignment?.data?.cod}</span>
+            </p>
           </div>
         </div>
 

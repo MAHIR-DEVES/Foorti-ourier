@@ -340,7 +340,7 @@ const ParcelTable = () => {
           )
         ) : (
           <table className="w-full table-auto text-[19px] text-left text-gray-700">
-            <thead className="border-b border-gray">
+            <thead className="border-b border-gray bg-gradient-to-r from-blue-50 to-indigo-50">
               <tr className="text-primary">
                 <th className="px-4 py-3">SL#</th>
                 <th className="px-4 py-3">Create Date</th>
