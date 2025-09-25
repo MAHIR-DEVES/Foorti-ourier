@@ -49,31 +49,34 @@ const DetailsPage = () => {
   if (loading) return <p className="p-4">Loading...</p>;
   if (error) return <p className="p-4 text-red-500">{error}</p>;
 
-  const trackingUpdates = [
+  const orderStatus = [
     {
-      date: 'Apr 24, 2025',
-      time: '11:45 am',
-      message: 'Consignment has been listed for reversed back.',
+      date: '2025-09-11 16:02:14',
+      mobile: '01888558812',
+      name: 'Admin',
+      status: 'Assigned Pickup Rider',
+      role: 12,
     },
     {
-      date: 'Apr 21, 2025',
-      time: '3:41 pm',
-      message: 'Consignment has been received at BURICHANG (CUMILLA).',
+      date: '2025-09-11 16:02:14',
+      mobile: '01763211337',
+      name: 'Sohan Mia',
+      status: 'Assigned Pickup Rider',
+      role: 10,
     },
     {
-      date: 'Apr 20, 2025',
-      time: '01:27 am',
-      message: 'Consignment sent to BURICHANG (CUMILLA). Dispatch ID: 523488',
+      date: '2025-09-11 16:02:14',
+      mobile: '01888558812',
+      name: 'Vatara  Hub',
+      status: 'Assigned Pickup Rider',
+      role: 12,
     },
     {
-      date: 'Apr 17, 2025',
-      time: '10:12 am',
-      message: 'Consignment has been received at CUMILLA WAREHOUSE.',
-    },
-    {
-      date: 'Apr 16, 2025',
-      time: '11:45 pm',
-      message: 'Consignment sent to CUMILLA WAREHOUSE. Dispatch ID: 5228488',
+      date: '2025-09-11 16:02:14',
+      mobile: '01888558812',
+      name: 'Monir',
+      status: 'Assigned Pickup Rider',
+      role: 12,
     },
   ];
 
@@ -102,28 +105,28 @@ const DetailsPage = () => {
         {/* Info Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
           <div>
-            <p className=" text-xl">
+            <p className="text-xl">
               Tracking ID: {consignment?.data?.tracking_id}
-            </p>{' '}
+            </p>
+
             {/* Customer Info */}
             <div className="space-y-2 text-xl">
-              <p className="">
-                <strong>Name: {consignment?.data?.customer_name}</strong>
+              <p>
+                Name: <span>{consignment?.data?.customer_name}</span>
               </p>
               <p>
-                <strong>Address: {consignment?.data?.customer_address}</strong>
+                Address: <span>{consignment?.data?.customer_address}</span>
               </p>
               <p>
-                <strong>Area: {consignment?.data?.area}</strong>
+                Area: <span>{consignment?.data?.area}</span>
               </p>
               <p>
-                <strong>District: {consignment?.data?.district}</strong>
+                District: <span>{consignment?.data?.district}</span>
               </p>
+
               <p className="flex items-center gap-2">
-                <strong>
-                  Phone Number: {consignment?.data?.customer_phone}
-                </strong>
-                <button className="button-primary cursor-pointer text-white px-2 py-1 rounded flex items-center ">
+                Phone Number: <span>{consignment?.data?.customer_phone}</span>
+                <button className="button-primary cursor-pointer text-white px-2 py-1 rounded flex items-center">
                   <FaPhoneAlt className="mr-1" /> Call
                 </button>
               </p>
@@ -132,7 +135,7 @@ const DetailsPage = () => {
 
           <div className="text-right text-xl">
             <p>
-              <strong>Created at:</strong>
+              Created at:{' '}
               {consignment?.data?.user?.created_at
                 ? new Date(
                     consignment?.data?.user?.created_at.replace(' ', 'T')
@@ -149,7 +152,7 @@ const DetailsPage = () => {
             </p>
 
             <p>
-              <strong>Weight: {consignment?.data?.weight}</strong>
+              Weight: <span>{consignment?.data?.weight}</span>
             </p>
           </div>
         </div>
@@ -177,47 +180,56 @@ const DetailsPage = () => {
                 <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gray-300 transform -translate-x-1/2"></div>
 
                 <div className="space-y-16 pb-8">
-                  {consignment?.order_history.map((update, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between relative"
-                    >
-                      {/* Date - Left Side */}
-                      <div className="text-right w-2/5 ">
-                        <p className="text-sm  text-gray-700">{update.time}</p>
-                        <p className="text-xs text-gray-500">{update.date}</p>
-                      </div>
+                  {[...consignment?.order_status]
+                    .sort((a, b) => new Date(b.date) - new Date(a.date)) // DESC (latest first)
+                    .map((update, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between relative"
+                      >
+                        {/* Date - Left Side */}
+                        <div className="text-right w-2/5 ">
+                          <p className="text-sm text-gray-700">
+                            {new Date(update.date).toLocaleTimeString('en-GB')}
+                            <span className="mr-3"></span>
 
-                      {/* Icon - Middle */}
-                      <div className="relative  flex-shrink-0">
-                        <div
-                          className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                            index === 0
-                              ? 'bg-green-500 ring-4 ring-green-100'
-                              : 'bg-green-400'
-                          }`}
-                        >
-                          <FaCheckCircle className="text-white text-sm" />
+                            {new Date(update.date).toLocaleDateString('en-GB')}
+                          </p>
+                        </div>
+
+                        {/* Icon - Middle */}
+                        <div className="relative flex-shrink-0">
+                          <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                              index === 0
+                                ? 'bg-green-500 ring-4 ring-green-100'
+                                : 'bg-green-400'
+                            }`}
+                          >
+                            <FaCheckCircle className="text-white text-sm" />
+                          </div>
+                        </div>
+
+                        {/* Status - Right Side */}
+                        <div className="text-left w-2/5 pl-6">
+                          <p className="text-sm text-gray-800">
+                            {update.status}
+                          </p>
+                          <p className="text-sm text-gray-800">{update.name}</p>
+                          <p className="text-sm text-gray-800">
+                            {update.mobile}
+                          </p>
+                          <p className="text-sm text-gray-800">
+                            note Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Dolore molestiae voluptates
+                            consectetur. Voluptatibus, officiis blanditiis rerum
+                            quae esse ratione, aliquid reprehenderit quia,
+                            aliquam ab fugit? Hic labore fugiat veniam
+                            distinctio.
+                          </p>
                         </div>
                       </div>
-
-                      {/* Status - Right Side */}
-                      <div className="text-left w-2/5 pl-6">
-                        <p className="text-sm  text-gray-800">
-                          {update.status}
-                        </p>
-                        <p className="text-sm  text-gray-800">{update.name}</p>
-                        <p className="text-sm  text-gray-800">
-                          {update.mobile}
-                        </p>
-                        {update.location && (
-                          <p className="text-xs text-gray-600 mt-1">
-                            {update.location}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
+                    ))}
                 </div>
               </div>
             </div>

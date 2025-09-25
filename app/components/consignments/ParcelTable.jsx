@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Link from 'next/link';
+import Loading from '@/app/loading';
 
 const tabs = [
   { label: 'All', value: 'All' },
@@ -175,9 +176,9 @@ const ParcelTable = () => {
       {/* Table */}
       <div className="w-full overflow-x-auto bg-primary">
         {loading ? (
-          <p className="p-4">Loading...</p>
+          <Loading />
         ) : (
-          <table className="w-full table-auto text-[20px] text-left text-gray-700">
+          <table className="w-full table-auto text-[19px] text-left text-gray-700">
             <thead className="border-b border-gray">
               <tr className="text-primary">
                 <th className="px-4 py-3">SL#</th>
