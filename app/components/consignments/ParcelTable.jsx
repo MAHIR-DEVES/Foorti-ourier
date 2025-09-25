@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Link from 'next/link';
 import Loading from '@/app/loading';
+import { Calendar } from 'lucide-react';
 
 const tabs = [
   { label: 'All', value: 'All' },
@@ -23,22 +24,46 @@ const statusMapping = {
     'Assigned To Delivery Rider',
   ],
   'Approval Pending': [
+    'Assigned Pickup Rider',
+    'Order Placed',
+    'Pickup Done',
+    'Received by Pickup Branch',
+    'Transfer Assign for Fulfillment',
+    'Transfer Reach To Fullfilment',
+    'Received By Fullfilment',
+    'Transfer Assign for Branch',
+    'Transfer Reach To Branch',
+    'Received By Destination Hub',
+  ],
+  Delivered: [
+    'Successfully Delivered',
     'Delivered Amount Collected from Branch',
     'Delivered Amount Send to Fulfillment',
+    'Payment Processing',
+    'Payment Processing Complete',
+    'Payment Completed',
   ],
-  Delivered: ['Successfully Delivered'],
   'Partly Delivered': ['Partly Delivered'],
   Cancelled: [
     'Return Confirm',
     'Cancel Order',
-    'Payment Processing',
-    'Payment Processing Complete',
     'Return Reach To Merchant',
     'Assigned Rider For Return',
     'Return Received By Destination Hub',
     'Return To Merchant',
   ],
   All: [],
+};
+
+// helper function: group by date
+const groupByDate = orders => {
+  return orders.reduce((acc, order) => {
+    if (!order?.order_create_date) return acc;
+    const dateKey = order.order_create_date.split(' ')[0]; // YYYY-MM-DD
+    if (!acc[dateKey]) acc[dateKey] = [];
+    acc[dateKey].push(order);
+    return acc;
+  }, {});
 };
 
 const ParcelTable = () => {
@@ -94,12 +119,12 @@ const ParcelTable = () => {
 
   // Filtered Orders based on status mapping
   const filteredOrders = orders.filter(order => {
-    if (activeTab === 'All') return true;
+    if (activeTab === 'All' || activeTab === 'List by Date') return true;
     const allowedStatuses = statusMapping[activeTab] || [];
     return allowedStatuses.includes(order.status);
   });
 
-  // Pagination
+  // Pagination (only for non-date tabs)
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedOrders = filteredOrders.slice(
@@ -148,6 +173,10 @@ const ParcelTable = () => {
     return pages;
   };
 
+  // group orders by date (for List by Date)
+  const groupedOrders =
+    activeTab === 'List by Date' ? groupByDate(filteredOrders) : {};
+
   return (
     <div className="p-4 md:p-6 mt-8">
       <h1 className="text-xl font-semibold mb-4">Consignments List</h1>
@@ -174,9 +203,141 @@ const ParcelTable = () => {
       </div>
 
       {/* Table */}
-      <div className="w-full overflow-x-auto bg-primary">
+      <div className="w-full overflow-x-auto ">
         {loading ? (
           <Loading />
+        ) : activeTab === 'List by Date' ? (
+          // date wise grouped data
+          Object.keys(groupedOrders).length === 0 ? (
+            <p className="text-center py-6">No data found.</p>
+          ) : (
+            Object.keys(groupedOrders).map(date => (
+              <div key={date} className="mb-10">
+                {/* Header with date */}
+                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-t-lg border border-gray-200">
+                  <h2 className="text-xl font-bold text-gray-800 flex items-center">
+                    <Calendar className="w-5 h-5 mr-2 text-blue-600" />
+                    {date}
+                    <span className="ml-3 text-sm font-normal text-gray-600 bg-white px-2 py-1 rounded-full">
+                      {groupedOrders[date].length} orders
+                    </span>
+                  </h2>
+                </div>
+
+                {/* Table Container */}
+                <div className="overflow-hidden rounded-b-lg shadow-sm border border-gray-200 border-t-0">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left">
+                      {/* Table Header */}
+                      <thead className="bg-gray-50">
+                        <tr className="border-b border-gray-200">
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            SL#
+                          </th>
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            ID
+                          </th>
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            Customer
+                          </th>
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            Phone
+                          </th>
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            Charge
+                          </th>
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            Collection
+                          </th>
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            Remarks
+                          </th>
+                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+
+                      {/* Table Body */}
+                      <tbody className="bg-white divide-y divide-gray-100">
+                        {groupedOrders[date].map((order, idx) => (
+                          <tr
+                            key={`${order.id}-${idx}`}
+                            className="hover:bg-gray-50 transition-colors duration-150 ease-in-out"
+                          >
+                            {/* Serial Number */}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-800 rounded-full text-[14px] font-medium">
+                                {idx + 1}
+                              </span>
+                            </td>
+
+                            {/* Tracking ID */}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <Link
+                                href={`/dashboard/consignments/${order.tracking_id}`}
+                                className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
+                              >
+                                #{order.tracking_id}
+                              </Link>
+                            </td>
+
+                            {/* Customer Name */}
+                            <td className="px-6 py-4">
+                              <div className="text-sm font-medium text-gray-900">
+                                {order.customer_name}
+                              </div>
+                            </td>
+
+                            {/* Customer Phone */}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm text-gray-700">
+                                {order.customer_phone}
+                              </div>
+                            </td>
+
+                            {/* Charge */}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                                {order.delivery}
+                              </span>
+                            </td>
+
+                            {/* Collection */}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <span className="px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">
+                                {order.collection}
+                              </span>
+                            </td>
+
+                            {/* Remarks */}
+                            <td className="px-6 py-4 max-w-xs">
+                              <div
+                                className="text-sm text-gray-600 truncate"
+                                title={order.remarks || 'No remarks'}
+                              >
+                                {order.remarks || '-'}
+                              </div>
+                            </td>
+
+                            {/* Action */}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <Link
+                                href={`/dashboard/consignments/${order.tracking_id}`}
+                                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                              >
+                                View Details
+                              </Link>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            ))
+          )
         ) : (
           <table className="w-full table-auto text-[19px] text-left text-gray-700">
             <thead className="border-b border-gray">
@@ -222,7 +383,7 @@ const ParcelTable = () => {
                         : '-'}
                     </td>
 
-                    <td className="px-4 py-3 text-[#FB654d]">
+                    <td className="px-4 py-3 text-blue-600">
                       <Link
                         href={`/dashboard/consignments/${order.tracking_id}`}
                       >
@@ -250,7 +411,7 @@ const ParcelTable = () => {
       </div>
 
       {/* Pagination Controls */}
-      {filteredOrders.length > itemsPerPage && (
+      {activeTab !== 'List by Date' && filteredOrders.length > itemsPerPage && (
         <div className="flex justify-center items-center mt-6">
           <button
             onClick={handlePreviousPageGroup}

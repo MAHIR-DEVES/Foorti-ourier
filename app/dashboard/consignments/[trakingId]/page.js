@@ -49,37 +49,6 @@ const DetailsPage = () => {
   if (loading) return <p className="p-4">Loading...</p>;
   if (error) return <p className="p-4 text-red-500">{error}</p>;
 
-  const orderStatus = [
-    {
-      date: '2025-09-11 16:02:14',
-      mobile: '01888558812',
-      name: 'Admin',
-      status: 'Assigned Pickup Rider',
-      role: 12,
-    },
-    {
-      date: '2025-09-11 16:02:14',
-      mobile: '01763211337',
-      name: 'Sohan Mia',
-      status: 'Assigned Pickup Rider',
-      role: 10,
-    },
-    {
-      date: '2025-09-11 16:02:14',
-      mobile: '01888558812',
-      name: 'Vatara  Hub',
-      status: 'Assigned Pickup Rider',
-      role: 12,
-    },
-    {
-      date: '2025-09-11 16:02:14',
-      mobile: '01888558812',
-      name: 'Monir',
-      status: 'Assigned Pickup Rider',
-      role: 12,
-    },
-  ];
-
   console.log(consignment.data.tracking_id);
 
   return (
@@ -162,10 +131,8 @@ const DetailsPage = () => {
 
         {/* Item Description Table */}
         <div className="mt-6 border border-gray-300 rounded">
-          <div className="text-center">
-            <div className="bg-gray-100 text-xl p-2">
-              Note: {consignment?.data?.remarks}{' '}
-            </div>
+          <div className="bg-gray-100 text-xl p-2">
+            Note: <br /> {consignment?.data?.remarks}{' '}
           </div>
 
           {/* Tracking Updates */}

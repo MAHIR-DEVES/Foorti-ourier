@@ -1,25 +1,25 @@
-import Image from "next/image";
-import { FaTwitter, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa";
-import { useTranslations } from "next-intl";
+import Image from 'next/image';
+import { FaTwitter, FaInstagram, FaFacebook, FaYoutube } from 'react-icons/fa';
+import { useTranslations } from 'next-intl';
 
 const Footer = () => {
-  const tFooter = useTranslations("homePage.footer");
+  const tFooter = useTranslations('homePage.footer');
 
   const footerLinks = [
     {
-      title: tFooter("titleOne"),
+      title: tFooter('titleOne'),
       links: [
-        { name: tFooter("links.0"), url: "#" },
-        { name: tFooter("links.1"), url: "#" },
-        { name: tFooter("links.2"), url: "#" },
+        { name: tFooter('links.0'), url: '#' },
+        { name: tFooter('links.1'), url: '#' },
+        { name: tFooter('links.2'), url: '#' },
       ],
     },
     {
-      title: tFooter("titleTwo"),
+      title: tFooter('titleTwo'),
       links: [
-        { name: tFooter("links.3"), url: "#" },
-        { name: tFooter("links.4"), url: "#" },
-        { name: tFooter("links.5"), url: "#" },
+        { name: tFooter('links.3'), url: '#' },
+        { name: tFooter('links.4'), url: '#' },
+        { name: tFooter('links.5'), url: '#' },
       ],
     },
   ];
@@ -27,23 +27,23 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: <FaTwitter size={16} />,
-      bgColor: "bg-[#33CCFF]",
-      url: "#",
+      bgColor: 'bg-[#33CCFF]',
+      url: '#',
     },
     {
       icon: <FaInstagram size={16} />,
-      bgColor: "bg-gradient-to-r from-[#FEE411] via-[#FE2181] to-[#9000DC]",
-      url: "#",
+      bgColor: 'bg-gradient-to-r from-[#FEE411] via-[#FE2181] to-[#9000DC]',
+      url: '#',
     },
     {
       icon: <FaFacebook size={16} />,
-      bgColor: "bg-[#337FFF]",
-      url: "#",
+      bgColor: 'bg-[#337FFF]',
+      url: '#',
     },
     {
       icon: <FaYoutube size={16} />,
-      bgColor: "bg-[#FF0000]",
-      url: "#",
+      bgColor: 'bg-[#FF0000]',
+      url: '#',
     },
   ];
 
@@ -60,7 +60,7 @@ const Footer = () => {
               alt="footer-logo"
             />
             <p className="pt-4 md:py-8 text-[16px] text-secondary lg:max-w-xs">
-              {tFooter("description")}
+              {tFooter('description')}
             </p>
           </div>
 
@@ -83,7 +83,7 @@ const Footer = () => {
 
           <div className="lg:mx-auto text-left">
             <h4 className="text-primary font-[600] text-[1.3rem] mb-4">
-              {tFooter("social")}
+              {tFooter('social')}
             </h4>
 
             <div className="flex mt-4 space-x-4 lg:mt-0">
@@ -141,7 +141,10 @@ const Footer = () => {
         <div className="py-7 border-t border-gray">
           <div className="flex items-center justify-center">
             <span className="text-md text-secondary">
-              <a href="#"> {tFooter('copyRight')}</a> 
+              <a target="_black" href="https://creativesoftware.com.bd/">
+                {' '}
+                {tFooter('copyRight')}
+              </a>
             </span>
           </div>
         </div>
