@@ -220,12 +220,7 @@ const DetailsPage = () => {
                             {update.mobile}
                           </p>
                           <p className="text-sm text-gray-800">
-                            note Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Dolore molestiae voluptates
-                            consectetur. Voluptatibus, officiis blanditiis rerum
-                            quae esse ratione, aliquid reprehenderit quia,
-                            aliquam ab fugit? Hic labore fugiat veniam
-                            distinctio.
+                            {update.delivery_note}
                           </p>
                         </div>
                       </div>
