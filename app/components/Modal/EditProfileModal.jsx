@@ -78,7 +78,7 @@ const EditProfileModal = ({
       const formData = new FormData(e.target);
 
       // Example: include token
-      const token = 'YOUR_JWT_TOKEN_HERE'; // যেখান থেকে token নেবেন সেই জায়গা থেকে
+      const token = 'YOUR_JWT_TOKEN_HERE';
 
       const response = await axios.post(
         'https://admin.merchantfcservice.com/api/merchant-profile-updated',
@@ -191,7 +191,7 @@ const EditProfileModal = ({
                     type="tel"
                     name="mobile"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="+88017 000-00000"
                   />
                 </div>
               </div>

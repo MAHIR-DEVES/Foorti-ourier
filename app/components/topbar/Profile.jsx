@@ -1,11 +1,11 @@
-"use client";
-import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { FaUserCircle, FaKey, FaCog } from "react-icons/fa";
-import { FiUser } from "react-icons/fi";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import Link from "next/link";
+'use client';
+import { useState, useRef, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { FaUserCircle, FaKey, FaCog } from 'react-icons/fa';
+import { FiUser } from 'react-icons/fi';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Link from 'next/link';
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,36 +15,36 @@ const ProfileMenu = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("user");
+    const userInfo = localStorage.getItem('user');
     if (userInfo) {
       setUser(JSON.parse(userInfo));
     }
   }, []);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = event => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setIsOpen(false);
-    toast.success("Logout successful!", {
-      position: "top-right",
+    toast.success('Logout successful!', {
+      position: 'top-right',
       autoClose: 2000,
     });
 
     setTimeout(() => {
-      router.push("/landing/login");
+      router.push('/landing/login');
     }, 2000);
   };
 
@@ -79,7 +79,7 @@ const ProfileMenu = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/dashboard/"
                 className="group flex items-center px-4 py-2 text-secondary hover:text-[#00b795]"
               >
                 <FaKey className="mr-3 text-secondary" />
@@ -88,7 +88,7 @@ const ProfileMenu = () => {
             </li>
             <li>
               <a
-                href="#"
+                href="/dashboard/user/profile"
                 className="group flex items-center px-4 py-2 text-secondary hover:text-[#00b795]"
               >
                 <FaCog className="mr-3 text-secondary" />
