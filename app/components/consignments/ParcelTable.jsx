@@ -78,6 +78,8 @@ const ParcelTable = () => {
   const itemsPerPage = 20;
   const [paginationGroup, setPaginationGroup] = useState(1);
 
+  const [expandedDates, setExpandedDates] = useState({});
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -177,6 +179,22 @@ const ParcelTable = () => {
   const groupedOrders =
     activeTab === 'List by Date' ? groupByDate(filteredOrders) : {};
 
+  // toggle expand for date
+  const toggleDateExpand = date => {
+    setExpandedDates(prev => ({
+      ...prev,
+      [date]: !prev[date],
+    }));
+  };
+
+  // auto-expand today's date
+  useEffect(() => {
+    if (activeTab === 'List by Date') {
+      const today = new Date().toISOString().split('T')[0];
+      setExpandedDates({ [today]: true });
+    }
+  }, [activeTab]);
+
   return (
     <div className="p-4 md:p-6 mt-8">
       <h1 className="text-xl font-semibold mb-4">Consignments List</h1>
@@ -212,129 +230,82 @@ const ParcelTable = () => {
             <p className="text-center py-6">No data found.</p>
           ) : (
             Object.keys(groupedOrders).map(date => (
-              <div key={date} className="mb-10">
+              <div key={date} className="mb-6  rounded-lg shadow-sm">
                 {/* Header with date */}
-                <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-t-lg border border-gray-200">
-                  <h2 className="text-xl font-bold text-gray-800 flex items-center">
+                <div className="flex justify-between items-center bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-t-lg border border-gray-200">
+                  <h2 className="text-lg font-bold text-gray-800 flex items-center">
                     <Calendar className="w-5 h-5 mr-2 text-blue-600" />
                     {date}
                     <span className="ml-3 text-sm font-normal text-gray-600 bg-white px-2 py-1 rounded-full">
                       {groupedOrders[date].length} orders
                     </span>
                   </h2>
+                  <button
+                    onClick={() => toggleDateExpand(date)}
+                    className="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700"
+                  >
+                    {expandedDates[date] ? 'Hide Data' : 'View Data'}
+                  </button>
                 </div>
 
-                {/* Table Container */}
-                <div className="overflow-hidden rounded-b-lg shadow-sm border border-gray-200 border-t-0">
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left">
-                      {/* Table Header */}
-                      <thead className="bg-gray-50">
-                        <tr className="border-b border-gray-200">
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            SL#
-                          </th>
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            ID
-                          </th>
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            Customer
-                          </th>
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            Phone
-                          </th>
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            Charge
-                          </th>
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            Collection
-                          </th>
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            Remarks
-                          </th>
-                          <th className="px-6 py-4 text-[14px] font-semibold text-gray-600 uppercase tracking-wider">
-                            Action
-                          </th>
-                        </tr>
-                      </thead>
-
-                      {/* Table Body */}
-                      <tbody className="bg-white divide-y divide-gray-100">
-                        {groupedOrders[date].map((order, idx) => (
-                          <tr
-                            key={`${order.id}-${idx}`}
-                            className="hover:bg-gray-50 transition-colors duration-150 ease-in-out"
-                          >
-                            {/* Serial Number */}
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="inline-flex items-center justify-center w-8 h-8 bg-blue-100 text-blue-800 rounded-full text-[14px] font-medium">
-                                {idx + 1}
-                              </span>
-                            </td>
-
-                            {/* Tracking ID */}
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <Link
-                                href={`/dashboard/consignments/${order.tracking_id}`}
-                                className="text-blue-600 hover:text-blue-800 font-medium transition-colors"
-                              >
-                                #{order.tracking_id}
-                              </Link>
-                            </td>
-
-                            {/* Customer Name */}
-                            <td className="px-6 py-4">
-                              <div className="text-sm font-medium text-gray-900">
-                                {order.customer_name}
-                              </div>
-                            </td>
-
-                            {/* Customer Phone */}
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <div className="text-sm text-gray-700">
-                                {order.customer_phone}
-                              </div>
-                            </td>
-
-                            {/* Charge */}
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
-                                {order.delivery}
-                              </span>
-                            </td>
-
-                            {/* Collection */}
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <span className="px-3 py-1 bg-purple-100 text-purple-800 text-sm font-medium rounded-full">
-                                {order.collection}
-                              </span>
-                            </td>
-
-                            {/* Remarks */}
-                            <td className="px-6 py-4 max-w-xs">
-                              <div
-                                className="text-sm text-gray-600 truncate"
-                                title={order.remarks || 'No remarks'}
-                              >
-                                {order.remarks || '-'}
-                              </div>
-                            </td>
-
-                            {/* Action */}
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <Link
-                                href={`/dashboard/consignments/${order.tracking_id}`}
-                                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
-                              >
-                                View Details
-                              </Link>
-                            </td>
+                {/* Show table only if expanded */}
+                {expandedDates[date] && (
+                  <div className="overflow-hidden rounded-b-lg shadow-sm border border-gray-200 border-t-0">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left">
+                        <thead className="bg-gray-50">
+                          <tr className="border-b border-gray-200">
+                            <th className="px-6 py-4">SL#</th>
+                            <th className="px-6 py-4">ID</th>
+                            <th className="px-6 py-4">Customer</th>
+                            <th className="px-6 py-4">Phone</th>
+                            <th className="px-6 py-4">Charge</th>
+                            <th className="px-6 py-4">Collection</th>
+                            <th className="px-6 py-4">Remarks</th>
+                            <th className="px-6 py-4">Action</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody className="bg-white divide-y divide-gray-100">
+                          {groupedOrders[date].map((order, idx) => (
+                            <tr
+                              key={`${order.id}-${idx}`}
+                              className="hover:bg-gray-50"
+                            >
+                              <td className="px-6 py-4">{idx + 1}</td>
+                              <td className="px-6 py-4">
+                                <Link
+                                  href={`/dashboard/consignments/${order.tracking_id}`}
+                                  className="text-blue-600 hover:text-blue-800"
+                                >
+                                  #{order.tracking_id}
+                                </Link>
+                              </td>
+                              <td className="px-6 py-4">
+                                {order.customer_name}
+                              </td>
+                              <td className="px-6 py-4">
+                                {order.customer_phone}
+                              </td>
+                              <td className="px-6 py-4">{order.delivery}</td>
+                              <td className="px-6 py-4">{order.collection}</td>
+                              <td className="px-6 py-4">
+                                {order.remarks || '-'}
+                              </td>
+                              <td className="px-6 py-4">
+                                <Link
+                                  href={`/dashboard/consignments/${order.tracking_id}`}
+                                  className="px-3 py-1 bg-blue-600 text-white rounded"
+                                >
+                                  View Details
+                                </Link>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             ))
           )

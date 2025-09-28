@@ -6,6 +6,7 @@ import { FiUser } from 'react-icons/fi';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Link from 'next/link';
+import { MdPayment } from 'react-icons/md';
 
 const ProfileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +94,15 @@ const ProfileMenu = () => {
               >
                 <FaCog className="mr-3 text-secondary" />
                 Settings
+              </a>
+            </li>
+            <li>
+              <a
+                href="/dashboard/add-payment-method"
+                className="group flex items-center px-4 py-2 text-secondary hover:text-[#00b795]"
+              >
+                <MdPayment className="mr-3 text-secondary" />
+                Add Payment Method
               </a>
             </li>
             <li className="mt-10 flex justify-center pb-5">
