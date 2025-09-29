@@ -69,20 +69,21 @@ const PaymentPage = () => {
     }
 
     try {
-      const token = 'YOUR_TOKEN_HERE'; // এখানে আপনার JWT বা Bearer token বসান
+      const stored = localStorage.getItem('token');
+      const token = stored ? JSON.parse(stored).token : null;
       const response = await axios.post(
         'https://admin.merchantfcservice.com/api/payment-info-add',
         data,
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImIyZGVjMmFjMjViNmZjMzU4YTFjMTlkOTJkNGMyMjc0ODk3MjliYzdkZDJlYmJkOTY1Zjk3NmE5NDRiYWM5MmRiYzcxMWE1ZDMyMWRhZGVjIn0.eyJhdWQiOiIyMiIsImp0aSI6ImIyZGVjMmFjMjViNmZjMzU4YTFjMTlkOTJkNGMyMjc0ODk3MjliYzdkZDJlYmJkOTY1Zjk3NmE5NDRiYWM5MmRiYzcxMWE1ZDMyMWRhZGVjIiwiaWF0IjoxNzU5MTI4OTQ0LCJuYmYiOjE3NTkxMjg5NDQsImV4cCI6MTc5MDY2NDk0NCwic3ViIjoiMTM2OCIsInNjb3BlcyI6W119.PAw-sBDwwo6RcOnFB56ctP6HliT1cg3ol40CMkSEzfOX0zDUjQ0Ljm9kvhHbwuLKGWpkA4bU8FjICF40BhoY61La9ehKTLrH5koDEcczcJu0s4iPY2_9E7iit8jm90gaxGJAYGiXhuzvS3N6jVwcCnJ0BAV-bGjCZw8ntqwqL2PU65MvcmqRN4GoxjB7GuxEe8S4y3sGEu7hgf7tsRl8Vy-olMG-B7-AeaKLjcymJNReE35R9eBN69v6jVpz-aEJX7LIkDNkS4AFlcIk3LFtnRNRkIgaUKR7r02w0UmFKjhzsJVdyF7Uh2mz2ZmL1oCLUWjTNpnScZZ3r__Qme-kRteKLszQfGOpUeyA09ftgjoevBD6JOz2IQC7qu_SOdYcjEQXxoX611pup703CJNjR9r_UZHsKOxnqKa7HBAwunNyZyQTgWGY8LnadacrApqt_X1SUIjdcWmfVACpSWZXHSN1mbcp9GPPHhl8PbMDnRAus2F9ouGhweoxHKF4eXuFR0prfX_d2m9fd_cHjeiTSQEPS2uTJhednqXz_T0xaujVooejbbTN63r7nXkORB1OW7yOvJMMrmBz_OywHC9fWLwVYxsSF2NPNrnCFLYNYK9wd6Dx9D2_uhU4CS9xzyajBvU8pYVLxlXi65e92vbZhaYuf8nWkRtNRuVbIxFrUe8`, // Token সংযুক্ত
+            Authorization: `Bearer ${token}`, // Token সংযুক্ত
           },
         }
       );
 
       console.log('Server Response:', response.data);
-      alert('Payment method saved successfully!');
+      toast('Payment method saved successfully!');
     } catch (error) {
       console.error('Error saving payment info:', error);
       toast.error('Failed to save payment method!');
