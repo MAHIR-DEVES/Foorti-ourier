@@ -12,7 +12,7 @@ const tabs = [
   { label: 'Pending', value: 'Pending' },
   { label: 'Approval Pending', value: 'Approval Pending' },
   { label: 'Delivered', value: 'Delivered' },
-  { label: 'Partly Delivered', value: 'Partly Delivered' },
+  { label: 'Partially Delivered', value: 'Partially Delivered' },
   { label: 'Cancelled', value: 'Cancelled' },
 ];
 
@@ -43,7 +43,7 @@ const statusMapping = {
     'Payment Processing Complete',
     'Payment Completed',
   ],
-  'Partly Delivered': ['Partly Delivered'],
+  'Partially Delivered': ['Partially Delivered'],
   Cancelled: [
     'Return Confirm',
     'Cancel Order',
@@ -79,6 +79,8 @@ const ParcelTable = () => {
   const [paginationGroup, setPaginationGroup] = useState(1);
 
   const [expandedDates, setExpandedDates] = useState({});
+
+  console.log(orders);
 
   useEffect(() => {
     const fetchOrders = async () => {
