@@ -80,8 +80,6 @@ const ParcelTable = () => {
 
   const [expandedDates, setExpandedDates] = useState({});
 
-  console.log(orders);
-
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -128,7 +126,7 @@ const ParcelTable = () => {
     return allowedStatuses.includes(order.status);
   });
 
-  // Pagination (only for non-date tabs)
+  // Pagination (only for non-date tabs except Delivered)
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedOrders = filteredOrders.slice(
@@ -177,9 +175,17 @@ const ParcelTable = () => {
     return pages;
   };
 
-  // group orders by date (for List by Date)
+  // group orders by date for List by Date or Delivered tab
   const groupedOrders =
-    activeTab === 'List by Date' ? groupByDate(filteredOrders) : {};
+    activeTab === 'List by Date'
+      ? groupByDate(filteredOrders)
+      : activeTab === 'Delivered'
+      ? groupByDate(
+          filteredOrders.filter(order =>
+            statusMapping['Delivered'].includes(order.status)
+          )
+        )
+      : {};
 
   // toggle expand for date
   const toggleDateExpand = date => {
@@ -189,9 +195,9 @@ const ParcelTable = () => {
     }));
   };
 
-  // auto-expand today's date
+  // auto-expand today's date for List by Date & Delivered
   useEffect(() => {
-    if (activeTab === 'List by Date') {
+    if (activeTab === 'List by Date' || activeTab === 'Delivered') {
       const today = new Date().toISOString().split('T')[0];
       setExpandedDates({ [today]: true });
     }
@@ -223,17 +229,16 @@ const ParcelTable = () => {
       </div>
 
       {/* Table */}
-      <div className="w-full overflow-x-auto ">
+      <div className="w-full overflow-x-auto">
         {loading ? (
           <Loading />
-        ) : activeTab === 'List by Date' ? (
-          // date wise grouped data
+        ) : activeTab === 'List by Date' || activeTab === 'Delivered' ? (
+          // grouped data
           Object.keys(groupedOrders).length === 0 ? (
             <p className="text-center py-6">No data found.</p>
           ) : (
             Object.keys(groupedOrders).map(date => (
-              <div key={date} className="mb-6  rounded-lg shadow-sm">
-                {/* Header with date */}
+              <div key={date} className="mb-6 rounded-lg shadow-sm">
                 <div className="flex justify-between items-center bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-t-lg border border-gray-200">
                   <h2 className="text-lg font-bold text-gray-800 flex items-center">
                     <Calendar className="w-5 h-5 mr-2 text-blue-600" />
@@ -249,8 +254,6 @@ const ParcelTable = () => {
                     {expandedDates[date] ? 'Hide Data' : 'View Data'}
                   </button>
                 </div>
-
-                {/* Show table only if expanded */}
                 {expandedDates[date] && (
                   <div className="overflow-hidden rounded-b-lg shadow-sm border border-gray-200 border-t-0">
                     <div className="overflow-x-auto">
@@ -312,6 +315,7 @@ const ParcelTable = () => {
             ))
           )
         ) : (
+          // normal paginated table for other tabs
           <table className="w-full table-auto text-[19px] text-left text-gray-700">
             <thead className="border-b border-gray bg-gradient-to-r from-blue-50 to-indigo-50">
               <tr className="text-primary">
@@ -384,25 +388,27 @@ const ParcelTable = () => {
       </div>
 
       {/* Pagination Controls */}
-      {activeTab !== 'List by Date' && filteredOrders.length > itemsPerPage && (
-        <div className="flex justify-center items-center mt-6">
-          <button
-            onClick={handlePreviousPageGroup}
-            disabled={paginationGroup === 1}
-            className="mx-1 px-2.5 py-2 rounded-full bg-white text-primary-active cursor-pointer hover:bg-blue-100 disabled:opacity-50"
-          >
-            <FaChevronLeft />
-          </button>
-          {renderPageNumbers()}
-          <button
-            onClick={handleNextPageGroup}
-            disabled={paginationGroup * 5 >= totalPages}
-            className="mx-1 px-2.5 py-2 rounded-full bg-white text-primary-active cursor-pointer hover:bg-blue-100 disabled:opacity-50"
-          >
-            <FaChevronRight />
-          </button>
-        </div>
-      )}
+      {activeTab !== 'List by Date' &&
+        activeTab !== 'Delivered' &&
+        filteredOrders.length > itemsPerPage && (
+          <div className="flex justify-center items-center mt-6">
+            <button
+              onClick={handlePreviousPageGroup}
+              disabled={paginationGroup === 1}
+              className="mx-1 px-2.5 py-2 rounded-full bg-white text-primary-active cursor-pointer hover:bg-blue-100 disabled:opacity-50"
+            >
+              <FaChevronLeft />
+            </button>
+            {renderPageNumbers()}
+            <button
+              onClick={handleNextPageGroup}
+              disabled={paginationGroup * 5 >= totalPages}
+              className="mx-1 px-2.5 py-2 rounded-full bg-white text-primary-active cursor-pointer hover:bg-blue-100 disabled:opacity-50"
+            >
+              <FaChevronRight />
+            </button>
+          </div>
+        )}
     </div>
   );
 };
