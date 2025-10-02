@@ -112,21 +112,18 @@ const ParcelTable = () => {
     fetchOrders();
   }, []);
 
-  // Update active tab if queryStatus changes
   useEffect(() => {
     setActiveTab(queryStatus);
     setCurrentPage(1);
     setPaginationGroup(1);
   }, [queryStatus]);
 
-  // Filtered Orders based on status mapping
   const filteredOrders = orders.filter(order => {
     if (activeTab === 'All' || activeTab === 'List by Date') return true;
     const allowedStatuses = statusMapping[activeTab] || [];
     return allowedStatuses.includes(order.status);
   });
 
-  // Pagination (only for non-date tabs except Delivered)
   const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const paginatedOrders = filteredOrders.slice(
@@ -175,7 +172,7 @@ const ParcelTable = () => {
     return pages;
   };
 
-  // group orders by date for List by Date or Delivered tab
+  // group orders by date for List by Date, Delivered, or Cancelled tab
   const groupedOrders =
     activeTab === 'List by Date'
       ? groupByDate(filteredOrders)
@@ -185,23 +182,32 @@ const ParcelTable = () => {
             statusMapping['Delivered'].includes(order.status)
           )
         )
+      : activeTab === 'Cancelled'
+      ? groupByDate(
+          filteredOrders.filter(order =>
+            statusMapping['Cancelled'].includes(order.status)
+          )
+        )
       : {};
 
-  // toggle expand for date
+  // auto-expand today's date for List by Date, Delivered, or Cancelled
+  useEffect(() => {
+    if (
+      activeTab === 'List by Date' ||
+      activeTab === 'Delivered' ||
+      activeTab === 'Cancelled'
+    ) {
+      const today = new Date().toISOString().split('T')[0];
+      setExpandedDates({ [today]: true });
+    }
+  }, [activeTab]);
+
   const toggleDateExpand = date => {
     setExpandedDates(prev => ({
       ...prev,
       [date]: !prev[date],
     }));
   };
-
-  // auto-expand today's date for List by Date & Delivered
-  useEffect(() => {
-    if (activeTab === 'List by Date' || activeTab === 'Delivered') {
-      const today = new Date().toISOString().split('T')[0];
-      setExpandedDates({ [today]: true });
-    }
-  }, [activeTab]);
 
   return (
     <div className="p-4 md:p-6 mt-8">
@@ -232,8 +238,9 @@ const ParcelTable = () => {
       <div className="w-full overflow-x-auto">
         {loading ? (
           <Loading />
-        ) : activeTab === 'List by Date' || activeTab === 'Delivered' ? (
-          // grouped data
+        ) : activeTab === 'List by Date' ||
+          activeTab === 'Delivered' ||
+          activeTab === 'Cancelled' ? (
           Object.keys(groupedOrders).length === 0 ? (
             <p className="text-center py-6">No data found.</p>
           ) : (
@@ -390,6 +397,7 @@ const ParcelTable = () => {
       {/* Pagination Controls */}
       {activeTab !== 'List by Date' &&
         activeTab !== 'Delivered' &&
+        activeTab !== 'Cancelled' &&
         filteredOrders.length > itemsPerPage && (
           <div className="flex justify-center items-center mt-6">
             <button
