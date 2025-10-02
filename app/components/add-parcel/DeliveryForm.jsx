@@ -160,7 +160,7 @@ const DeliveryForm = () => {
         });
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      toast.error('Error submitting form:', error);
     }
   };
 
