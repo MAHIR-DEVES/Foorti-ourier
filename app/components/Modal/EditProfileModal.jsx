@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const EditProfileModal = ({
   isOpen,
@@ -77,8 +78,8 @@ const EditProfileModal = ({
     try {
       const formData = new FormData(e.target);
 
-      // Example: include token
-      const token = 'YOUR_JWT_TOKEN_HERE';
+      const stored = localStorage.getItem('token');
+      const token = stored ? JSON.parse(stored).token : null;
 
       const response = await axios.post(
         'https://admin.merchantfcservice.com/api/merchant-profile-updated',
@@ -86,12 +87,14 @@ const EditProfileModal = ({
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImE4N2RmMjU4ZjljMjViMmY4ZGQ1YzQzNDY2OTMxMDYxYzllODFjMGQyM2I3MTVkNmNjNjZiMWI0ZWFhMDgwMTc3ZDJiMjRmODc1MGUyZThmIn0.eyJhdWQiOiIyMiIsImp0aSI6ImE4N2RmMjU4ZjljMjViMmY4ZGQ1YzQzNDY2OTMxMDYxYzllODFjMGQyM2I3MTVkNmNjNjZiMWI0ZWFhMDgwMTc3ZDJiMjRmODc1MGUyZThmIiwiaWF0IjoxNzU4OTkyMDM1LCJuYmYiOjE3NTg5OTIwMzUsImV4cCI6MTc5MDUyODAzNSwic3ViIjoiMTM2OCIsInNjb3BlcyI6W119.GEnBL60wWZN-rzoBCUGbM5pNn9YrE4JkQsnFT6Mih5TtAK6QNIFoqqPsPnm7CnwHiB7mrCoAcnO2VGThTFZthBzrqYH2-TB8OWg1YlXIcO6o_MT8HX-PgqPTGxFpOi3cmRQnXAEWwtAjbKK0KsoWIEn0coxluUOOuiKa7GfzjhD1ePNm7Lq9eZsdlzkMmQrgnkwqKBZCBw1_RpKp3mNtSZZIv-NzGRrs4fXKizR9AvdDW3bwB2OGpPTVF_HViGWRKA6E8UQfi3dmUQyZcbqbDoJCCeErmwrR6g3DwQRm_ZIbPnBN6FU9SYFTtND6JzUEuxVvPHicIuwhWsuPv19ggqS_znXkBzRbH3KSzq512hCsDqvC4yaJ_GvzeXNFLWp-n4MjpPE10oFKOKx-MGnoSl9i4RobR8-9Odix201m4YvMUiMUvD9Y1CnTRUkuRCwDmkvJLhIBBMsRhN2TFr73FI564gyThntJCuJoFLQZzRKgGvy07qNnOhXZo1wfVRoWJRnmKbh3V3PBL0jVCtav7qZakSH4D5_pQCT_goJ2FJgX3QcU503DR8lYXvq_wwNgvA5stvxTNzJJTRugD9pchQBedHYdw0iP2cfpqV0hgipDUqoJGX4LRlKw36-grCOr3b55_n9tIS7n-WpWbZfHGrb0fAoG_pRdPPln_azsG3w`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
-      console.log('API Response:', response.data);
+      if (response?.data?.status === 'success') {
+        toast.success('Profile updated successfully!');
+      }
 
       onClose();
     } catch (error) {
