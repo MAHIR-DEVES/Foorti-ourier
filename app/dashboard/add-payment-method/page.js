@@ -119,7 +119,7 @@ const PaymentPage = () => {
         const token = stored ? JSON.parse(stored).token : null;
 
         const response = await fetch(
-          'http://admin.merchantfcservice.com/api/payment-info-show',
+          'https://admin.merchantfcservice.com/api/payment-info-show',
           {
             method: 'GET',
             headers: {
@@ -151,7 +151,7 @@ const PaymentPage = () => {
         const token = stored ? JSON.parse(stored).token : null;
 
         const response = await fetch(
-          'http://admin.merchantfcservice.com/api/restriction-payment',
+          'https://admin.merchantfcservice.com/api/restriction-payment',
           {
             method: 'GET',
             headers: {
