@@ -1,139 +1,69 @@
-// "use client";
-// import React from "react";
-// import { RxCross1 } from "react-icons/rx";
-
-// const PickupRequestModal = ({ isOpen, onClose }) => {
-//   if (!isOpen) return null;
-
-//   return (
-//     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/30 pt-10">
-//       <div className="bg-white w-[90%] sm:w-[80%] md:w-[35%] rounded-md shadow-lg relative">
-//         <div className="flex justify-between items-center border-b px-5 py-3">
-//           <h2 className="text-xl font-semibold">Pickup Request</h2>
-//           <RxCross1
-//             className="cursor-pointer text-gray-600 hover:bg-gray-100 p-2 rounded-full w-8 h-8"
-//             onClick={onClose}
-//           />
-//         </div>
-//         <div className="p-5">
-//           <form className="flex flex-col gap-4">
-//             <label className="block font-medium text-gray-700">
-//               Pickup Address <span className="text-red-500">*</span>
-//               <input
-//                 type="text"
-//                 placeholder="Enter pickup address"
-//                 className="w-full border border-gray outline-none rounded px-3 py-2 mt-1"
-//               />
-//             </label>
-//             <label className="block font-medium text-gray-700">
-//               Note <span className="text-red-500">*</span>
-//               <input
-//                 type="text"
-//                 placeholder="Note"
-//                 className="w-full border border-gray outline-none rounded px-3 py-2 mt-1"
-//               />
-//             </label>
-//             <label className="block font-medium text-gray-700">
-//               Estimated Parcel (Optional){" "}
-//               <span className="text-red-500">*</span>
-//               <input
-//                 type="text"
-//                 placeholder="Estimated Parcel (Optional) "
-//                 className="w-full border border-gray outline-none rounded px-3 py-2 mt-1"
-//               />
-//             </label>
-//             <div className="flex justify-end gap-3 pt-2">
-//               <button
-//                 type="submit"
-//                 className="button-primary cursor-pointer  text-white px-4 py-2 rounded"
-//               >
-//                 Send Request
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PickupRequestModal;
-
-
-
-
-
-"use client";
-import React, { useEffect, useState } from "react";
-import { RxCross1 } from "react-icons/rx";
-import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+'use client';
+import React, { useState } from 'react';
+import { RxCross1 } from 'react-icons/rx';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PickupRequestModal = ({ isOpen, onClose }) => {
-  const [userInfo, setUserInfo] = useState(null);
-  const [note, setNote] = useState("");
-  const [estimatedParcel, setEstimatedParcel] = useState("");
+  const [pickupAddress, setPickupAddress] = useState('');
+  const [note, setNote] = useState('');
+  const [estimatedParcel, setEstimatedParcel] = useState('');
   const [loading, setLoading] = useState(false);
-  const [shouldClose, setShouldClose] = useState(false); 
-
-  useEffect(() => {
-    if (isOpen) {
-      axios
-        .get("/api/user-info")
-        .then((res) => setUserInfo(res.data.user))
-        .catch((err) => {
-          console.error("User info load failed:", err);
-          toast.error("Failed to load user information");
-        });
-    }
-  }, [isOpen]);
-
- const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  if (!note || !estimatedParcel) {
-    toast.error("Please fill in both Note and Estimated Parcel");
-    return;
-  }
-
-  setLoading(true);
-
-  try {
-    const res = await axios.post("/api/pickup-request", {
-      pick_up_address: userInfo?.address || "",
-      Note: note,
-      estimated_parcel: estimatedParcel,
-    });
-
-    toast.success("Pickup request successfully!");
-// console.log(res.data)
-    setTimeout(() => {
-      setShouldClose(true);
-    }, 1000);
-  } catch (error) {
-    console.error("Pickup request error:", error);
-    toast.error("Failed to submit pickup request");
-  } finally {
-    setLoading(false);
-  }
-};
-
-
-  useEffect(() => {
-    if (shouldClose) {
-      onClose();
-      setShouldClose(false); 
-    }
-  }, [shouldClose, onClose]);
 
   if (!isOpen) return null;
 
+  // 🧠 Handle Form Submit
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    const formData = {
+      pick_up_address: pickupAddress,
+      Note: note,
+      estimated_parcel: estimatedParcel,
+    };
+
+    console.log('📦 Sending Data:', formData);
+
+    try {
+      setLoading(true);
+
+      // 🪪 Get token from localStorage
+      const stored = localStorage.getItem('token');
+      const token = stored ? JSON.parse(stored).token : null;
+
+      if (!token) {
+        toast.error('No token found. Please log in again.');
+        setLoading(false);
+        return;
+      }
+
+      // 🚀 Send request
+      const response = await axios.post(
+        'https://admin.merchantfcservice.com/api/pick-up-request',
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      toast.success(`${response?.data?.message}`);
+      setLoading(false);
+
+      // Optionally close modal
+      onClose();
+    } catch (error) {
+      console.error('❌ Error sending request:', error.response || error);
+      toast.error('Failed to send pickup request!');
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black/30 pt-10">
-     
-      <ToastContainer position="top-right" autoClose={3000} />
-
       <div className="bg-white w-[90%] sm:w-[80%] md:w-[35%] rounded-md shadow-lg relative">
         <div className="flex justify-between items-center border-b px-5 py-3">
           <h2 className="text-xl font-semibold">Pickup Request</h2>
@@ -142,15 +72,18 @@ const PickupRequestModal = ({ isOpen, onClose }) => {
             onClick={onClose}
           />
         </div>
+
         <div className="p-5">
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <label className="block font-medium text-gray-700">
               Pickup Address <span className="text-red-500">*</span>
               <input
                 type="text"
-                value={userInfo?.address || ""}
-                disabled
-                className="w-full border border-gray-300 outline-none rounded px-3 py-2 mt-1 bg-gray-100"
+                value={pickupAddress}
+                onChange={e => setPickupAddress(e.target.value)}
+                placeholder="Enter pickup address"
+                className="w-full border border-gray outline-none rounded px-3 py-2 mt-1"
+                required
               />
             </label>
 
@@ -158,31 +91,34 @@ const PickupRequestModal = ({ isOpen, onClose }) => {
               Note <span className="text-red-500">*</span>
               <input
                 type="text"
-                placeholder="Note"
                 value={note}
-                onChange={(e) => setNote(e.target.value)}
-                className="w-full border border-gray-300 outline-none rounded px-3 py-2 mt-1"
+                onChange={e => setNote(e.target.value)}
+                placeholder="Note"
+                className="w-full border border-gray outline-none rounded px-3 py-2 mt-1"
+                required
               />
             </label>
 
             <label className="block font-medium text-gray-700">
-              Estimated Parcel <span className="text-red-500">*</span>
+              Estimated Parcel (Optional)
               <input
-                type="number"
-                placeholder="Estimated Parcel"
+                type="text"
                 value={estimatedParcel}
-                onChange={(e) => setEstimatedParcel(e.target.value)}
-                className="w-full border border-gray-300 outline-none rounded px-3 py-2 mt-1"
+                onChange={e => setEstimatedParcel(e.target.value)}
+                placeholder="Estimated Parcel (Optional)"
+                className="w-full border border-gray outline-none rounded px-3 py-2 mt-1"
               />
             </label>
 
             <div className="flex justify-end gap-3 pt-2">
               <button
                 type="submit"
-                className="button-primary cursor-pointer text-white px-4 py-2 rounded"
                 disabled={loading}
+                className={`button-primary bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded ${
+                  loading ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
               >
-                {loading ? "Sending..." : "Send Request"}
+                {loading ? 'Sending...' : 'Send Request'}
               </button>
             </div>
           </form>

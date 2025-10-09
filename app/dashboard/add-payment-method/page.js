@@ -310,7 +310,7 @@ const PaymentPage = () => {
           ) : (
             <>
               {/* Method Selection */}
-              <div className="mb-8">
+              <div className="mb-8 px-2 mt-2">
                 <label className="block text-sm font-semibold text-gray-700 mb-3">
                   Select Payment Method
                 </label>
@@ -331,7 +331,7 @@ const PaymentPage = () => {
               {(method === 'bkash' ||
                 method === 'nagad' ||
                 method === 'rocket') && (
-                <div className="space-y-6 animate-fade-in">
+                <div className="space-y-6 animate-fade-in px-2">
                   <div className="flex items-center gap-3 p-4 bg-blue-50 rounded-xl border border-blue-200">
                     <img
                       src={getMethodImage(method)}
@@ -486,7 +486,7 @@ const PaymentPage = () => {
                 <div className="mt-8 pt-6 border-t border-gray-200">
                   <button
                     onClick={handleSave}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-4  font-semibold hover:from-blue-700 hover:to-indigo-800 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
                   >
                     Save Payment Method
                   </button>
