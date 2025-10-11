@@ -38,7 +38,7 @@ const PickupRequestModal = ({ isOpen, onClose }) => {
         return;
       }
 
-      // 🚀 Send request
+      // Send request
       const response = await axios.post(
         'https://admin.merchantfcservice.com/api/pick-up-request',
         formData,

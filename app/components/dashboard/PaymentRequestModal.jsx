@@ -28,7 +28,7 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
       const token = stored ? JSON.parse(stored).token : null;
 
       const response = await axios.post(
-        'http://admin.merchantfcservice.com/api/payment-request',
+        'https://admin.merchantfcservice.com/api/payment-request',
         formData,
         {
           headers: {
@@ -45,7 +45,10 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
         '❌ Payment Request Error:',
         error.response?.data || error.message
       );
-      alert('Failed to send payment request. Check console for details.');
+      toast.error(
+        'Failed to send payment request. Check console for details.',
+        error.message
+      );
     } finally {
       setLoading(false);
     }
