@@ -14,6 +14,7 @@ const tabs = [
   { label: 'Delivered', value: 'Delivered' },
   { label: 'Partially Delivered', value: 'Partially Delivered' },
   { label: 'Cancelled', value: 'Cancelled' },
+  { label: 'Payment', value: 'Payment' },
 ];
 
 const statusMapping = {
@@ -52,6 +53,7 @@ const statusMapping = {
     'Return Received By Destination Hub',
     'Return To Merchant',
   ],
+
   All: [],
 };
 
@@ -72,6 +74,7 @@ const ParcelTable = () => {
 
   const [activeTab, setActiveTab] = useState(queryStatus);
   const [orders, setOrders] = useState([]);
+  const [payments, setPayment] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -102,6 +105,39 @@ const ParcelTable = () => {
 
         const data = await response.json();
         setOrders(data.confirmed_order_list || []);
+      } catch (err) {
+        console.error('API Error:', err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrders();
+  }, []);
+
+  // payment info
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const stored = localStorage.getItem('token');
+        if (!stored) return;
+
+        const parsed = JSON.parse(stored);
+        const token = parsed?.token;
+        if (!token) return;
+
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_MERCHANT_API_KEY}/merchant-payment-history`,
+          {
+            method: 'GET',
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+
+        if (!response.ok) throw new Error('Failed to fetch orders');
+
+        const data = await response.json();
+        setPayment(data.payments || []);
       } catch (err) {
         console.error('API Error:', err.message);
       } finally {
@@ -172,7 +208,6 @@ const ParcelTable = () => {
     return pages;
   };
 
-  // group orders by date for List by Date, Delivered, or Cancelled tab
   const groupedOrders =
     activeTab === 'List by Date'
       ? groupByDate(filteredOrders)
@@ -190,7 +225,6 @@ const ParcelTable = () => {
         )
       : {};
 
-  // auto-expand today's date for List by Date, Delivered, or Cancelled
   useEffect(() => {
     if (
       activeTab === 'List by Date' ||
@@ -234,13 +268,14 @@ const ParcelTable = () => {
         ))}
       </div>
 
-      {/* Table */}
+      {/* Table / Section */}
       <div className="w-full overflow-x-auto">
         {loading ? (
           <Loading />
         ) : activeTab === 'List by Date' ||
           activeTab === 'Delivered' ||
           activeTab === 'Cancelled' ? (
+          // Grouped orders view
           Object.keys(groupedOrders).length === 0 ? (
             <p className="text-center py-6">No data found.</p>
           ) : (
@@ -321,8 +356,67 @@ const ParcelTable = () => {
               </div>
             ))
           )
+        ) : activeTab === 'Payment' ? (
+          // 🔹 Custom Section for Payment Tab
+          <div className="mt-6 rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+            <div className="flex justify-between items-center bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border-b border-gray-200">
+              <h2 className="text-lg font-bold text-gray-800 flex items-center">
+                <Calendar className="w-5 h-5 mr-2 text-blue-600" />
+                Payment History
+              </h2>
+              <span className="text-sm font-medium text-gray-600 bg-white px-3 py-1 rounded-full">
+                {payments.length} payments
+              </span>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-gray-700">
+                <thead className="bg-gray-50 border-b border-gray-200">
+                  <tr className="text-primary">
+                    <th className="px-6 py-4">SL#</th>
+                    <th className="px-6 py-4">Date</th>
+                    <th className="px-6 py-4">Invoice No</th>
+                    <th className="px-6 py-4">Status</th>
+                    <th className="px-6 py-4">Amount</th>
+                    <th className="px-6 py-4 text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="bg-white divide-y divide-gray-100">
+                  {payments?.map((payment, idx) => (
+                    <tr
+                      key={payment.id}
+                      className="hover:bg-gray-50 transition duration-150"
+                    >
+                      <td className="px-6 py-4">{idx + 1}</td>
+                      <td className="px-6 py-4">{payment.created_at}</td>
+                      <td className="px-6 py-4 text-blue-600 font-medium">
+                        {payment.invoice_id}
+                      </td>
+                      <td
+                        className={`px-6 py-4 font-semibold ${
+                          payment.status === 'Complete'
+                            ? 'text-green-600'
+                            : payment.status === 'Processing'
+                            ? 'text-yellow-600'
+                            : 'text-red-600'
+                        }`}
+                      >
+                        {payment.status}
+                      </td>
+                      <td className="px-6 py-4">{payment.t_payable}</td>
+                      <td className="px-6 py-4 text-center">
+                        <button className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         ) : (
-          // normal paginated table for other tabs
+          // Normal table view
           <table className="w-full table-auto text-[19px] text-left text-gray-700">
             <thead className="border-b border-gray bg-gradient-to-r from-blue-50 to-indigo-50">
               <tr className="text-primary">
@@ -398,6 +492,7 @@ const ParcelTable = () => {
       {activeTab !== 'List by Date' &&
         activeTab !== 'Delivered' &&
         activeTab !== 'Cancelled' &&
+        activeTab !== 'Payment' &&
         filteredOrders.length > itemsPerPage && (
           <div className="flex justify-center items-center mt-6">
             <button

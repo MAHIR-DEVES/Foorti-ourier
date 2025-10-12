@@ -23,8 +23,6 @@ const PickupRequestModal = ({ isOpen, onClose }) => {
       estimated_parcel: estimatedParcel,
     };
 
-    console.log('📦 Sending Data:', formData);
-
     try {
       setLoading(true);
 
