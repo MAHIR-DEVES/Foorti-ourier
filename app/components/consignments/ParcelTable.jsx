@@ -376,8 +376,8 @@ const ParcelTable = () => {
                     <th className="px-6 py-4">SL#</th>
                     <th className="px-6 py-4">Date</th>
                     <th className="px-6 py-4">Invoice No</th>
-                    <th className="px-6 py-4">Status</th>
                     <th className="px-6 py-4">Amount</th>
+                    <th className="px-6 py-4">Status</th>
                     <th className="px-6 py-4 text-center">Action</th>
                   </tr>
                 </thead>
@@ -388,26 +388,44 @@ const ParcelTable = () => {
                       className="hover:bg-gray-50 transition duration-150"
                     >
                       <td className="px-6 py-4">{idx + 1}</td>
-                      <td className="px-6 py-4">{payment.created_at}</td>
+                      <td className="px-6 py-4">
+                        {' '}
+                        {new Date(payment.created_at).toLocaleString('en-GB', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          second: '2-digit',
+                          hour12: true,
+                        })}
+                      </td>
                       <td className="px-6 py-4 text-blue-600 font-medium">
                         {payment.invoice_id}
                       </td>
+                      <td className="px-6 py-4">{payment.t_payable}</td>
                       <td
                         className={`px-6 py-4 font-semibold ${
-                          payment.status === 'Complete'
+                          payment.status === 'Payment Received By Merchant'
                             ? 'text-green-600'
                             : payment.status === 'Processing'
                             ? 'text-yellow-600'
                             : 'text-red-600'
                         }`}
                       >
-                        {payment.status}
+                        {payment.status === 'Payment Received By Merchant'
+                          ? 'Complete'
+                          : payment.status === 'Payment Processing'
+                          ? 'Processing'
+                          : payment.status}
                       </td>
-                      <td className="px-6 py-4">{payment.t_payable}</td>
                       <td className="px-6 py-4 text-center">
-                        <button className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                        <Link
+                          href={`/dashboard/consignments/payment-details?invoiceId=${payment.invoice_id}`}
+                          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                        >
                           View
-                        </button>
+                        </Link>
                       </td>
                     </tr>
                   ))}
