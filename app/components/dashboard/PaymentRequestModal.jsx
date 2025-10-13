@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { RxCross1 } from 'react-icons/rx';
 import { toast } from 'react-toastify';
@@ -8,8 +8,44 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
   const [paymentMethod, setPaymentMethod] = useState('');
   const [amount, setAmount] = useState('');
   const [loading, setLoading] = useState(false);
+  // const [data, setData] = useState(null);
 
   if (!isOpen) return null;
+
+  useEffect(() => {
+    const fetchDashboard = async () => {
+      try {
+        const stored = localStorage.getItem('token');
+        const token = stored ? JSON.parse(stored).token : null;
+
+        if (!token) {
+          console.error('No token found');
+          return;
+        }
+
+        const res = await fetch(
+          'https://admin.merchantfcservice.com/api/merchantdashboard',
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        if (!res.ok) throw new Error(`Error ${res.status}`);
+
+        const result = await res.json();
+        // setData(result);
+        setAmount(result?.data?.paymentProcessing || ''); // set default amount here
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
+    fetchDashboard();
+  }, []);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -18,8 +54,6 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
       payment_method: paymentMethod,
       amount,
     };
-
-    console.log('Sending Payment Request:', formData);
 
     try {
       setLoading(true);
@@ -45,10 +79,7 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
         '❌ Payment Request Error:',
         error.response?.data || error.message
       );
-      toast.error(
-        'Failed to send payment request. Check console for details.',
-        error.message
-      );
+      toast.error('Failed to send payment request.');
     } finally {
       setLoading(false);
     }
@@ -56,7 +87,6 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
 
   const handleClear = () => {
     setPaymentMethod('');
-    setAmount('');
   };
 
   return (
@@ -90,30 +120,31 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
             </select>
 
             {/* Amount */}
-            <label className="block font-medium text-gray-700">
+            <label className="block font-medium text-gray-700 mt-2">
               Amount <span className="text-red-500">*</span>
-              <input
-                type="text"
-                placeholder="Enter amount"
-                value={amount}
-                onChange={e => setAmount(e.target.value)}
-                required
-                className="w-full border border-gray outline-none rounded px-3 py-2 mt-1"
-              />
             </label>
+            <input
+              type="text"
+              value={amount}
+              readOnly // make non-editable
+              className="w-full border border-gray-300 bg-gray-100 rounded px-3 py-2 mt-1 cursor-not-allowed text-gray-600"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              This amount is fetched automatically from your dashboard.
+            </p>
 
             {/* Buttons */}
-            <div className="flex justify-end gap-3 pt-2">
+            <div className="flex justify-end gap-3 pt-4">
               <button
                 type="button"
-                className="bg-yellow-400 hover:bg-yellow-500 text-white cursor-pointer px-4 py-2 rounded"
+                className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded"
                 onClick={onClose}
               >
                 Close
               </button>
               <button
                 type="button"
-                className="bg-red-500 hover:bg-red-600 text-white cursor-pointer px-4 py-2 rounded"
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
                 onClick={handleClear}
               >
                 Clear
