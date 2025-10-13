@@ -30,16 +30,16 @@ const FloatingTab = () => {
 
         <div className="h-6 w-px bg-gray-300"></div>
 
-        <Link href="/dashboard/bulk-import">
+        {/* <Link href="/dashboard/bulk-import">
           <div className="flex items-center gap-2">
             <TbTableImport className="text-orange-500 text-lg" />
             <span className="text-sm whitespace-nowrap text-primary">
               Bulk Import
             </span>
           </div>
-        </Link>
+        </Link> */}
 
-        <div className="h-6 w-px bg-gray-300"></div>
+        {/* <div className="h-6 w-px bg-gray-300"></div> */}
 
         <Link href="/dashboard/fraud-check">
           <div className="flex items-center gap-2">

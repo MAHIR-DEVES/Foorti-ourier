@@ -53,7 +53,6 @@ const statusMapping = {
     'Return Received By Destination Hub',
     'Return To Merchant',
   ],
-
   All: [],
 };
 
@@ -61,7 +60,7 @@ const statusMapping = {
 const groupByDate = orders => {
   return orders.reduce((acc, order) => {
     if (!order?.order_create_date) return acc;
-    const dateKey = order.order_create_date.split(' ')[0]; // YYYY-MM-DD
+    const dateKey = order.order_create_date.split(' ')[0];
     if (!acc[dateKey]) acc[dateKey] = [];
     acc[dateKey].push(order);
     return acc;
@@ -76,29 +75,24 @@ const ParcelTable = () => {
   const [orders, setOrders] = useState([]);
   const [payments, setPayment] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
   const [paginationGroup, setPaginationGroup] = useState(1);
-
   const [expandedDates, setExpandedDates] = useState({});
 
+  // fetch orders
   useEffect(() => {
     const fetchOrders = async () => {
       try {
         const stored = localStorage.getItem('token');
         if (!stored) return;
-
         const parsed = JSON.parse(stored);
         const token = parsed?.token;
         if (!token) return;
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_MERCHANT_API_KEY}/confirm-orders-list`,
-          {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          { method: 'GET', headers: { Authorization: `Bearer ${token}` } }
         );
 
         if (!response.ok) throw new Error('Failed to fetch orders');
@@ -111,30 +105,25 @@ const ParcelTable = () => {
         setLoading(false);
       }
     };
-
     fetchOrders();
   }, []);
 
-  // payment info
+  // fetch payments
   useEffect(() => {
-    const fetchOrders = async () => {
+    const fetchPayments = async () => {
       try {
         const stored = localStorage.getItem('token');
         if (!stored) return;
-
         const parsed = JSON.parse(stored);
         const token = parsed?.token;
         if (!token) return;
 
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_MERCHANT_API_KEY}/merchant-payment-history`,
-          {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${token}` },
-          }
+          { method: 'GET', headers: { Authorization: `Bearer ${token}` } }
         );
 
-        if (!response.ok) throw new Error('Failed to fetch orders');
+        if (!response.ok) throw new Error('Failed to fetch payments');
 
         const data = await response.json();
         setPayment(data.payments || []);
@@ -144,8 +133,7 @@ const ParcelTable = () => {
         setLoading(false);
       }
     };
-
-    fetchOrders();
+    fetchPayments();
   }, []);
 
   useEffect(() => {
@@ -188,7 +176,6 @@ const ParcelTable = () => {
     const pages = [];
     const start = (paginationGroup - 1) * 5 + 1;
     const end = Math.min(start + 4, totalPages);
-
     for (let i = start; i <= end; i++) {
       pages.push(
         <button
@@ -204,7 +191,6 @@ const ParcelTable = () => {
         </button>
       );
     }
-
     return pages;
   };
 
@@ -229,7 +215,8 @@ const ParcelTable = () => {
     if (
       activeTab === 'List by Date' ||
       activeTab === 'Delivered' ||
-      activeTab === 'Cancelled'
+      activeTab === 'Cancelled' ||
+      activeTab === 'Payment'
     ) {
       const today = new Date().toISOString().split('T')[0];
       setExpandedDates({ [today]: true });
@@ -268,14 +255,14 @@ const ParcelTable = () => {
         ))}
       </div>
 
-      {/* Table / Section */}
+      {/* Table Section */}
       <div className="w-full overflow-x-auto">
         {loading ? (
           <Loading />
         ) : activeTab === 'List by Date' ||
           activeTab === 'Delivered' ||
           activeTab === 'Cancelled' ? (
-          // Grouped orders view
+          // grouped orders section
           Object.keys(groupedOrders).length === 0 ? (
             <p className="text-center py-6">No data found.</p>
           ) : (
@@ -357,84 +344,116 @@ const ParcelTable = () => {
             ))
           )
         ) : activeTab === 'Payment' ? (
-          // 🔹 Custom Section for Payment Tab
-          <div className="mt-6 rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-            <div className="flex justify-between items-center bg-gradient-to-r from-blue-50 to-indigo-50 p-4 border-b border-gray-200">
-              <h2 className="text-lg font-bold text-gray-800 flex items-center">
-                <Calendar className="w-5 h-5 mr-2 text-blue-600" />
-                Payment History
-              </h2>
-              <span className="text-sm font-medium text-gray-600 bg-white px-3 py-1 rounded-full">
-                {payments.length} payments
-              </span>
-            </div>
+          // grouped payments section
+          (() => {
+            const groupedPayments = payments.reduce((acc, payment) => {
+              const dateKey = new Date(payment.created_at)
+                .toISOString()
+                .split('T')[0];
+              if (!acc[dateKey]) acc[dateKey] = [];
+              acc[dateKey].push(payment);
+              return acc;
+            }, {});
 
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-gray-700">
-                <thead className="bg-gray-50 border-b border-gray-200">
-                  <tr className="text-primary">
-                    <th className="px-6 py-4">SL#</th>
-                    <th className="px-6 py-4">Date</th>
-                    <th className="px-6 py-4">Invoice No</th>
-                    <th className="px-6 py-4">Amount</th>
-                    <th className="px-6 py-4">Status</th>
-                    <th className="px-6 py-4 text-center">Action</th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-100">
-                  {payments?.map((payment, idx) => (
-                    <tr
-                      key={payment.id}
-                      className="hover:bg-gray-50 transition duration-150"
+            return Object.keys(groupedPayments).length === 0 ? (
+              <p className="text-center py-6">No payment history found.</p>
+            ) : (
+              Object.keys(groupedPayments).map(date => (
+                <div key={date} className="mb-6 rounded-lg shadow-sm">
+                  <div className="flex justify-between items-center bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-t-lg border border-gray-200">
+                    <h2 className="text-lg font-bold text-gray-800 flex items-center">
+                      <Calendar className="w-5 h-5 mr-2 text-blue-600" />
+                      {date}
+                      <span className="ml-3 text-sm font-normal text-gray-600 bg-white px-2 py-1 rounded-full">
+                        {groupedPayments[date].length} payments
+                      </span>
+                    </h2>
+                    <button
+                      onClick={() => toggleDateExpand(date)}
+                      className="px-3 py-1 bg-blue-600 text-white rounded-md text-sm hover:bg-blue-700"
                     >
-                      <td className="px-6 py-4">{idx + 1}</td>
-                      <td className="px-6 py-4">
-                        {' '}
-                        {new Date(payment.created_at).toLocaleString('en-GB', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric',
-                          hour: '2-digit',
-                          minute: '2-digit',
-                          second: '2-digit',
-                          hour12: true,
-                        })}
-                      </td>
-                      <td className="px-6 py-4 text-blue-600 font-medium">
-                        {payment.invoice_id}
-                      </td>
-                      <td className="px-6 py-4">{payment.t_payable}</td>
-                      <td
-                        className={`px-6 py-4 font-semibold ${
-                          payment.status === 'Payment Received By Merchant'
-                            ? 'text-green-600'
-                            : payment.status === 'Processing'
-                            ? 'text-yellow-600'
-                            : 'text-red-600'
-                        }`}
-                      >
-                        {payment.status === 'Payment Received By Merchant'
-                          ? 'Complete'
-                          : payment.status === 'Payment Processing'
-                          ? 'Processing'
-                          : payment.status}
-                      </td>
-                      <td className="px-6 py-4 text-center">
-                        <Link
-                          href={`/dashboard/consignments/payment-details?invoiceId=${payment.invoice_id}`}
-                          className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-                        >
-                          View
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
+                      {expandedDates[date] ? 'Hide Data' : 'View Data'}
+                    </button>
+                  </div>
+                  {expandedDates[date] && (
+                    <div className="overflow-hidden rounded-b-lg shadow-sm border border-gray-200 border-t-0">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-left text-gray-700">
+                          <thead className="bg-gray-50 border-b border-gray-200">
+                            <tr className="text-primary">
+                              <th className="px-6 py-4">SL#</th>
+                              <th className="px-6 py-4">Date & Time</th>
+                              <th className="px-6 py-4">Invoice No</th>
+                              <th className="px-6 py-4">Amount</th>
+                              <th className="px-6 py-4">Status</th>
+                              <th className="px-6 py-4 text-center">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody className="bg-white divide-y divide-gray-100">
+                            {groupedPayments[date].map((payment, idx) => (
+                              <tr
+                                key={payment.id}
+                                className="hover:bg-gray-50 transition duration-150"
+                              >
+                                <td className="px-6 py-4">{idx + 1}</td>
+                                <td className="px-6 py-4">
+                                  {new Date(payment.created_at).toLocaleString(
+                                    'en-GB',
+                                    {
+                                      day: '2-digit',
+                                      month: '2-digit',
+                                      year: 'numeric',
+                                      hour: '2-digit',
+                                      minute: '2-digit',
+                                      second: '2-digit',
+                                      hour12: true,
+                                    }
+                                  )}
+                                </td>
+                                <td className="px-6 py-4 text-blue-600 font-medium">
+                                  {payment.invoice_id}
+                                </td>
+                                <td className="px-6 py-4">
+                                  {payment.t_payable}
+                                </td>
+                                <td
+                                  className={`px-6 py-4 font-semibold ${
+                                    payment.status ===
+                                    'Payment Received By Merchant'
+                                      ? 'text-green-600'
+                                      : payment.status === 'Payment Processing'
+                                      ? 'text-yellow-600'
+                                      : 'text-red-600'
+                                  }`}
+                                >
+                                  {payment.status ===
+                                  'Payment Received By Merchant'
+                                    ? 'Complete'
+                                    : payment.status === 'Payment Processing'
+                                    ? 'Processing'
+                                    : payment.status}
+                                </td>
+                                <td className="px-6 py-4 text-center">
+                                  <Link
+                                    href={`/dashboard/consignments/payment-details?invoiceId=${payment.invoice_id}`}
+                                    className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                                  >
+                                    View
+                                  </Link>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))
+            );
+          })()
         ) : (
-          // Normal table view
+          // normal table
           <table className="w-full table-auto text-[19px] text-left text-gray-700">
             <thead className="border-b border-gray bg-gradient-to-r from-blue-50 to-indigo-50">
               <tr className="text-primary">
@@ -463,39 +482,28 @@ const ParcelTable = () => {
                     key={`${order.id}-${idx}`}
                   >
                     <td className="px-4 py-3">{startIndex + idx + 1}</td>
+                    <td className="px-4 py-3">{order.order_create_date}</td>
                     <td className="px-4 py-3">
-                      {order?.order_create_date
-                        ? new Date(
-                            order.order_create_date.replace(' ', 'T')
-                          ).toLocaleString('en-GB', {
-                            year: 'numeric',
-                            month: '2-digit',
-                            day: '2-digit',
-                            hour: '2-digit',
-                            minute: '2-digit',
-                            second: '2-digit',
-                            hour12: true,
-                          })
-                        : '-'}
-                    </td>
-
-                    <td className="px-4 py-3 text-blue-600">
                       <Link
                         href={`/dashboard/consignments/${order.tracking_id}`}
+                        className="text-blue-600"
                       >
-                        {order.tracking_id}
+                        #{order.tracking_id}
                       </Link>
                     </td>
                     <td className="px-4 py-3">{order.customer_name}</td>
                     <td className="px-4 py-3">{order.customer_phone}</td>
                     <td className="px-4 py-3">{order.delivery}</td>
                     <td className="px-4 py-3">{order.collection}</td>
-                    <td className="px-4 py-3">{order.remarks || ''}</td>
-                    <td className="px-4 py-3 text-blue-600">
+                    <td className="px-4 py-3">
+                      {order.remarks ? order.remarks : '-'}
+                    </td>
+                    <td className="px-4 py-3">
                       <Link
                         href={`/dashboard/consignments/${order.tracking_id}`}
+                        className="px-3 py-1 bg-blue-600 text-white rounded"
                       >
-                        View
+                        View Details
                       </Link>
                     </td>
                   </tr>
@@ -506,17 +514,20 @@ const ParcelTable = () => {
         )}
       </div>
 
-      {/* Pagination Controls */}
+      {/* Pagination */}
       {activeTab !== 'List by Date' &&
         activeTab !== 'Delivered' &&
         activeTab !== 'Cancelled' &&
-        activeTab !== 'Payment' &&
-        filteredOrders.length > itemsPerPage && (
+        activeTab !== 'Payment' && (
           <div className="flex justify-center items-center mt-6">
             <button
               onClick={handlePreviousPageGroup}
               disabled={paginationGroup === 1}
-              className="mx-1 px-2.5 py-2 rounded-full bg-white text-primary-active cursor-pointer hover:bg-blue-100 disabled:opacity-50"
+              className={`mx-2 px-2 py-1 text-sm rounded-full ${
+                paginationGroup === 1
+                  ? 'text-gray-400 cursor-not-allowed'
+                  : 'text-primary hover:bg-blue-100'
+              }`}
             >
               <FaChevronLeft />
             </button>
@@ -524,7 +535,11 @@ const ParcelTable = () => {
             <button
               onClick={handleNextPageGroup}
               disabled={paginationGroup * 5 >= totalPages}
-              className="mx-1 px-2.5 py-2 rounded-full bg-white text-primary-active cursor-pointer hover:bg-blue-100 disabled:opacity-50"
+              className={`mx-2 px-2 py-1 text-sm rounded-full ${
+                paginationGroup * 5 >= totalPages
+                  ? 'text-gray-400 cursor-not-allowed'
+                  : 'text-primary hover:bg-blue-100'
+              }`}
             >
               <FaChevronRight />
             </button>
