@@ -56,7 +56,7 @@ const PaymentDetailsPage = () => {
   console.log('Payment Details:', payment);
 
   return (
-    <div className="max-w-6xl mx-auto md:p-6">
+    <div className=" md:p-6">
       <div className="md:flex justify-between items-center mb-4">
         <h2 className="text-lg">Payment Details</h2>
         <div className="flex flex-wrap justify-end gap-2 pt-1.5 md:pt-0">
@@ -107,12 +107,7 @@ const PaymentDetailsPage = () => {
                       : 'text-red-600 font-semibold'
                   }
                 >
-                  {payment?.merchantpay?.status ===
-                  'Payment Received By Merchant'
-                    ? 'Completed'
-                    : payment?.status === 'Payment Processing'
-                    ? 'Processing'
-                    : payment?.status || '-'}
+                  {payment?.merchantpay?.status}
                 </span>
               </p>
             </div>
@@ -147,33 +142,41 @@ const PaymentDetailsPage = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Tracking ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Invoice ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
                     Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Status
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    Tracking
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    COD Charge
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    Phone
+                  </th>
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    Delivery
+                  </th>
+
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    COD
+                  </th>
+
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    Collect
+                  </th>
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    Return
+                  </th>
+                  <th className="px-6 py-3 text-left text-[16px] font-medium text-gray-500 uppercase tracking-wider">
+                    Status
                   </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {payment?.merchantPayments?.map((detail, index) => (
                   <tr key={index}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-600">
-                      {detail.tracking_id}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      {detail.invoice_id}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
                       {new Date(detail.created_at).toLocaleString('en-GB', {
                         day: '2-digit',
                         month: '2-digit',
@@ -184,11 +187,31 @@ const PaymentDetailsPage = () => {
                         hour12: true,
                       })}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      {detail.status}
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px] text-blue-600">
+                      {detail.tracking_id}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
-                      ৳{detail.cod}
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
+                      {detail.customer_name}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
+                      {detail.customer_phone}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
+                      {detail.delivery}
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
+                      {detail.cod}
+                    </td>
+
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
+                      {detail.collect}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
+                      {detail.return_charge}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-[16px]">
+                      {detail.reason_status}
                     </td>
                   </tr>
                 ))}

@@ -6,9 +6,10 @@ import { toast } from 'react-toastify';
 
 const PaymentRequestModal = ({ isOpen, onClose }) => {
   const [paymentMethod, setPaymentMethod] = useState('');
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(0);
   const [loading, setLoading] = useState(false);
   // const [data, setData] = useState(null);
+  console.log(amount);
 
   if (!isOpen) return null;
 
@@ -38,7 +39,7 @@ const PaymentRequestModal = ({ isOpen, onClose }) => {
 
         const result = await res.json();
         // setData(result);
-        setAmount(result?.data?.paymentProcessing || ''); // set default amount here
+        setAmount(result?.data?.paymentProcessing); // set default amount here
       } catch (err) {
         console.error(err.message);
       }
