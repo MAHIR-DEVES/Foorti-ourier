@@ -44,7 +44,7 @@ const statusMapping = {
     'Payment Processing Complete',
     'Payment Completed',
   ],
-  'Partially Delivered': ['Partially Delivered'],
+  'Partially Delivered': ['Partially Delivered', 'Assigned To Delivery Rider'],
   Cancelled: [
     'Return Confirm',
     'Cancel Order',
